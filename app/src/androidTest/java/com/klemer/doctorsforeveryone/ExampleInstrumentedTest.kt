@@ -1,4 +1,4 @@
-package com.klemer.doctorapp
+package com.klemer.doctorsforeveryone
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4

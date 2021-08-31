@@ -1,4 +1,4 @@
-package com.klemer.doctorapp
+package com.klemer.doctorsforeveryone
 
 import org.junit.Test
 

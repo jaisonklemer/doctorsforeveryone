@@ -1,4 +1,4 @@
-package com.klemer.doctorapp.view_model
+package com.klemer.doctorsforeveryone.view_model
 
 import androidx.lifecycle.ViewModel
 
