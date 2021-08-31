@@ -1,3 +1,8 @@
 <resources>
-    <string name="app_name">DoctorApp</string>
+    <string name="app_name">Doctors For Everyone</string>
+    <string name="email_exemple_com">email@exemple.com</string>
+    <string name="password">password</string>
+    <string name="sign_in">Sign In</string>
+    <string name="create_account">Create Account!!</string>
+    <string name="sign_up">Sign Up</string>
 </resources>
