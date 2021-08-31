@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="margin_40">40dp</dimen>
+    <dimen name="size_logo_width_150">150dp</dimen>
+    <dimen name="size_logo_height_150">150dp</dimen>
+    <dimen name="margin_20">20dp</dimen>
+    <dimen name="font_size_create_account">17sp</dimen>
+</resources>

@@ -2,6 +2,8 @@ package com.klemer.doctorapp
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.klemer.doctorapp.utils.replaceView
+import com.klemer.doctorapp.view.SignInFragment
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
