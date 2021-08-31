@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "886802055145",
+    "project_id": "doctors-for-everyone",
+    "storage_bucket": "doctors-for-everyone.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:886802055145:android:c9fed17adcab556764d578",
+        "android_client_info": {
+          "package_name": "com.klemer.doctorsforeveryone"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "886802055145-ov8mfaqmjiilp8c6jtptdh0mciue8c97.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBn6ixcBvn2U5319HcJ_prXY7sNtzthurY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "886802055145-ov8mfaqmjiilp8c6jtptdh0mciue8c97.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
