@@ -3,9 +3,12 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/drawable/ic_logo_doctors_foreveryone.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_login.xml" value="0.2375" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.14402173913043478" />
         <entry key="app/src/main/res/layout/sign_in_fragment.xml" value="0.22780797101449277" />
         <entry key="app/src/main/res/layout/sign_up_fragment.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/splash_screen.xml" value="0.2375" />
       </map>
     </option>
   </component>
