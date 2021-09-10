@@ -62,6 +62,15 @@
         android:layout_margin="@dimen/size_20"
         android:text="@string/sign_in"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/sign_in_buttonWithGoogle"
+        app:layout_constraintTop_toBottomOf="@+id/outlinedTextFieldPasswordSignIn" />
+
+    <com.google.android.gms.common.SignInButton
+        android:id="@+id/sign_in_buttonWithGoogle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_20"
+        app:layout_constraintEnd_toStartOf="@+id/buttonSignIn"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/outlinedTextFieldPasswordSignIn" />
 
