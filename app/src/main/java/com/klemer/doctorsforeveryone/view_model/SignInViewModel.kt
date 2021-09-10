@@ -1,5 +1,9 @@
 package com.klemer.doctorsforeveryone.view_model
 
+import android.app.Activity
+import android.content.Context
+import android.content.Intent
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.firebase.auth.FirebaseUser
@@ -22,4 +26,28 @@ class SignInViewModel : ViewModel() {
             }
         }
     }
+
+    fun signInGoogleOnActivityResult(requestCode: Int, data: Intent?, activity: Activity) {
+        repository.signInGoogleOnActivityResult(requestCode, data, activity) { user, error ->
+            loginUser.value = user
+            loginError.value = error
+        }
+    }
+
+    fun signIn(fragment: Fragment, context: Context) {
+        repository.signIn(fragment, context)
+    }
+
+    fun currentUser() : FirebaseUser?{
+        return repository.currentUser()
+    }
+
+    fun updateUI(user: FirebaseUser?) {
+        repository.updateUI(user)
+    }
+
+    fun signOut() {
+        repository.signOut()
+    }
+
 }
