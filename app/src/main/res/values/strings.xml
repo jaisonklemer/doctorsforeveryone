@@ -12,4 +12,7 @@
     <string name="schedules">Agendamentos</string>
     <string name="health">Saúde</string>
     <string name="profile">Perfil</string>
+    <string name="subtitle">Encontre os melhores doutores aqui!</string>
+    <string name="placeholder">Busque doutores:</string>
+    <string name="search_specialty">Pesquise por especialidade:</string>
 </resources>
