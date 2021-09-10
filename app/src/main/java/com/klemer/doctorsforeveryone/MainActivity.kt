@@ -9,7 +9,6 @@ import com.klemer.doctorsforeveryone.view.HomeFragment
 import com.klemer.doctorsforeveryone.view.ProfileFragment
 import com.klemer.doctorsforeveryone.view.SchedulesFragment
 
-
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
