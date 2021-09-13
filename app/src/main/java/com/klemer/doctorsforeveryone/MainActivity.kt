@@ -26,6 +26,8 @@ class MainActivity : AppCompatActivity() {
             when (item.itemId) {
                 R.id.navHome -> {
                     replaceView(HomeFragment.newInstance())
+                    // Insert test category
+//                    replaceView(CategoryFragment.newInstance())
                 }
                 R.id.navSchedules -> {
                     replaceView(SchedulesFragment.newInstance())

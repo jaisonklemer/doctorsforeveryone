@@ -60,7 +60,9 @@ class CategoryFragment : Fragment(R.layout.category_fragment) {
 //        viewModel.deleteCategory("")
 //        viewModel.fetchCategory()
 //        viewModel.fetchCategoryById("IXhRMsR6bVkNWIFZnFFl")
+    }
 
+    private fun executeComponent() {
 
     }
 
