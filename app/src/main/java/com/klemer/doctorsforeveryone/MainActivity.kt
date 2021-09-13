@@ -2,12 +2,9 @@ package com.klemer.doctorsforeveryone
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import com.klemer.doctorsforeveryone.databinding.ActivityMainBinding
-import com.klemer.doctorsforeveryone.view.HealthFragment
-import com.klemer.doctorsforeveryone.view.HomeFragment
-import com.klemer.doctorsforeveryone.view.ProfileFragment
-import com.klemer.doctorsforeveryone.view.SchedulesFragment
+import com.klemer.doctorsforeveryone.utils.replaceView
+import com.klemer.doctorsforeveryone.view.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -19,30 +16,25 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         bottomNav()
-        changeFrag(HomeFragment.newInstance())
-
-    }
-
-    private fun changeFrag(fragment: Fragment) {
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.container, fragment)
-            .commitNow()
+//        replaceView(HomeFragment.newInstance())
     }
 
     private fun bottomNav() {
         binding.bottomNavigation.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.navHome -> {
-                    changeFrag(HomeFragment.newInstance())
+//                    replaceView(HomeFragment.newInstance())
+                    // Insert test category
+                    replaceView(CategoryFragment.newInstance())
                 }
                 R.id.navSchedules -> {
-                    changeFrag(SchedulesFragment.newInstance())
+                    replaceView(SchedulesFragment.newInstance())
                 }
                 R.id.navHealth -> {
-                    changeFrag(HealthFragment.newInstance())
+                    replaceView(HealthFragment.newInstance())
                 }
                 R.id.navProfile -> {
-                    changeFrag(ProfileFragment.newInstance())
+                    replaceView(ProfileFragment.newInstance())
                 }
             }
             true

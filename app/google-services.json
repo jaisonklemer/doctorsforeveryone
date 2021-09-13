@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "886802055145",
+    "firebase_url": "https://doctors-for-everyone-default-rtdb.firebaseio.com",
     "project_id": "doctors-for-everyone",
     "storage_bucket": "doctors-for-everyone.appspot.com"
   },
@@ -13,6 +14,14 @@
         }
       },
       "oauth_client": [
+        {
+          "client_id": "886802055145-b1br1slokiuj44d6f8cqlgpkvfp9psqv.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.klemer.doctorsforeveryone",
+            "certificate_hash": "aac6c6a8d72babaf455290a8618ec1c06132f476"
+          }
+        },
         {
           "client_id": "886802055145-ov8mfaqmjiilp8c6jtptdh0mciue8c97.apps.googleusercontent.com",
           "client_type": 3
