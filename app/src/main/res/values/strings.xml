@@ -12,6 +12,7 @@
     <string name="schedules">Agendamentos</string>
     <string name="health">Saúde</string>
     <string name="profile">Perfil</string>
+    <string name="admin">Admin</string>
     <string name="subtitle">Encontre os melhores doutores aqui!</string>
     <string name="placeholder">Busque doutores:</string>
     <string name="placeholder_name">Nome completo</string>
@@ -28,6 +29,6 @@
 
 
     <!-- TODO: Token Google-->
-<!--    <string name="default_web_client_id">886802055145-ov8mfaqmjiilp8c6jtptdh0mciue8c97.apps.googleusercontent.com</string>-->
+    <!--    <string name="default_web_client_id">886802055145-ov8mfaqmjiilp8c6jtptdh0mciue8c97.apps.googleusercontent.com</string>-->
 
 </resources>
