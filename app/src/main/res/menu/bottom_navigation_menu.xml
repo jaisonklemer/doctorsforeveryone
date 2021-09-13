@@ -6,25 +6,32 @@
         android:id="@+id/navHome"
         android:enabled="true"
         android:icon="@drawable/ic_icon_home"
-        android:title="@string/home"/>
+        android:title="@string/home" />
 
     <item
         android:id="@+id/navSchedules"
         android:enabled="true"
         android:icon="@drawable/ic_icon_schedule"
-        android:title="@string/schedules"/>
+        android:title="@string/schedules" />
 
     <item
         android:id="@+id/navHealth"
         android:enabled="true"
         android:icon="@drawable/ic_icon_health"
-        android:title="@string/health"/>
+        android:title="@string/health" />
 
     <item
         android:id="@+id/navProfile"
         android:enabled="true"
         android:icon="@drawable/ic_icon_profile"
-        android:title="@string/profile"/>
+        android:title="@string/profile" />
+
+    <item
+        android:id="@+id/navAdmin"
+        android:enabled="true"
+        android:icon="@drawable/ic_icon_profile"
+        android:title="@string/admin"
+        android:visible="false" />
 
 
 </menu>

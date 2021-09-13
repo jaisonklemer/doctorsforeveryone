@@ -12,6 +12,7 @@ import com.klemer.doctorsforeveryone.MainActivity
 import com.klemer.doctorsforeveryone.R
 import com.klemer.doctorsforeveryone.StartActivity
 import com.klemer.doctorsforeveryone.databinding.SignInFragmentBinding
+import com.klemer.doctorsforeveryone.repository.UserRepository
 import com.klemer.doctorsforeveryone.utils.replaceView
 import com.klemer.doctorsforeveryone.view_model.SignInViewModel
 
@@ -23,13 +24,17 @@ class SignInFragment : Fragment(R.layout.sign_in_fragment) {
 
     private lateinit var viewModel: SignInViewModel
     private lateinit var binding: SignInFragmentBinding
+    private val userRepository = UserRepository()
 
     private val loginSuccessful = Observer<FirebaseUser?> {
         //login successful
-        Intent(requireContext(), MainActivity::class.java).apply {
-            startActivity(this)
+        userRepository.getUser(it.uid) {
+            Intent(requireContext(), MainActivity::class.java).apply {
+                this.putExtra("admin", it?.admin)
+                startActivity(this)
+            }
+            (requireActivity() as StartActivity).finish()
         }
-        (requireActivity() as StartActivity).finish()
     }
 
     private val loginError = Observer<String?> {
