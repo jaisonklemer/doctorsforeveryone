@@ -6,12 +6,26 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".view.ProfileFragment">
 
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/size_20"
+        android:text="@string/update_profile"
+        android:textColor="@color/greenLight"
+        android:textSize="@dimen/size_30"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardView2" />
+
     <androidx.cardview.widget.CardView
-        android:layout_width="300dp"
-        android:layout_height="300dp"
-        android:elevation="8dp"
-        app:cardCornerRadius="@dimen/size_20"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:id="@+id/cardView2"
+        android:layout_width="@dimen/size_100"
+        android:layout_height="@dimen/size_100"
+        android:layout_margin="@dimen/size_20"
+        android:elevation="@dimen/size_4"
+        app:cardCornerRadius="@dimen/size_60"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -19,11 +33,12 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#027A7A">
+            android:background="@color/greenLight">
 
             <ImageView
-                android:layout_width="200dp"
-                android:layout_height="200dp"
+                android:id="@+id/imageUser"
+                android:layout_width="@dimen/size_70"
+                android:layout_height="@dimen/size_70"
                 android:src="@drawable/ic_icon_profile"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -32,8 +47,128 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-
     </androidx.cardview.widget.CardView>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayoutName"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/size_20"
+        android:hint="@string/placeholder_name"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/profileName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayoutAge"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="@dimen/size_110"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/size_20"
+        android:hint="@string/placeholder_age"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayoutName">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/profileAge"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayoutWeight"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="@dimen/size_110"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/size_20"
+        android:hint="@string/placeholder_weight"
+        app:layout_constraintStart_toEndOf="@+id/textInputLayoutAge"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayoutName">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/profileWeight"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayoutHeight"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="@dimen/size_110"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/size_20"
+        android:hint="@string/placeholder_height"
+        app:layout_constraintStart_toEndOf="@+id/textInputLayoutWeight"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayoutName">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/profileHeight"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/size_20"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayoutWeight">
+
+        <CheckBox
+            android:id="@+id/checkboxFem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onCheckboxClicked"
+            android:text="@string/feminine"
+            android:textColor="@color/greenLight" />
+
+        <CheckBox
+            android:id="@+id/checkboxMas"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onCheckboxClicked"
+            android:text="@string/masculine"
+            android:textColor="@color/greenLight" />
+
+        <CheckBox
+            android:id="@+id/checkboxNotResponse"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onCheckboxClicked"
+            android:text="@string/not_response"
+            android:textColor="@color/greenLight" />
+
+    </LinearLayout>
+
+    <Button
+        android:layout_width="@dimen/size_180"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/size_20"
+        android:text="@string/Edit"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
+
+    <Button
+        android:layout_width="@dimen/size_180"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/size_20"
+        android:text="@string/Save"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

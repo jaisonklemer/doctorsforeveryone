@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="../../../../layout/custom_preview.xml" value="0.3104166666666667" />
+        <entry key="app/src/main/res/drawable/checkbox_selector.xml" value="0.24722222222222223" />
         <entry key="app/src/main/res/drawable/gradient.xml" value="0.24974358974358973" />
         <entry key="app/src/main/res/drawable/ic_icon_health.xml" value="0.25364583333333335" />
         <entry key="app/src/main/res/drawable/ic_icon_home.xml" value="0.25364583333333335" />
@@ -24,6 +25,7 @@
         <entry key="app/src/main/res/layout/itens_cards_specialty.xml" value="0.335" />
         <entry key="app/src/main/res/layout/news_list_item.xml" value="0.30512820512820515" />
         <entry key="app/src/main/res/layout/profile_fragment.xml" value="0.2234375" />
+        <entry key="app/src/main/res/layout/profile_fragment.xml" value="0.25" />
         <entry key="app/src/main/res/layout/schedules_fragment.xml" value="0.2375" />
         <entry key="app/src/main/res/layout/sign_in_fragment.xml" value="0.22780797101449277" />
         <entry key="app/src/main/res/layout/sign_up_fragment.xml" value="0.1982727143297738" />

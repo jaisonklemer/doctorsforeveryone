@@ -15,7 +15,17 @@
     <string name="admin">Admin</string>
     <string name="subtitle">Encontre os melhores doutores aqui!</string>
     <string name="placeholder">Busque doutores:</string>
+    <string name="placeholder_name">Nome completo</string>
+    <string name="placeholder_age">Idade</string>
+    <string name="placeholder_weight">Peso</string>
+    <string name="placeholder_height">Altura</string>
     <string name="search_specialty">Pesquise por especialidade:</string>
+    <string name="update_profile">Atualize seus dados</string>
+    <string name="feminine">Feminino</string>
+    <string name="masculine">Masculino</string>
+    <string name="not_response">Prefiro não responder</string>
+    <string name="Save">Salvar</string>
+    <string name="Edit">Editar</string>
 
 
     <!-- TODO: Token Google-->

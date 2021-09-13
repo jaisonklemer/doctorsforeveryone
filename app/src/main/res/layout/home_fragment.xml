@@ -69,7 +69,7 @@
     </LinearLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayout"
+        android:id="@+id/textInputLayoutSearch"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="@dimen/size_300"
         android:layout_height="wrap_content"
@@ -93,9 +93,9 @@
         android:layout_margin="@dimen/size_20"
         android:elevation="@dimen/size_4"
         app:cardCornerRadius="@dimen/size_60"
-        app:layout_constraintBottom_toBottomOf="@+id/textInputLayout"
-        app:layout_constraintStart_toEndOf="@+id/textInputLayout"
-        app:layout_constraintTop_toTopOf="@+id/textInputLayout">
+        app:layout_constraintBottom_toBottomOf="@+id/textInputLayoutSearch"
+        app:layout_constraintStart_toEndOf="@+id/textInputLayoutSearch"
+        app:layout_constraintTop_toTopOf="@+id/textInputLayoutSearch">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -126,7 +126,7 @@
         android:textSize="@dimen/size_20"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout" />
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayoutSearch" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewSpecialtyList"
