@@ -16,16 +16,16 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         bottomNav()
-//        replaceView(HomeFragment.newInstance())
+        replaceView(HomeFragment.newInstance())
     }
 
     private fun bottomNav() {
         binding.bottomNavigation.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.navHome -> {
-//                    replaceView(HomeFragment.newInstance())
+                    replaceView(HomeFragment.newInstance())
                     // Insert test category
-                    replaceView(CategoryFragment.newInstance())
+//                    replaceView(CategoryFragment.newInstance())
                 }
                 R.id.navSchedules -> {
                     replaceView(SchedulesFragment.newInstance())
