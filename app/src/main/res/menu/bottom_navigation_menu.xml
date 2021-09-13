@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <item
+        android:id="@+id/navHome"
+        android:enabled="true"
+        android:icon="@drawable/ic_icon_home"
+        android:title="@string/home"/>
+
+    <item
+        android:id="@+id/navSchedules"
+        android:enabled="true"
+        android:icon="@drawable/ic_icon_schedule"
+        android:title="@string/schedules"/>
+
+    <item
+        android:id="@+id/navHealth"
+        android:enabled="true"
+        android:icon="@drawable/ic_icon_health"
+        android:title="@string/health"/>
+
+    <item
+        android:id="@+id/navProfile"
+        android:enabled="true"
+        android:icon="@drawable/ic_icon_profile"
+        android:title="@string/profile"/>
+
+
+</menu>
