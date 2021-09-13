@@ -30,7 +30,6 @@ class SignInFragment : Fragment(R.layout.sign_in_fragment) {
             startActivity(this)
         }
         (requireActivity() as StartActivity).finish()
-//        requireActivity().replaceView(HomeFragment.newInstance())
     }
 
     private val loginError = Observer<String?> {
