@@ -155,6 +155,7 @@
     </LinearLayout>
 
     <Button
+        android:id="@+id/buttonEdit"
         android:layout_width="@dimen/size_180"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/size_20"
@@ -163,6 +164,7 @@
         app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
 
     <Button
+        android:id="@+id/buttonSave"
         android:layout_width="@dimen/size_180"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/size_20"
