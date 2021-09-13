@@ -15,17 +15,17 @@ class MainActivity : AppCompatActivity() {
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        setupBottomNavigation()
+
         bottomNav()
-//        replaceView(HomeFragment.newInstance())
+        replaceView(HomeFragment.newInstance())
     }
 
     private fun bottomNav() {
         binding.bottomNavigation.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.navHome -> {
-//                    replaceView(HomeFragment.newInstance())
-                    // Insert test category
-                    replaceView(CategoryFragment.newInstance())
+                    replaceView(HomeFragment.newInstance())
                 }
                 R.id.navSchedules -> {
                     replaceView(SchedulesFragment.newInstance())
@@ -38,6 +38,13 @@ class MainActivity : AppCompatActivity() {
                 }
             }
             true
+        }
+    }
+
+    private fun setupBottomNavigation() {
+        val userAdmin = intent.getBooleanExtra("admin", false)
+        if (userAdmin) {
+            binding.bottomNavigation.menu.getItem(4).isVisible = true
         }
     }
 }
