@@ -8,9 +8,9 @@
 
     <ImageView
         android:id="@+id/imageViewLogoSignUp"
-        android:layout_width="@dimen/size_150"
-        android:layout_height="@dimen/size_150"
-        android:layout_marginTop="@dimen/size_40"
+        android:layout_width="@dimen/size_logo_width_150"
+        android:layout_height="@dimen/size_logo_height_150"
+        android:layout_marginTop="@dimen/margin_40"
         android:src="@drawable/ic_launcher_background"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -21,7 +21,7 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/size_20"
+        android:layout_margin="@dimen/margin_20"
         android:hint="@string/email_exemple_com"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -39,7 +39,7 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/size_20"
+        android:layout_margin="@dimen/margin_20"
         android:hint="@string/password"
         app:endIconMode="password_toggle"
         app:layout_constraintEnd_toEndOf="parent"
@@ -59,7 +59,7 @@
         style="@style/Widget.MaterialComponents.Button.TextButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/size_20"
+        android:layout_margin="@dimen/margin_20"
         android:text="@string/sign_up"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -70,7 +70,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_arrow_back"
-        android:layout_margin="@dimen/size_20"
+        android:layout_margin="@dimen/margin_20"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"/>
 
