@@ -23,6 +23,17 @@ class UserRepository {
             callback(null)
             println(it.localizedMessage)
         }
+    }
+    fun updateUser(user: User, callback: (User?) -> Unit){
+        database.collection(USERS_COLLECTION)
+            .document(user.id.toString())
+            .set(user)
+            .addOnSuccessListener {
+                println("Sucess")
+            }
+            .addOnFailureListener{
+                println("ERRO")
+            }
 
     }
 }

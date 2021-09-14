@@ -62,7 +62,8 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/profileName"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:enabled="false"/>
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -79,7 +80,8 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/profileAge"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:enabled="false"/>
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -96,24 +98,27 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/profileWeight"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:enabled="false"/>
 
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayoutHeight"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="@dimen/size_110"
+        android:layout_width="@dimen/size_0"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/size_20"
         android:hint="@string/placeholder_height"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/textInputLayoutWeight"
         app:layout_constraintTop_toBottomOf="@+id/textInputLayoutName">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/profileHeight"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:enabled="false"/>
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -156,7 +161,7 @@
 
     <Button
         android:id="@+id/buttonEdit"
-        android:layout_width="@dimen/size_180"
+        android:layout_width="@dimen/size_0"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/size_20"
         android:text="@string/Edit"
@@ -165,11 +170,13 @@
 
     <Button
         android:id="@+id/buttonSave"
-        android:layout_width="@dimen/size_180"
+        android:layout_width="@dimen/size_0"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/size_20"
         android:text="@string/Save"
+        android:enabled="false"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/buttonEdit"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
 
 
