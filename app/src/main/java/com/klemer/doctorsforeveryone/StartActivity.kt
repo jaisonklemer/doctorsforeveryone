@@ -20,6 +20,7 @@ class StartActivity : AppCompatActivity() {
 
         viewModel = ViewModelProvider(this).get(SignInViewModel::class.java)
 //        TODO: Remove signOut after
+        viewModel.signOut()
 
 
         if (viewModel.currentUser() != null) {

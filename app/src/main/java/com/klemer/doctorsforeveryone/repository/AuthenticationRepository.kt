@@ -17,11 +17,13 @@ import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.klemer.doctorsforeveryone.R
+import com.klemer.doctorsforeveryone.model.User
 
 class AuthenticationRepository {
 
     private val auth = FirebaseAuth.getInstance()
     private val database = Firebase.firestore
+    private val userRepository = UserRepository()
 
     fun signInWithEmailAndPassword(
         email: String,
@@ -108,17 +110,23 @@ class AuthenticationRepository {
         callback: (FirebaseUser?, String?) -> Unit
     ) {
         val credential = GoogleAuthProvider.getCredential(idToken, null)
+
         auth.signInWithCredential(credential)
             .addOnCompleteListener(activity) { task ->
                 if (task.isSuccessful) {
                     // Sign in success, update UI with the signed-in user's information
-                    Log.d(TAG, "signInWithCredential:success")
+                    println("signInWithCredential:success")
                     val user = auth.currentUser
-                    user?.let { this.createUserAtCollection(it) }
+                    user?.let { firebaseUser ->
+                        userRepository.getUser(firebaseUser.uid) { user ->
+                            if (user == null) {
+                                this.createUserAtCollection(firebaseUser)
+                            }
+                        }
+                    }
                     callback(user, null)
                 } else {
-                    // If sign in fails, display a message to the user.
-                    Log.w(TAG, "signInWithCredential:failure", task.exception)
+                    println("signInWithCredential:failure ${task.exception}")
                     callback(null, task.exception.toString())
                 }
             }
@@ -135,6 +143,11 @@ class AuthenticationRepository {
         )
 
         database.collection(collection).document(user.uid).set(data)
+    }
+
+    private fun createUserAtCollection(user: User) {
+        val collection = "users"
+        database.collection(collection).document(user.id).set(user)
     }
 
     companion object {
