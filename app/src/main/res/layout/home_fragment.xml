@@ -13,7 +13,7 @@
         android:layout_height="@dimen/size_70"
         android:layout_margin="@dimen/size_20"
         android:elevation="@dimen/size_4"
-        app:cardCornerRadius="@dimen/size_60"
+        app:cardCornerRadius="@dimen/size_35"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -92,8 +92,9 @@
         android:layout_height="@dimen/size_50"
         android:layout_margin="@dimen/size_20"
         android:elevation="@dimen/size_4"
-        app:cardCornerRadius="@dimen/size_60"
+        app:cardCornerRadius="@dimen/size_25"
         app:layout_constraintBottom_toBottomOf="@+id/textInputLayoutSearch"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/textInputLayoutSearch"
         app:layout_constraintTop_toTopOf="@+id/textInputLayoutSearch">
 
