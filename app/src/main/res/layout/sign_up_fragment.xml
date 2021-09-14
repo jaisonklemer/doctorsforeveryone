@@ -8,10 +8,10 @@
 
     <ImageView
         android:id="@+id/imageViewLogoSignUp"
-        android:layout_width="@dimen/size_150"
-        android:layout_height="@dimen/size_150"
+        android:layout_width="@dimen/size_200"
+        android:layout_height="@dimen/size_200"
         android:layout_marginTop="@dimen/size_40"
-        android:src="@drawable/ic_launcher_background"
+        android:src="@drawable/ic_logo_doctors_for_everyone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

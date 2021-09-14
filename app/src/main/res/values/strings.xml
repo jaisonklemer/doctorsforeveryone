@@ -3,7 +3,8 @@
     <string name="email_exemple_com">email@exemple.com</string>
     <string name="password">password</string>
     <string name="sign_in">Sign In</string>
-    <string name="create_account">Create Account!!</string>
+    <string name="create_account">CRIAR CONTA</string>
+    <string name="signInGoogle">Entre com sua conta Google</string>
     <string name="sign_up">Sign Up</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
@@ -23,7 +24,7 @@
     <string name="update_profile">Atualize seus dados</string>
     <string name="feminine">Feminino</string>
     <string name="masculine">Masculino</string>
-    <string name="not_response">Prefiro não responder</string>
+    <string name="not_response">Outro</string>
     <string name="Save">Salvar</string>
     <string name="Edit">Editar</string>
 
