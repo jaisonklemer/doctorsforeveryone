@@ -14,8 +14,10 @@ class UserRepository {
         val task = database.collection(USERS_COLLECTION).document(userId).get()
 
         task.addOnSuccessListener {
-            if (it != null) {
+            if (it.data != null) {
                 callback(User.fromDocument(it))
+            } else {
+                callback(null)
             }
         }
 
@@ -24,14 +26,15 @@ class UserRepository {
             println(it.localizedMessage)
         }
     }
-    fun updateUser(user: User, callback: (User?) -> Unit){
+
+    fun updateUser(user: User, callback: (User?) -> Unit) {
         database.collection(USERS_COLLECTION)
             .document(user.id.toString())
             .set(user)
             .addOnSuccessListener {
                 println("Sucess")
             }
-            .addOnFailureListener{
+            .addOnFailureListener {
                 println("ERRO")
             }
 
