@@ -127,7 +127,11 @@ class AuthenticationRepository {
     private fun createUserAtCollection(user: FirebaseUser) {
         val collection = "users"
         val data = hashMapOf(
-            "admin" to false
+            "admin" to false,
+            "name" to "",
+            "age" to "",
+            "weight" to "",
+            "height" to ""
         )
 
         database.collection(collection).document(user.uid).set(data)
