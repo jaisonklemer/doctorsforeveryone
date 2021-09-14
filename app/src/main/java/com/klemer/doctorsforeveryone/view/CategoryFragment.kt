@@ -40,6 +40,7 @@ class CategoryFragment : Fragment(R.layout.category_fragment) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(this).get(CategoryViewModel::class.java)
 
+
         setupObservers()
         executeTest()
 
