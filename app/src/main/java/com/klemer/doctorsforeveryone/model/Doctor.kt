@@ -8,7 +8,9 @@ data class Doctor(
     val category: String,
     val biography: String,
     val working_hours: Long,
-    val working_period: String
+    val working_period: String,
+    val avatarDoctor: String?,
+    val iconDoctorCategory: String?
 ) {
 
     fun calculateWorkingHours(): List<String> {
@@ -63,7 +65,9 @@ data class Doctor(
                 category = document["category"] as String,
                 biography = document["biography"] as String,
                 working_hours = document["working_hours"] as Long,
-                working_period = document["working_period"] as String
+                working_period = document["working_period"] as String,
+                avatarDoctor = document["avatarDoctor"] as String?,
+                iconDoctorCategory = document["avatarDoctorCategory"] as String?
             )
         }
     }
