@@ -7,6 +7,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.SnapHelper
+import com.google.android.material.snackbar.Snackbar
 import com.klemer.doctorsforeveryone.R
 import com.klemer.doctorsforeveryone.adapter.CategoryAdapter
 import com.klemer.doctorsforeveryone.adapter.DoctorAdapter
@@ -31,6 +33,7 @@ class HomeFragment : Fragment(R.layout.home_fragment) {
     private lateinit var recyclerViewDoctor: RecyclerView
     private var adapterCategory = CategoryAdapter {
         println("Nome da categoria: ${it.name}")
+        viewModelDoctor.fetchDoctorByCategory(it.name)
     }
     private var adapterDoctor = DoctorAdapter {
         println("Id do Doctor: ${it.id}")
@@ -41,7 +44,14 @@ class HomeFragment : Fragment(R.layout.home_fragment) {
     }
 
     private val observerDoctorGetALL = Observer<List<Doctor>> {
-        adapterDoctor.refresh(it)
+        if (it != null) {
+            adapterDoctor.refresh(it)
+        } else {
+            adapterDoctor.clear()
+            Snackbar.make(requireView(), "Nao foi encontrado Nenhum Doctor!", Snackbar.LENGTH_LONG)
+                .show()
+        }
+
     }
 
     override fun onStart() {
@@ -49,6 +59,7 @@ class HomeFragment : Fragment(R.layout.home_fragment) {
         viewModelCategory.fetchCategory()
         viewModelDoctor.fetchDoctor()
     }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -68,7 +79,7 @@ class HomeFragment : Fragment(R.layout.home_fragment) {
 
     private fun setupOservers() {
         viewModelCategory.categoryGet.observe(viewLifecycleOwner, observerCategoryGetAll)
-        viewModelDoctor.doctorGetAll.observe(viewLifecycleOwner, observerDoctorGetALL)
+        viewModelDoctor.doctorGet.observe(viewLifecycleOwner, observerDoctorGetALL)
     }
 
     private fun executeComponents() {

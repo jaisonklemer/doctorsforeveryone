@@ -32,8 +32,6 @@ class ProfileFragment : Fragment(R.layout.profile_fragment) {
         viewModel.user.observe(viewLifecycleOwner, observerUser)
         viewModel.getCurrentUser()
 
-        edidUser()
-
         binding.buttonEdit.setOnClickListener {
             setValueFieldsEnable(true)
         }

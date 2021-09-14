@@ -48,6 +48,8 @@ class DoctorRepository {
                     doctors.add(Doctor.fromDocument(doctor))
                 }
                 callback(doctors, null)
+            }else {
+                callback(null,null)
             }
         }
     }
