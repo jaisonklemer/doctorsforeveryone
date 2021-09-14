@@ -39,7 +39,8 @@ class SignInFragment : Fragment(R.layout.sign_in_fragment) {
     }
 
     private val loginError = Observer<String?> {
-        Toast.makeText(requireContext(), "Error: $it", Toast.LENGTH_LONG).show()
+        if (it != null)
+            Toast.makeText(requireContext(), "Error: $it", Toast.LENGTH_LONG).show()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
