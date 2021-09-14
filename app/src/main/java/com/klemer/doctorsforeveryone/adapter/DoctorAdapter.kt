@@ -37,6 +37,11 @@ class DoctorAdapter(private val onClick: (Doctor) -> Unit): RecyclerView.Adapter
         listOfDoctor.addAll(newList)
         notifyDataSetChanged()
     }
+
+    fun clear() {
+        listOfDoctor.clear()
+        notifyDataSetChanged()
+    }
 }
 
 class ItemDoctorViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {

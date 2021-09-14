@@ -9,13 +9,20 @@ class DoctorViewModel : ViewModel() {
 
     private val repository = DoctorRepository()
 
-    var doctorGetAll = MutableLiveData<List<Doctor>>()
+    var doctorGet = MutableLiveData<List<Doctor>>()
     var doctorInsert = MutableLiveData<Boolean>()
     var error = MutableLiveData<String>()
 
     fun fetchDoctor() {
         repository.getAllDoctors { listDoc, e ->
-            doctorGetAll.value = listDoc
+            doctorGet.value = listDoc
+            error.value = e
+        }
+    }
+
+    fun fetchDoctorByCategory(name: String) {
+        repository.getDoctorByCategory(name) { listDoc, e ->
+            doctorGet.value = listDoc
             error.value = e
         }
     }
