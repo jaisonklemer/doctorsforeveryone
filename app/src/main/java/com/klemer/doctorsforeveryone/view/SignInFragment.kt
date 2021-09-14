@@ -13,6 +13,7 @@ import com.klemer.doctorsforeveryone.R
 import com.klemer.doctorsforeveryone.StartActivity
 import com.klemer.doctorsforeveryone.databinding.SignInFragmentBinding
 import com.klemer.doctorsforeveryone.repository.UserRepository
+import com.klemer.doctorsforeveryone.utils.hideKeyboard
 import com.klemer.doctorsforeveryone.utils.replaceView
 import com.klemer.doctorsforeveryone.view_model.SignInViewModel
 
@@ -64,7 +65,11 @@ class SignInFragment : Fragment(R.layout.sign_in_fragment) {
 
     private fun setupClickListeners() {
         //button SignIn
-        binding.buttonSignIn.setOnClickListener { loginUser() }
+        binding.buttonSignIn.setOnClickListener {
+        binding.progressBar.visibility = View.VISIBLE
+            loginUser()
+            requireActivity().hideKeyboard()
+        }
 
         //button create account
         binding.textViewCreateAccount.setOnClickListener {
