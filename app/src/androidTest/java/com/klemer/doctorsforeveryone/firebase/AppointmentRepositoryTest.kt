@@ -2,7 +2,7 @@ package com.klemer.doctorsforeveryone.firebase
 
 import com.klemer.doctorsforeveryone.model.Appointment
 import com.klemer.doctorsforeveryone.repository.AppointmentRepository
-import com.klemer.doctorsforeveryone.repository.DoctorsRepository
+import com.klemer.doctorsforeveryone.repository.DoctorRepository
 
 class AppointmentRepositoryTest {
 
@@ -25,7 +25,7 @@ class AppointmentRepositoryTest {
         val doctorId = "Q8RJMLeiIIUpSkfiEphy"
 
         val appointmentRepository = AppointmentRepository()
-        val doctorRepository = DoctorsRepository()
+        val doctorRepository = DoctorRepository()
 
         doctorRepository.getDoctorById(doctorId) { doctor, s ->
             if (doctor != null) {
