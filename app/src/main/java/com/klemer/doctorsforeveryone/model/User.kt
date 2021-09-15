@@ -5,10 +5,11 @@ import com.google.firebase.firestore.DocumentSnapshot
 data class User(
     var id: String,
     val admin: Boolean,
-    var name : String,
-    var age : String,
-    var weight :String,
-    var height: String
+    var name: String,
+    var age: String,
+    var weight: String,
+    var height: String,
+    var gender: String
 ) {
     companion object {
         fun fromDocument(document: DocumentSnapshot): User {
@@ -19,6 +20,7 @@ data class User(
                 age = document["age"] as String,
                 weight = document["weight"] as String,
                 height = document["height"] as String,
+                gender = document["gender"] as String
             )
         }
     }

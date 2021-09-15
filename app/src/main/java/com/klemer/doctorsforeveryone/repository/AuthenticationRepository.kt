@@ -139,15 +139,11 @@ class AuthenticationRepository {
             "name" to "",
             "age" to "",
             "weight" to "",
-            "height" to ""
+            "height" to "",
+            "gender" to ""
         )
 
         database.collection(collection).document(user.uid).set(data)
-    }
-
-    private fun createUserAtCollection(user: User) {
-        val collection = "users"
-        database.collection(collection).document(user.id).set(user)
     }
 
     companion object {
