@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".view.ProfileFragment">
 
     <TextView
@@ -63,7 +63,7 @@
             android:id="@+id/profileName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:enabled="false"/>
+            android:enabled="false" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -81,7 +81,7 @@
             android:id="@+id/profileAge"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:enabled="false"/>
+            android:enabled="false" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -99,7 +99,7 @@
             android:id="@+id/profileWeight"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:enabled="false"/>
+            android:enabled="false" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -118,7 +118,7 @@
             android:id="@+id/profileHeight"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:enabled="false"/>
+            android:enabled="false" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -133,32 +133,48 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textInputLayoutWeight">
 
-        <CheckBox
-            android:id="@+id/checkboxFem"
-            android:layout_width="wrap_content"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/autoCompleteLayout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:onClick="onCheckboxClicked"
-            android:layout_margin="@dimen/size_15"
-            android:text="@string/feminine"
-            android:textColor="@color/greenLight" />
+            android:enabled="false"
+            android:hint="@string/sexo">
 
-        <CheckBox
-            android:id="@+id/checkboxMas"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="onCheckboxClicked"
-            android:layout_margin="@dimen/size_15"
-            android:text="@string/masculine"
-            android:textColor="@color/greenLight" />
+            <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                android:id="@+id/autoComplete_gender"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
-        <CheckBox
-            android:id="@+id/checkboxNotResponse"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/size_15"
-            android:onClick="onCheckboxClicked"
-            android:text="@string/not_response"
-            android:textColor="@color/greenLight" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!--        <CheckBox-->
+        <!--            android:id="@+id/checkboxFem"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:onClick="onCheckboxClicked"-->
+        <!--            android:layout_margin="@dimen/size_15"-->
+        <!--            android:text="@string/feminine"-->
+        <!--            android:textColor="@color/greenLight" />-->
+
+        <!--        <CheckBox-->
+        <!--            android:id="@+id/checkboxMas"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:onClick="onCheckboxClicked"-->
+        <!--            android:layout_margin="@dimen/size_15"-->
+        <!--            android:text="@string/masculine"-->
+        <!--            android:textColor="@color/greenLight" />-->
+
+        <!--        <CheckBox-->
+        <!--            android:id="@+id/checkboxNotResponse"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_margin="@dimen/size_15"-->
+        <!--            android:onClick="onCheckboxClicked"-->
+        <!--            android:text="@string/not_response"-->
+        <!--            android:textColor="@color/greenLight" />-->
 
     </LinearLayout>
 
@@ -176,8 +192,8 @@
         android:layout_width="@dimen/size_0"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/size_20"
-        android:text="@string/Save"
         android:enabled="false"
+        android:text="@string/Save"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/buttonEdit"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
