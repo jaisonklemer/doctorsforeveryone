@@ -146,35 +146,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
-
         </com.google.android.material.textfield.TextInputLayout>
-
-        <!--        <CheckBox-->
-        <!--            android:id="@+id/checkboxFem"-->
-        <!--            android:layout_width="wrap_content"-->
-        <!--            android:layout_height="wrap_content"-->
-        <!--            android:onClick="onCheckboxClicked"-->
-        <!--            android:layout_margin="@dimen/size_15"-->
-        <!--            android:text="@string/feminine"-->
-        <!--            android:textColor="@color/greenLight" />-->
-
-        <!--        <CheckBox-->
-        <!--            android:id="@+id/checkboxMas"-->
-        <!--            android:layout_width="wrap_content"-->
-        <!--            android:layout_height="wrap_content"-->
-        <!--            android:onClick="onCheckboxClicked"-->
-        <!--            android:layout_margin="@dimen/size_15"-->
-        <!--            android:text="@string/masculine"-->
-        <!--            android:textColor="@color/greenLight" />-->
-
-        <!--        <CheckBox-->
-        <!--            android:id="@+id/checkboxNotResponse"-->
-        <!--            android:layout_width="wrap_content"-->
-        <!--            android:layout_height="wrap_content"-->
-        <!--            android:layout_margin="@dimen/size_15"-->
-        <!--            android:onClick="onCheckboxClicked"-->
-        <!--            android:text="@string/not_response"-->
-        <!--            android:textColor="@color/greenLight" />-->
 
     </LinearLayout>
 
