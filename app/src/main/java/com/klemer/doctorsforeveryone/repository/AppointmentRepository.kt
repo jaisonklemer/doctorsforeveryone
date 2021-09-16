@@ -7,6 +7,7 @@ import com.klemer.doctorsforeveryone.model.Appointment
 class AppointmentRepository {
 
     private val APPOINTMENT_COLLECTION = "appointments"
+    private val DOCTOR_COLLECTION = "doctors"
 
     private val database = Firebase.firestore
 
@@ -21,7 +22,7 @@ class AppointmentRepository {
         }
     }
 
-    fun getAppointmentByUser(userId: String, callback: (List<Appointment>?, String?) -> Unit) {
+    fun getAppointmentByUser(userId: String?, callback: (List<Appointment>?, String?) -> Unit) {
         val task =
             database.collection(APPOINTMENT_COLLECTION).whereEqualTo("user_id", userId).get()
 
@@ -33,6 +34,10 @@ class AppointmentRepository {
             snapshots.documents.forEach { appointment ->
                 appointments.add(Appointment.fromDocument(appointment))
             }
+            appointments.forEach {
+
+            }
+
 
             callback(appointments, null)
         }
