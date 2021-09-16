@@ -79,6 +79,7 @@ class SignInFragment : Fragment(R.layout.sign_in_fragment) {
 
         //button SignIn With Google
         binding.signInButtonWithGoogle.setOnClickListener {
+            binding.progressBar.visibility = View.VISIBLE
             viewModel.signIn(this, requireContext())
         }
     }

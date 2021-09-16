@@ -7,11 +7,11 @@
     tools:context=".view.SchedulesFragment">
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/cardView3"
         android:layout_width="300dp"
         android:layout_height="300dp"
         android:elevation="8dp"
         app:cardCornerRadius="@dimen/size_20"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -32,7 +32,16 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-
     </androidx.cardview.widget.CardView>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewAppointment"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardView3"
+        tools:listitem="@layout/item_appointment"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
