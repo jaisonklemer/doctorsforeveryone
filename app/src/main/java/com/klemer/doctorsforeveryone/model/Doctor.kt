@@ -1,6 +1,7 @@
 package com.klemer.doctorsforeveryone.model
 
 import com.google.firebase.firestore.DocumentSnapshot
+import java.io.Serializable
 
 data class Doctor(
     var id: String?,
@@ -11,7 +12,7 @@ data class Doctor(
     val working_period: String,
     val avatarDoctor: String?,
     val iconDoctorCategory: String?
-) {
+): Serializable {
 
     fun calculateWorkingHours(): List<String> {
         //duração da consulta
