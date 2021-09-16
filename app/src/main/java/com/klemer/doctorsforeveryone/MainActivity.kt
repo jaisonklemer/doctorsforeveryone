@@ -38,6 +38,9 @@ class MainActivity : AppCompatActivity() {
                 R.id.navProfile -> {
                     replaceView(ProfileFragment.newInstance())
                 }
+                R.id.navAdmin -> {
+                    replaceView(AdminFragment.newInstance())
+                }
             }
             true
         }

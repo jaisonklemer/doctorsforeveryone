@@ -9,11 +9,11 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView2"
-        android:layout_width="@dimen/size_70"
-        android:layout_height="@dimen/size_70"
-        android:layout_margin="@dimen/size_20"
+        android:layout_width="@dimen/size_35"
+        android:layout_height="@dimen/size_35"
+        android:layout_margin="@dimen/size_18"
         android:elevation="@dimen/size_4"
-        app:cardCornerRadius="@dimen/size_35"
+        app:cardCornerRadius="@dimen/size_17"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -24,8 +24,8 @@
 
             <ImageView
                 android:id="@+id/imageUser"
-                android:layout_width="@dimen/size_50"
-                android:layout_height="@dimen/size_50"
+                android:layout_width="@dimen/size_25"
+                android:layout_height="@dimen/size_25"
                 android:src="@drawable/ic_icon_profile"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -53,14 +53,14 @@
             android:layout_height="wrap_content"
             android:text="Olá, Usuário"
             android:textColor="@color/greenLight"
-            android:textSize="@dimen/size_20"
-            android:layout_marginBottom="@dimen/size_4"
+            android:textSize="@dimen/size_15"
+            android:layout_marginBottom="@dimen/size_1"
             android:textStyle="bold" />
 
         <TextView
             android:textStyle="italic"
             android:textColor="@color/greenDark"
-            android:layout_marginTop="@dimen/size_4"
+            android:layout_marginTop="@dimen/size_1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/subtitle"
@@ -71,31 +71,31 @@
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayoutSearch"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="@dimen/size_300"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/size_20"
+        android:layout_width="@dimen/size_0"
+        android:layout_height="@dimen/size_60"
+        android:layout_margin="@dimen/size_15"
         android:hint="@string/placeholder"
+        app:layout_constraintEnd_toStartOf="@+id/cardViewSearch"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cardView2">
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/searchDoctors"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/searchDoctors"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardViewSearch"
-        android:layout_width="@dimen/size_50"
-        android:layout_height="@dimen/size_50"
-        android:layout_margin="@dimen/size_20"
+        android:layout_width="@dimen/size_35"
+        android:layout_height="@dimen/size_35"
+        android:layout_margin="@dimen/size_18"
         android:elevation="@dimen/size_4"
-        app:cardCornerRadius="@dimen/size_25"
+        app:cardCornerRadius="@dimen/size_17"
         app:layout_constraintBottom_toBottomOf="@+id/textInputLayoutSearch"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textInputLayoutSearch"
         app:layout_constraintTop_toTopOf="@+id/textInputLayoutSearch">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -105,8 +105,8 @@
 
             <ImageView
                 android:id="@+id/idSearch"
-                android:layout_width="@dimen/size_20"
-                android:layout_height="@dimen/size_20"
+                android:layout_width="@dimen/size_15"
+                android:layout_height="@dimen/size_15"
                 android:src="@drawable/ic_lupa"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -121,10 +121,10 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/size_20"
+        android:layout_margin="@dimen/size_10"
         android:text="@string/search_specialty"
         android:textColor="@color/greenLight"
-        android:textSize="@dimen/size_20"
+        android:textSize="@dimen/size_15"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textInputLayoutSearch" />
@@ -132,7 +132,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewSpecialtyList"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/size_130"
+        android:layout_height="@dimen/size_90"
         android:layout_marginTop="@dimen/size_10"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -145,7 +145,8 @@
         android:id="@+id/recyclerViewDoctorsList"
         android:layout_width="match_parent"
         android:layout_height="@dimen/size_0"
-        android:layout_margin="@dimen/size_10"
+        android:layout_marginRight="@dimen/size_10"
+        android:layout_marginLeft="@dimen/size_10"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/recyclerViewSpecialtyList"
         tools:listitem="@layout/itens_cards_doctors"/>
