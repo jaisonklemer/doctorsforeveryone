@@ -2,9 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.klemer.doctorsforeveryone">
 
-
-    <uses-permission android:name="android.permission.INTERNET"/>
-
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -13,6 +11,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.DoctorsForEveryone">
+        <activity
+            android:name=".DoctorActivity"
+            android:exported="true" />
         <activity
             android:name=".StartActivity"
             android:exported="true">
@@ -25,8 +26,7 @@
         <activity
             android:name=".MainActivity"
             android:exported="true"
-            android:windowSoftInputMode="adjustNothing">
-        </activity>
+            android:windowSoftInputMode="adjustNothing"></activity>
     </application>
 
 </manifest>

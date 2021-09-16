@@ -38,9 +38,14 @@ class AppointmentRepository {
         }
     }
 
-    fun getAppointmentsByDoctor(doctorId: String, callback: (List<Appointment>?, String?) -> Unit) {
+    fun getAppointmentsByDoctor(
+        doctorId: String,
+        date: String,
+        callback: (List<Appointment>?, String?) -> Unit
+    ) {
         val task =
-            database.collection(APPOINTMENT_COLLECTION).whereEqualTo("doctor_id", doctorId).get()
+            database.collection(APPOINTMENT_COLLECTION).whereEqualTo("doctor_id", doctorId)
+                .whereEqualTo("date", date).get()
 
         task.addOnFailureListener {
             callback(null, it.localizedMessage)
