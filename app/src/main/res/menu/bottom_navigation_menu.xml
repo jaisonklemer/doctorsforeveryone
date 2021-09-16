@@ -29,7 +29,7 @@
     <item
         android:id="@+id/navAdmin"
         android:enabled="true"
-        android:icon="@drawable/ic_icon_profile"
+        android:icon="@drawable/ic_icon_admin"
         android:title="@string/admin"
         android:visible="false" />
 
