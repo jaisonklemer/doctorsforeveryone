@@ -49,7 +49,6 @@ class StartActivity : AppCompatActivity() {
 
         } else {
             replaceView(SignInFragment.newInstance(), R.id.containerStart)
-            finish()
         }
     }
 }
