@@ -23,8 +23,9 @@ class MainActivity : AppCompatActivity() {
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        setupBottomNavigation()
 
+        supportActionBar?.hide()
+        setupBottomNavigation()
         bottomNav()
         replaceView(HomeFragment.newInstance())
     }
@@ -67,6 +68,5 @@ class MainActivity : AppCompatActivity() {
             replaceView(fragment)
             binding.bottomNavigation.menu.getItem(position).isChecked = true
         }
-
     }
 }

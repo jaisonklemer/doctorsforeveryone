@@ -1,7 +1,6 @@
 package com.klemer.doctorsforeveryone.view
 
 import android.annotation.SuppressLint
-import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
@@ -12,11 +11,9 @@ import com.google.android.flexbox.AlignItems
 import com.google.android.flexbox.FlexboxLayoutManager
 import com.google.android.flexbox.JustifyContent
 import com.klemer.doctorsforeveryone.DoctorActivity
-import com.klemer.doctorsforeveryone.MainActivity
 import com.klemer.doctorsforeveryone.R
 import com.klemer.doctorsforeveryone.adapter.DoctorHourAdapter
 import com.klemer.doctorsforeveryone.databinding.DoctorFragmentBinding
-import com.klemer.doctorsforeveryone.model.Appointment
 import com.klemer.doctorsforeveryone.model.Doctor
 import com.klemer.doctorsforeveryone.view_model.DoctorViewModel
 import java.text.SimpleDateFormat
