@@ -34,10 +34,6 @@ class AppointmentRepository {
             snapshots.documents.forEach { appointment ->
                 appointments.add(Appointment.fromDocument(appointment))
             }
-            appointments.forEach {
-
-            }
-
 
             callback(appointments, null)
         }

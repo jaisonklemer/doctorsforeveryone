@@ -2,6 +2,8 @@ package com.klemer.doctorsforeveryone.view
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -31,12 +33,6 @@ class HomeFragment : Fragment(R.layout.home_fragment) {
     private lateinit var viewModelDoctor: DoctorViewModel
     private lateinit var binding: HomeFragmentBinding
     private lateinit var recyclerViewDoctor: RecyclerView
-    private lateinit var concatAdapter: ConcatAdapter
-     private lateinit var categoryHorizontalAdapter: CategoryHorizontalAdapter
-    lateinit var homeHeaderAdapter : HomeHeaderAdapter
-
-    private val adapterSearch = HeaderAdapter() {
-    }
 
     private var adapterCategory = CategoryAdapter {
         println("Nome da categoria: ${it.name}")
@@ -45,7 +41,7 @@ class HomeFragment : Fragment(R.layout.home_fragment) {
     private var adapterDoctor = DoctorAdapter {
         showBottomSheetDialog(it)
     }
-    
+
     private val observerCategoryGetAll = Observer<List<Category>> {
         adapterCategory.refresh(it)
     }
@@ -70,9 +66,6 @@ class HomeFragment : Fragment(R.layout.home_fragment) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        homeHeaderAdapter = HomeHeaderAdapter(adapterSearch)
-        categoryHorizontalAdapter = CategoryHorizontalAdapter(adapterCategory)
-
         loadComponents(view)
         setupOservers()
         executeComponents()
@@ -94,15 +87,34 @@ class HomeFragment : Fragment(R.layout.home_fragment) {
     }
 
     private fun executeComponents() {
+        //Lista de categorias
+        binding.include.recyclerViewCategory.adapter = adapterCategory
+        binding.include.recyclerViewCategory.layoutManager =
+            LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
 
+        //Lista de médicos
         recyclerViewDoctor.layoutManager = LinearLayoutManager(requireContext())
+        recyclerViewDoctor.adapter = adapterDoctor
 
-        concatAdapter = ConcatAdapter(homeHeaderAdapter, categoryHorizontalAdapter, adapterDoctor)
-        recyclerViewDoctor.adapter = concatAdapter
+        binding.headerFragment.includeSearch.searchDoctors.addTextChangedListener(object :
+            TextWatcher {
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+
+            }
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                println(p0)
+            }
+
+            override fun afterTextChanged(p0: Editable?) {
+
+            }
+
+        })
 
     }
 
-    private fun showBottomSheetDialog(doctor:Doctor) {
+    private fun showBottomSheetDialog(doctor: Doctor) {
         val bottomSheet = BottomSheetFragment.newInstance()
         val arguments = Bundle()
         arguments.putSerializable("doctor", doctor)

@@ -1,19 +1,14 @@
 package com.klemer.doctorsforeveryone.view
 
-import android.os.Binder
 import android.os.Bundle
 import android.view.View
-import android.widget.Adapter
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
-import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.ktx.Firebase
 import com.klemer.doctorsforeveryone.R
 import com.klemer.doctorsforeveryone.adapter.AppointmentAdapter
-import com.klemer.doctorsforeveryone.databinding.ItensCardsDoctorsBinding
 import com.klemer.doctorsforeveryone.databinding.SchedulesFragmentBinding
 import com.klemer.doctorsforeveryone.model.Appointment
 import com.klemer.doctorsforeveryone.repository.AuthenticationRepository
