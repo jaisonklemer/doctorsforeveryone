@@ -33,7 +33,6 @@ class StartActivity : AppCompatActivity() {
         viewModel.signOut()
     }
 
-
     private fun removeActionBar() {
         supportActionBar?.hide()
     }
@@ -44,11 +43,13 @@ class StartActivity : AppCompatActivity() {
                 Intent(this, MainActivity::class.java).apply {
                     this.putExtra("admin", it?.admin)
                     startActivity(this)
+                    finish()
                 }
             }
 
         } else {
             replaceView(SignInFragment.newInstance(), R.id.containerStart)
+            finish()
         }
     }
 }

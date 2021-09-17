@@ -1,13 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".view.DoctorFragment">
 
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Hello" />
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/size_10"
+        android:text="@string/escolha_um_dia"
+        android:textColor="@color/greenLight"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-</FrameLayout>
+    <com.harrywhewell.scrolldatepicker.DayScrollDatePicker
+        android:id="@+id/datepicker"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/size_10"
+        app:baseColor="@color/greenLightBackgroundDoctors"
+        app:baseTextColor="@color/greenDark"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView4"
+        app:selectedColor="@color/greenLight"
+        app:selectedTextColor="@color/black"
+        app:showFullDate="false" />
+
+
+    <TextView
+        android:id="@+id/tv_select_hour"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/size_10"
+        android:text="@string/selecione_um_hor_rio"
+        android:textColor="@color/greenLight"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/datepicker" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_doctor_hours"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:overScrollMode="never"
+        app:layout_constraintBottom_toTopOf="@+id/btn_make_appointment"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_select_hour"
+        tools:listitem="@layout/itens_cards_doctor_hours" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_make_appointment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/size_10"
+        android:text="@string/agendar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

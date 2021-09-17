@@ -45,6 +45,7 @@ class HomeFragment : Fragment(R.layout.home_fragment) {
     private var adapterDoctor = DoctorAdapter {
         showBottomSheetDialog(it)
     }
+    
     private val observerCategoryGetAll = Observer<List<Category>> {
         adapterCategory.refresh(it)
     }
@@ -100,12 +101,12 @@ class HomeFragment : Fragment(R.layout.home_fragment) {
         recyclerViewDoctor.adapter = concatAdapter
 
     }
+
     private fun showBottomSheetDialog(doctor:Doctor) {
         val bottomSheet = BottomSheetFragment.newInstance()
-        var arguments = Bundle()
+        val arguments = Bundle()
         arguments.putSerializable("doctor", doctor)
         bottomSheet.arguments = arguments
         bottomSheet.show(parentFragmentManager, "dialog_doctors")
     }
-
 }
