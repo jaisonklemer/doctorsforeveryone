@@ -26,7 +26,13 @@
         <entry key="app/src/main/res/layout/header_home.xml" value="0.2375" />
         <entry key="app/src/main/res/layout/health_fragment.xml" value="0.2375" />
         <entry key="app/src/main/res/layout/home_fragment.xml" value="0.25" />
+
         <entry key="app/src/main/res/layout/home_header.xml" value="0.25" />
+
+        <entry key="app/src/main/res/layout/item_appointment.xml" value="0.2807971014492754" />
+        <entry key="app/src/main/res/layout/itens_cards_doctors.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/itens_cards_specialty.xml" value="0.335" />
+
         <entry key="app/src/main/res/layout/itens_cards_doctors.xml" value="0.45" />
         <entry key="app/src/main/res/layout/itens_cards_specialty.xml" value="0.25" />
         <entry key="app/src/main/res/layout/news_list_item.xml" value="0.30512820512820515" />

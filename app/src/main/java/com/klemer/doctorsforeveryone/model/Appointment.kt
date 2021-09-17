@@ -7,7 +7,10 @@ data class Appointment(
     var user_id: String, //auth.currentUser.id
     var doctor_id: String, // doctorSelected.id
     var hour: String, // 08:00-09:00
-    var date: String //dia da consulta
+    var date: String, //dia da consulta
+    var doctorName: String,
+    var status: String
+
 ) {
 
     companion object {
@@ -17,7 +20,9 @@ data class Appointment(
                 user_id = document["user_id"] as String,
                 doctor_id = document["doctor_id"] as String,
                 hour = document["hour"] as String,
-                date = document["date"] as String
+                date = document["date"] as String,
+                doctorName = document["doctor_name"] as String,
+                status = document["status"] as String
             )
         }
     }
