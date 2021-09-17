@@ -5,14 +5,15 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.SnapHelper
 import com.google.android.material.snackbar.Snackbar
 import com.klemer.doctorsforeveryone.R
-import com.klemer.doctorsforeveryone.adapter.CategoryAdapter
-import com.klemer.doctorsforeveryone.adapter.DoctorAdapter
+import com.klemer.doctorsforeveryone.adapter.*
 import com.klemer.doctorsforeveryone.databinding.HomeFragmentBinding
+import com.klemer.doctorsforeveryone.databinding.HomeHeaderBinding
 import com.klemer.doctorsforeveryone.model.Category
 import com.klemer.doctorsforeveryone.model.Doctor
 import com.klemer.doctorsforeveryone.view_model.CategoryViewModel
@@ -29,8 +30,14 @@ class HomeFragment : Fragment(R.layout.home_fragment) {
     private lateinit var viewModelCategory: CategoryViewModel
     private lateinit var viewModelDoctor: DoctorViewModel
     private lateinit var binding: HomeFragmentBinding
-    private lateinit var recyclerViewCategory: RecyclerView
     private lateinit var recyclerViewDoctor: RecyclerView
+    private lateinit var concatAdapter: ConcatAdapter
+     private lateinit var categoryHorizontalAdapter: CategoryHorizontalAdapter
+    lateinit var homeHeaderAdapter : HomeHeaderAdapter
+
+    private val adapterSearch = HeaderAdapter() {
+    }
+
     private var adapterCategory = CategoryAdapter {
         println("Nome da categoria: ${it.name}")
         viewModelDoctor.fetchDoctorByCategory(it.name)
@@ -38,8 +45,6 @@ class HomeFragment : Fragment(R.layout.home_fragment) {
     private var adapterDoctor = DoctorAdapter {
         showBottomSheetDialog(it)
     }
-
-
     private val observerCategoryGetAll = Observer<List<Category>> {
         adapterCategory.refresh(it)
     }
@@ -64,18 +69,22 @@ class HomeFragment : Fragment(R.layout.home_fragment) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        homeHeaderAdapter = HomeHeaderAdapter(adapterSearch)
+        categoryHorizontalAdapter = CategoryHorizontalAdapter(adapterCategory)
+
         loadComponents(view)
         setupOservers()
         executeComponents()
     }
 
-    private fun loadComponents(view: View) {
-        binding = HomeFragmentBinding.bind(view)
+    private fun loadComponents(view2: View) {
+        binding = HomeFragmentBinding.bind(view2)
         viewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
         viewModelCategory = ViewModelProvider(this).get(CategoryViewModel::class.java)
         viewModelDoctor = ViewModelProvider(this).get(DoctorViewModel::class.java)
-        recyclerViewCategory = binding.recyclerViewSpecialtyList
         recyclerViewDoctor = binding.recyclerViewDoctorsList
+
+
     }
 
     private fun setupOservers() {
@@ -84,13 +93,11 @@ class HomeFragment : Fragment(R.layout.home_fragment) {
     }
 
     private fun executeComponents() {
-        recyclerViewCategory.layoutManager =
-            LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-        recyclerViewCategory.adapter = adapterCategory
 
-        recyclerViewDoctor.layoutManager =
-            LinearLayoutManager(requireContext())
-        recyclerViewDoctor.adapter = adapterDoctor
+        recyclerViewDoctor.layoutManager = LinearLayoutManager(requireContext())
+
+        concatAdapter = ConcatAdapter(homeHeaderAdapter, categoryHorizontalAdapter, adapterDoctor)
+        recyclerViewDoctor.adapter = concatAdapter
 
     }
     private fun showBottomSheetDialog(doctor:Doctor) {
@@ -99,8 +106,6 @@ class HomeFragment : Fragment(R.layout.home_fragment) {
         arguments.putSerializable("doctor", doctor)
         bottomSheet.arguments = arguments
         bottomSheet.show(parentFragmentManager, "dialog_doctors")
-
     }
-
 
 }

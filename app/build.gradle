@@ -73,4 +73,7 @@ dependencies {
     // Import dependency for the Google Play services
     implementation 'com.google.android.gms:play-services-auth:19.2.0'
 
+    //Recycler view for using concat adapter
+    implementation "androidx.recyclerview:recyclerview:1.2.1"
+
 }
