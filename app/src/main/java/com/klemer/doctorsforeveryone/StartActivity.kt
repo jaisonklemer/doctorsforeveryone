@@ -18,11 +18,28 @@ class StartActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_start)
 
+        loadComponents()
+        executeComponents()
+        removeActionBar()
+//        singOut()
+
+
+    }
+
+    private fun loadComponents() {
         viewModel = ViewModelProvider(this).get(SignInViewModel::class.java)
+    }
+
+    private fun singOut() {
 //        TODO: Remove signOut after
         viewModel.signOut()
+    }
 
+    private fun removeActionBar() {
+        supportActionBar?.hide()
+    }
 
+    private fun executeComponents() {
         if (viewModel.currentUser() != null) {
             userRepository.getUser(viewModel.currentUser()!!.uid) {
                 Intent(this, MainActivity::class.java).apply {
@@ -34,6 +51,5 @@ class StartActivity : AppCompatActivity() {
         } else {
             replaceView(SignInFragment.newInstance(), R.id.containerStart)
         }
-
     }
 }
