@@ -1,6 +1,5 @@
 package com.klemer.doctorsforeveryone.view
 
-import android.content.Intent
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.view.View
@@ -10,14 +9,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.SnapHelper
 import com.google.android.material.snackbar.Snackbar
-import com.klemer.doctorsforeveryone.DoctorActivity
 import com.klemer.doctorsforeveryone.R
 import com.klemer.doctorsforeveryone.adapter.CategoryAdapter
 import com.klemer.doctorsforeveryone.adapter.DoctorAdapter
 import com.klemer.doctorsforeveryone.databinding.HomeFragmentBinding
 import com.klemer.doctorsforeveryone.model.Category
 import com.klemer.doctorsforeveryone.model.Doctor
-import com.klemer.doctorsforeveryone.utils.replaceView
 import com.klemer.doctorsforeveryone.view_model.CategoryViewModel
 import com.klemer.doctorsforeveryone.view_model.DoctorViewModel
 import com.klemer.doctorsforeveryone.view_model.HomeViewModel
@@ -39,8 +36,9 @@ class HomeFragment : Fragment(R.layout.home_fragment) {
         viewModelDoctor.fetchDoctorByCategory(it.name)
     }
     private var adapterDoctor = DoctorAdapter {
-        startDoctorActivity(it.id)
+        showBottomSheetDialog(it)
     }
+
 
     private val observerCategoryGetAll = Observer<List<Category>> {
         adapterCategory.refresh(it)
@@ -95,15 +93,14 @@ class HomeFragment : Fragment(R.layout.home_fragment) {
         recyclerViewDoctor.adapter = adapterDoctor
 
     }
-
-    private fun startDoctorActivity(doctorId: String?) {
-        if (doctorId != null) {
-            val doctorActivity = Intent(requireContext(), DoctorActivity::class.java).apply {
-                putExtra("doctor_id", doctorId)
-            }
-            startActivity(doctorActivity)
-        }
+    private fun showBottomSheetDialog(doctor:Doctor) {
+        val bottomSheet = BottomSheetFragment.newInstance()
+        var arguments = Bundle()
+        arguments.putSerializable("doctor", doctor)
+        bottomSheet.arguments = arguments
+        bottomSheet.show(parentFragmentManager, "dialog_doctors")
 
     }
+
 
 }
