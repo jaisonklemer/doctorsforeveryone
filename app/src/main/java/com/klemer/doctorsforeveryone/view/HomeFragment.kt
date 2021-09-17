@@ -39,7 +39,6 @@ class HomeFragment : Fragment(R.layout.home_fragment) {
         showBottomSheetDialog(it)
     }
 
-
     private val observerCategoryGetAll = Observer<List<Category>> {
         adapterCategory.refresh(it)
     }
@@ -93,14 +92,13 @@ class HomeFragment : Fragment(R.layout.home_fragment) {
         recyclerViewDoctor.adapter = adapterDoctor
 
     }
+
     private fun showBottomSheetDialog(doctor:Doctor) {
         val bottomSheet = BottomSheetFragment.newInstance()
-        var arguments = Bundle()
+        val arguments = Bundle()
         arguments.putSerializable("doctor", doctor)
         bottomSheet.arguments = arguments
         bottomSheet.show(parentFragmentManager, "dialog_doctors")
 
     }
-
-
 }

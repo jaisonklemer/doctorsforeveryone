@@ -39,7 +39,7 @@ class ItemAppointmentViewHolder(itemView: View): RecyclerView.ViewHolder(itemVie
     private val binding = ItemAppointmentBinding.bind(itemView)
 
     fun bind(appointment: Appointment) {
-        binding.textViewDoctor.text = "Dr. ${appointment.doctorName}"
+        binding.textViewDoctor.text = "Dr. ${appointment.doctor_name}"
         binding.textViewDate.text = appointment.date
         binding.textViewHour.text = appointment.hour.split("-")[0]
         binding.textViewStatus.text = appointment.status

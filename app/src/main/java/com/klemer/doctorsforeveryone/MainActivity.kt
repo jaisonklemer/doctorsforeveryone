@@ -2,9 +2,17 @@ package com.klemer.doctorsforeveryone
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
+import androidx.annotation.LayoutRes
+import androidx.core.view.children
+import androidx.fragment.app.Fragment
 import com.klemer.doctorsforeveryone.databinding.ActivityMainBinding
 import com.klemer.doctorsforeveryone.utils.replaceView
 import com.klemer.doctorsforeveryone.view.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
 
@@ -51,5 +59,14 @@ class MainActivity : AppCompatActivity() {
         if (userAdmin) {
             binding.bottomNavigation.menu.getItem(4).isVisible = true
         }
+    }
+
+    fun changeBottomSelectedItem(fragment: Fragment, position: Int) {
+        GlobalScope.launch(Dispatchers.Main) {
+            delay(100)
+            replaceView(fragment)
+            binding.bottomNavigation.menu.getItem(position).isChecked = true
+        }
+
     }
 }

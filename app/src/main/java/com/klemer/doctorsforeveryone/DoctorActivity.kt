@@ -39,6 +39,8 @@ class DoctorActivity : AppCompatActivity() {
         fragment.arguments = args
 
         replaceView(fragment, R.id.root_container)
+
+
     }
 }
 

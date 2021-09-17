@@ -2,7 +2,10 @@ package com.klemer.doctorsforeveryone.view_model
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.google.firebase.auth.FirebaseAuth
+import com.klemer.doctorsforeveryone.model.Appointment
 import com.klemer.doctorsforeveryone.model.Doctor
+import com.klemer.doctorsforeveryone.model.User
 import com.klemer.doctorsforeveryone.repository.AppointmentRepository
 import com.klemer.doctorsforeveryone.repository.DoctorRepository
 
@@ -62,6 +65,22 @@ class DoctorViewModel : ViewModel() {
 
             doctorHours.value =
                 currentDoctorHours.filter { x -> !availableHours.contains(x) } as MutableList<String>
+        }
+    }
+
+    fun insertUserAppointment(doctor: Doctor, date: String, hour: String) {
+        val user = FirebaseAuth.getInstance().currentUser
+        val appointment = Appointment(
+            id = null,
+            user_id = user?.uid!!,
+            doctor_id = doctor.id!!,
+            date = date,
+            doctor_name = doctor.name,
+            hour = hour
+        )
+
+        appointmentRepository.insert(appointment) { success, error ->
+
         }
     }
 }

@@ -3,18 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
-    android:layout_gravity="center"
+    android:minHeight="70dp"
     android:layout_height="wrap_content">
 
-    <com.google.android.material.chip.Chip
-        android:id="@+id/btn_hour"
+    <com.google.android.material.chip.ChipGroup
+        android:id="@+id/chip_group"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/size_5"
-        android:textColor="@color/white"
-        app:chipEndPadding="@dimen/size_10"
-        app:chipStartPadding="@dimen/size_10"
-        app:chipSurfaceColor="@color/greenLight"
-        tools:text="08:00" />
+        app:singleSelection="true" />
 
 </LinearLayout>

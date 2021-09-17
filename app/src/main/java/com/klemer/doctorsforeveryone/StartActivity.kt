@@ -20,7 +20,7 @@ class StartActivity : AppCompatActivity() {
 
         viewModel = ViewModelProvider(this).get(SignInViewModel::class.java)
 //        TODO: Remove signOut after
-        viewModel.signOut()
+//        viewModel.signOut()
 
 
         if (viewModel.currentUser() != null) {
@@ -28,11 +28,13 @@ class StartActivity : AppCompatActivity() {
                 Intent(this, MainActivity::class.java).apply {
                     this.putExtra("admin", it?.admin)
                     startActivity(this)
+                    finish()
                 }
             }
 
         } else {
             replaceView(SignInFragment.newInstance(), R.id.containerStart)
+            finish()
         }
 
     }
