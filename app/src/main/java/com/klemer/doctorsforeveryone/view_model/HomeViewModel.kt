@@ -3,5 +3,12 @@ package com.klemer.doctorsforeveryone.view_model
 import androidx.lifecycle.ViewModel
 
 class HomeViewModel : ViewModel() {
-    // TODO: Implement the ViewModel
+
+
+    private var query : String? = null
+
+    fun searchDoctors(q : String){
+        query= q
+    }
+
 }

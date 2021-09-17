@@ -22,8 +22,6 @@ class StartActivity : AppCompatActivity() {
         executeComponents()
         removeActionBar()
 //        singOut()
-
-
     }
 
     private fun loadComponents() {
@@ -34,6 +32,7 @@ class StartActivity : AppCompatActivity() {
 //        TODO: Remove signOut after
         viewModel.signOut()
     }
+
 
     private fun removeActionBar() {
         supportActionBar?.hide()
