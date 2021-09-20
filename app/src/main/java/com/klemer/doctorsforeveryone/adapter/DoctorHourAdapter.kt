@@ -1,20 +1,15 @@
 package com.klemer.doctorsforeveryone.adapter
 
 import android.annotation.SuppressLint
-import android.content.res.ColorStateList
-import android.graphics.Color
-import android.graphics.drawable.ColorStateListDrawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.chip.Chip
 import com.klemer.doctorsforeveryone.R
 import com.klemer.doctorsforeveryone.databinding.ItensCardsDoctorHoursBinding
-import com.klemer.doctorsforeveryone.model.Doctor
 
 class DoctorHourAdapter(private val onClick: (String) -> Unit) :
     ListAdapter<String, DoctorHourVH>(DoctorHourDiff()) {
