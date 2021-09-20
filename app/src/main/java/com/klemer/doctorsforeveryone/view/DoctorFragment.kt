@@ -32,6 +32,7 @@ class DoctorFragment : Fragment(R.layout.doctor_fragment) {
     private lateinit var binding: DoctorFragmentBinding
     private var selectedHour: String? = null
     private var selectedDate: String? = null
+    private var selectedDay: String? = null
 
     private val adapter = DoctorHourAdapter {
         selectedHour = it
@@ -92,8 +93,8 @@ class DoctorFragment : Fragment(R.layout.doctor_fragment) {
         }
     }
 
-    private fun getDoctorAvailableHours(doctor: Doctor, date: String) {
-        viewModel.getDoctorHours(doctor, date)
+    private fun getDoctorAvailableHours(doctor: Doctor, date: String, selectedDay: String) {
+        viewModel.getDoctorHours(doctor, date, selectedDay)
     }
 
     @SuppressLint("SimpleDateFormat")
@@ -120,7 +121,8 @@ class DoctorFragment : Fragment(R.layout.doctor_fragment) {
                     binding.rvDoctorHours.visibility = View.VISIBLE
                     binding.imgNotWorking.visibility = View.GONE
                     selectedDate = formatDate(date)
-                    getDoctorAvailableHours(currentDoctor, selectedDate!!)
+                    selectedDay = selectedDate?.split("/")?.get(0)
+                    getDoctorAvailableHours(currentDoctor, selectedDate!!, selectedDay!!)
                 } else {
                     binding.rvDoctorHours.visibility = View.GONE
                     binding.imgNotWorking.visibility = View.VISIBLE
@@ -164,6 +166,23 @@ class DoctorFragment : Fragment(R.layout.doctor_fragment) {
         binding.tvDoctorCategory.text = doctor.category
         binding.tvDoctorDescription.text = doctor.biography
     }
+
+//    private fun checkListOfHours(listOfHours: List<String>) {
+//        if (selectedDay == getCurrentDay()) {
+//            val finalList = mutableListOf<String>()
+//            listOfHours.forEach {
+//                val hour = it.split(":")[0]
+//                if (hour.toInt() > getCurrentHour().toInt()) {
+//                    finalList.add(it)
+//                }
+//            }
+//            adapter.update(finalList)
+//        } else {
+//            adapter.update(listOfHours)
+//        }
+//
+//        println(getCurrentDay())
+//    }
 }
 
 
