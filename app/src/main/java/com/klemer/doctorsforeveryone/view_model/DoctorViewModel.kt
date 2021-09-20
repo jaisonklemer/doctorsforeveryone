@@ -8,6 +8,7 @@ import com.klemer.doctorsforeveryone.model.Appointment
 import com.klemer.doctorsforeveryone.model.Doctor
 import com.klemer.doctorsforeveryone.repository.AppointmentRepository
 import com.klemer.doctorsforeveryone.repository.DoctorRepository
+import com.klemer.doctorsforeveryone.utils.getCurrentDate
 import com.klemer.doctorsforeveryone.utils.getCurrentDay
 import com.klemer.doctorsforeveryone.utils.getCurrentHour
 import kotlinx.coroutines.launch
@@ -61,7 +62,7 @@ class DoctorViewModel : ViewModel() {
         }
     }
 
-    fun getDoctorHours(doctor: Doctor, date: String, selectedDay: String) {
+    fun getDoctorHours(doctor: Doctor, date: String) {
         val currentDoctorHours = doctor.calculateWorkingHours()
         val availableHours = mutableListOf<String>()
 
@@ -77,7 +78,7 @@ class DoctorViewModel : ViewModel() {
                 currentDoctorHours.filter { x -> !availableHours.contains(x) }
                         as MutableList<String>
 
-            this.checkListOfHours(totalDoctorHours, selectedDay = selectedDay)
+            this.checkListOfHours(totalDoctorHours, selectedDate = date)
         }
     }
 
@@ -95,9 +96,9 @@ class DoctorViewModel : ViewModel() {
         appointmentRepository.insert(appointment) { _, _ -> }
     }
 
-    private fun checkListOfHours(listOfHours: List<String>, selectedDay: String) {
+    private fun checkListOfHours(listOfHours: List<String>, selectedDate: String) {
         viewModelScope.launch {
-            if (selectedDay == getCurrentDay()) {
+            if (selectedDate == getCurrentDate()) {
                 val finalList = mutableListOf<String>()
                 listOfHours.forEach {
                     val hour = it.split(":")[0]

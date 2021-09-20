@@ -1,6 +1,5 @@
 package com.klemer.doctorsforeveryone.view
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -17,8 +16,9 @@ import com.klemer.doctorsforeveryone.R
 import com.klemer.doctorsforeveryone.adapter.DoctorHourAdapter
 import com.klemer.doctorsforeveryone.databinding.DoctorFragmentBinding
 import com.klemer.doctorsforeveryone.model.Doctor
+import com.klemer.doctorsforeveryone.utils.formatDate
+import com.klemer.doctorsforeveryone.utils.getCurrentDate
 import com.klemer.doctorsforeveryone.view_model.DoctorViewModel
-import java.text.SimpleDateFormat
 import java.util.*
 
 
@@ -93,14 +93,9 @@ class DoctorFragment : Fragment(R.layout.doctor_fragment) {
         }
     }
 
-    private fun getDoctorAvailableHours(doctor: Doctor, date: String, selectedDay: String) {
-        viewModel.getDoctorHours(doctor, date, selectedDay)
-    }
-
-    @SuppressLint("SimpleDateFormat")
-    private fun formatDate(date: Date): String {
-        val sdf = SimpleDateFormat("dd/MM/yyyy")
-        return sdf.format(date)
+    private fun getDoctorAvailableHours(doctor: Doctor, date: String) {
+        getCurrentDate()
+        viewModel.getDoctorHours(doctor, date)
     }
 
     private fun setupRecyclerView() {
@@ -121,8 +116,7 @@ class DoctorFragment : Fragment(R.layout.doctor_fragment) {
                     binding.rvDoctorHours.visibility = View.VISIBLE
                     binding.imgNotWorking.visibility = View.GONE
                     selectedDate = formatDate(date)
-                    selectedDay = selectedDate?.split("/")?.get(0)
-                    getDoctorAvailableHours(currentDoctor, selectedDate!!, selectedDay!!)
+                    getDoctorAvailableHours(currentDoctor, selectedDate!!)
                 } else {
                     binding.rvDoctorHours.visibility = View.GONE
                     binding.imgNotWorking.visibility = View.VISIBLE
@@ -166,23 +160,6 @@ class DoctorFragment : Fragment(R.layout.doctor_fragment) {
         binding.tvDoctorCategory.text = doctor.category
         binding.tvDoctorDescription.text = doctor.biography
     }
-
-//    private fun checkListOfHours(listOfHours: List<String>) {
-//        if (selectedDay == getCurrentDay()) {
-//            val finalList = mutableListOf<String>()
-//            listOfHours.forEach {
-//                val hour = it.split(":")[0]
-//                if (hour.toInt() > getCurrentHour().toInt()) {
-//                    finalList.add(it)
-//                }
-//            }
-//            adapter.update(finalList)
-//        } else {
-//            adapter.update(listOfHours)
-//        }
-//
-//        println(getCurrentDay())
-//    }
 }
 
 
