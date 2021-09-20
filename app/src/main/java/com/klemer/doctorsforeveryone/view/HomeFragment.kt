@@ -12,12 +12,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.SnapHelper
 import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.auth.FirebaseUser
 import com.klemer.doctorsforeveryone.R
 import com.klemer.doctorsforeveryone.adapter.*
 import com.klemer.doctorsforeveryone.databinding.HomeFragmentBinding
 import com.klemer.doctorsforeveryone.databinding.HomeHeaderBinding
 import com.klemer.doctorsforeveryone.model.Category
 import com.klemer.doctorsforeveryone.model.Doctor
+import com.klemer.doctorsforeveryone.model.User
 import com.klemer.doctorsforeveryone.view_model.CategoryViewModel
 import com.klemer.doctorsforeveryone.view_model.DoctorViewModel
 import com.klemer.doctorsforeveryone.view_model.HomeViewModel
@@ -35,7 +37,6 @@ class HomeFragment : Fragment(R.layout.home_fragment) {
     private lateinit var recyclerViewDoctor: RecyclerView
 
     private var adapterCategory = CategoryAdapter {
-        println("Nome da categoria: ${it.name}")
         viewModelDoctor.fetchDoctorByCategory(it.name)
     }
     private var adapterDoctor = DoctorAdapter {
@@ -54,7 +55,10 @@ class HomeFragment : Fragment(R.layout.home_fragment) {
             Snackbar.make(requireView(), "Nao foi encontrado Nenhum Doctor!", Snackbar.LENGTH_LONG)
                 .show()
         }
+    }
 
+    private val currentUserObserver = Observer<User> {
+        binding.headerFragment.nameUser.text = "Olá ${it.name}"
     }
 
     override fun onStart() {
@@ -84,9 +88,11 @@ class HomeFragment : Fragment(R.layout.home_fragment) {
     private fun setupOservers() {
         viewModelCategory.categoryGet.observe(viewLifecycleOwner, observerCategoryGetAll)
         viewModelDoctor.doctorGet.observe(viewLifecycleOwner, observerDoctorGetALL)
+        viewModel.currentUser.observe(viewLifecycleOwner, currentUserObserver)
     }
 
     private fun executeComponents() {
+        viewModel.getCurrentUser()
         //Lista de categorias
         binding.include.recyclerViewCategory.adapter = adapterCategory
         binding.include.recyclerViewCategory.layoutManager =
