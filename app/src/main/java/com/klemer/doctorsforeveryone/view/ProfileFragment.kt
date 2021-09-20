@@ -1,5 +1,6 @@
 package com.klemer.doctorsforeveryone.view
 
+import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -52,11 +53,26 @@ class ProfileFragment : Fragment(R.layout.profile_fragment) {
             setValueFieldsEnable(false)
         }
         binding.buttonLogOut.setOnClickListener {
-            viewModel.signOut()
-            Intent(requireContext(), StartActivity::class.java).apply {
-                startActivity(this)
-            }
+            alertDialogLogOut()
         }
+    }
+
+    private fun alertDialogLogOut() {
+        AlertDialog.Builder(context)
+            .setTitle("Sair")
+            .setMessage("Deseja realmente sair do aplicativo?")
+            .setPositiveButton(R.string.sair){dialog, which ->
+                viewModel.signOut()
+                Intent(requireContext(), StartActivity::class.java).apply {
+                    startActivity(this)
+                }
+                requireActivity().finish()
+            }
+            .setNegativeButton(R.string.cancelar){dialog,which ->
+
+            }
+            .create()
+            .show()
     }
 
     private fun edidUser() {
