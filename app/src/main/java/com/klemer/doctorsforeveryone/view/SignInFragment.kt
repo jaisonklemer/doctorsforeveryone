@@ -7,12 +7,14 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseUser
 import com.klemer.doctorsforeveryone.MainActivity
 import com.klemer.doctorsforeveryone.R
 import com.klemer.doctorsforeveryone.StartActivity
 import com.klemer.doctorsforeveryone.databinding.SignInFragmentBinding
 import com.klemer.doctorsforeveryone.repository.UserRepository
+import com.klemer.doctorsforeveryone.utils.checkForInternet
 import com.klemer.doctorsforeveryone.utils.hideKeyboard
 import com.klemer.doctorsforeveryone.utils.replaceView
 import com.klemer.doctorsforeveryone.view_model.SignInViewModel
@@ -67,9 +69,21 @@ class SignInFragment : Fragment(R.layout.sign_in_fragment) {
     private fun setupClickListeners() {
         //button SignIn
         binding.buttonSignIn.setOnClickListener {
-        binding.progressBar.visibility = View.VISIBLE
-            loginUser()
-            requireActivity().hideKeyboard()
+            if (requireActivity().checkForInternet(requireContext())) {
+                if (binding.editTextInputEmailSignIn.text.isNullOrEmpty() &&
+                    binding.editTextInputPasswordSignIn.text.isNullOrEmpty()
+                ) {
+                    binding.editTextInputEmailSignIn.setError("Preencha o email")
+                    binding.editTextInputPasswordSignIn.setError("Preencha a senha")
+                } else {
+                    binding.progressBar.visibility = View.VISIBLE
+                    loginUser()
+                    requireActivity().hideKeyboard()
+                }
+            } else {
+                Snackbar.make(requireView(), "Sem conexao com a internet!", Snackbar.LENGTH_LONG)
+                    .show()
+            }
         }
 
         //button create account
@@ -79,8 +93,13 @@ class SignInFragment : Fragment(R.layout.sign_in_fragment) {
 
         //button SignIn With Google
         binding.signInButtonWithGoogle.setOnClickListener {
-            binding.progressBar.visibility = View.VISIBLE
-            viewModel.signIn(this, requireContext())
+            if (requireActivity().checkForInternet(requireContext())) {
+                binding.progressBar.visibility = View.VISIBLE
+                viewModel.signIn(this, requireContext())
+            } else {
+                Snackbar.make(requireView(), "Sem conexao com a internet!", Snackbar.LENGTH_LONG)
+                    .show()
+            }
         }
     }
 

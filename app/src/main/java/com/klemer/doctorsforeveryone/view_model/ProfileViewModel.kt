@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.firebase.auth.FirebaseAuth
 import com.klemer.doctorsforeveryone.model.User
+import com.klemer.doctorsforeveryone.repository.AuthenticationRepository
 import com.klemer.doctorsforeveryone.repository.UserRepository
 
 class ProfileViewModel : ViewModel() {
@@ -13,6 +14,7 @@ class ProfileViewModel : ViewModel() {
     val user: LiveData<User> = _user
 
     private val repository = UserRepository()
+    private val logOut = AuthenticationRepository()
     private val auth = FirebaseAuth.getInstance()
 
 
@@ -27,13 +29,9 @@ class ProfileViewModel : ViewModel() {
                 user.gender = gender
 
                 repository.updateUser(user) {
-
                 }
-
             }
-
         }
-
     }
 
     fun getCurrentUser() {
@@ -42,5 +40,9 @@ class ProfileViewModel : ViewModel() {
                 _user.value = user
             }
         }
+    }
+
+    fun signOut() {
+        logOut.signOut()
     }
 }

@@ -157,6 +157,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/size_20"
         android:text="@string/Edit"
+        app:layout_constraintEnd_toStartOf="@id/buttonSave"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
 
@@ -167,9 +168,20 @@
         android:layout_margin="@dimen/size_20"
         android:enabled="false"
         android:text="@string/Save"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/buttonLogOut"
         app:layout_constraintStart_toEndOf="@+id/buttonEdit"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
+
+    <Button
+        android:id="@+id/buttonLogOut"
+        android:layout_width="@dimen/size_0"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/size_20"
+        android:text="@string/sair"
+        app:layout_constraintStart_toEndOf="@id/buttonSave"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
