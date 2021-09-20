@@ -82,12 +82,14 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
     @SuppressLint("ResourceType")
     private fun registerDoctorActivityResult() {
         doctorActivityResult =
-            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
-                this.dismiss()
-                (requireActivity() as MainActivity?)?.changeBottomSelectedItem(
-                    SchedulesFragment.newInstance(),
-                    1
-                )
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+                if (result.data?.hasExtra("created_appointment") == true) {
+                    this.dismiss()
+                    (requireActivity() as MainActivity?)?.changeBottomSelectedItem(
+                        SchedulesFragment.newInstance(),
+                        1
+                    )
+                }
             }
     }
 }

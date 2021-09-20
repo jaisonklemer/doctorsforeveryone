@@ -31,23 +31,10 @@
         android:id="@+id/idSearch"
         android:layout_width="@dimen/size_25"
         android:layout_height="@dimen/size_25"
-        android:src="@drawable/ic_lupa"
         android:layout_marginRight="@dimen/size_15"
+        android:src="@drawable/ic_lupa"
         app:layout_constraintBottom_toBottomOf="@+id/textInputLayoutSearch"
         app:layout_constraintEnd_toEndOf="@+id/textInputLayoutSearch"
         app:layout_constraintTop_toTopOf="@+id/textInputLayoutSearch" />
-
-
-<!--    <androidx.recyclerview.widget.RecyclerView-->
-<!--        android:id="@+id/recyclerViewSpecialtyList"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="@dimen/size_90"-->
-<!--        android:orientation="horizontal"-->
-<!--        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent"-->
-<!--        tools:listitem="@layout/itens_cards_specialty" />-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>
