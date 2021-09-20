@@ -8,6 +8,9 @@ import com.klemer.doctorsforeveryone.repository.UserRepository
 import com.klemer.doctorsforeveryone.utils.replaceView
 import com.klemer.doctorsforeveryone.view.SignInFragment
 import com.klemer.doctorsforeveryone.view_model.SignInViewModel
+import com.google.android.material.snackbar.Snackbar
+import com.klemer.doctorsforeveryone.utils.checkForInternet
+
 
 class StartActivity : AppCompatActivity() {
 
@@ -19,8 +22,8 @@ class StartActivity : AppCompatActivity() {
         setContentView(R.layout.activity_start)
 
         loadComponents()
-        executeComponents()
         removeActionBar()
+        verifyConnection()
 //        singOut()
     }
 
@@ -51,4 +54,14 @@ class StartActivity : AppCompatActivity() {
             replaceView(SignInFragment.newInstance(), R.id.containerStart)
         }
     }
+
+    private fun verifyConnection() {
+        if (checkForInternet(this)) {
+            executeComponents()
+        } else {
+            replaceView(SignInFragment.newInstance(), R.id.containerStart)
+            Snackbar.make(this.findViewById(R.id.containerStart), "Sem conexao com a internet!", Snackbar.LENGTH_LONG).show()
+        }
+    }
+
 }

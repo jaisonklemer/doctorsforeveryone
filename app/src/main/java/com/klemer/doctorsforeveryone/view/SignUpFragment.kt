@@ -4,11 +4,14 @@ import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.View
+import android.view.View.VISIBLE
 import android.widget.Toast
 import androidx.lifecycle.Observer
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseUser
 import com.klemer.doctorsforeveryone.R
 import com.klemer.doctorsforeveryone.databinding.SignUpFragmentBinding
+import com.klemer.doctorsforeveryone.utils.checkForInternet
 import com.klemer.doctorsforeveryone.utils.replaceView
 import com.klemer.doctorsforeveryone.view_model.SignUpViewModel
 
@@ -46,7 +49,13 @@ class SignUpFragment : Fragment(R.layout.sign_up_fragment) {
     }
 
     private fun setupClickListeners() {
-        binding.buttonSignUp.setOnClickListener { registerUser() }
+        binding.buttonSignUp.setOnClickListener {
+            if (requireActivity().checkForInternet(requireContext())) {
+                registerUser()
+            } else {
+                Snackbar.make(requireView(), "Sem conexao com a internet!", Snackbar.LENGTH_LONG).show()
+            }
+        }
         binding.imageViewArrowBack.setOnClickListener {
             requireActivity().replaceView(SignInFragment.newInstance(), R.id.containerStart) }
     }
@@ -55,7 +64,11 @@ class SignUpFragment : Fragment(R.layout.sign_up_fragment) {
         val email = binding.editTextInputEmailSignUp.text.toString()
         val pass = binding.editTextInputPasswordSignUp.text.toString()
         if (email.isNotEmpty() && pass.isNotEmpty()) {
+            binding.progressBarSignUp.visibility = VISIBLE
             viewModel.signUpWithEmailAndPassword(email, pass)
+        } else {
+            binding.editTextInputEmailSignUp.setError("Preencha o email")
+            binding.editTextInputPasswordSignUp.setError("Preencha se senha")
         }
     }
 
