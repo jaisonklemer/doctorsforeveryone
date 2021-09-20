@@ -1,5 +1,6 @@
 package com.klemer.doctorsforeveryone.view
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.ArrayAdapter
@@ -7,8 +8,10 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.klemer.doctorsforeveryone.R
+import com.klemer.doctorsforeveryone.StartActivity
 import com.klemer.doctorsforeveryone.databinding.ProfileFragmentBinding
 import com.klemer.doctorsforeveryone.model.User
+import com.klemer.doctorsforeveryone.utils.replaceView
 import com.klemer.doctorsforeveryone.view_model.ProfileViewModel
 
 class ProfileFragment : Fragment(R.layout.profile_fragment) {
@@ -47,6 +50,12 @@ class ProfileFragment : Fragment(R.layout.profile_fragment) {
         binding.buttonSave.setOnClickListener {
             edidUser()
             setValueFieldsEnable(false)
+        }
+        binding.buttonLogOut.setOnClickListener {
+            viewModel.signOut()
+            Intent(requireContext(), StartActivity::class.java).apply {
+                startActivity(this)
+            }
         }
     }
 
