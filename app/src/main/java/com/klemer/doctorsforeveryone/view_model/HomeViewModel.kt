@@ -11,13 +11,7 @@ class HomeViewModel : ViewModel() {
     private val auth = AuthenticationRepository()
     private val userRepository = UserRepository()
 
-
-    private var query: String? = null
     val currentUser = MutableLiveData<User>()
-
-    fun searchDoctors(q: String) {
-        query = q
-    }
 
     fun getCurrentUser() {
         auth.currentUser().let { user ->
