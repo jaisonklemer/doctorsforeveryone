@@ -48,8 +48,8 @@ class DoctorRepository {
                     doctors.add(Doctor.fromDocument(doctor))
                 }
                 callback(doctors, null)
-            }else {
-                callback(null,null)
+            } else {
+                callback(null, null)
             }
         }
     }
@@ -70,4 +70,29 @@ class DoctorRepository {
             callback(doctors, null)
         }
     }
+
+
+
+    fun getDoctorByName(doctorName: String, callback: (List<Doctor>?, String?) -> Unit) {
+
+        val task =
+            database.collection(DOCTOR_COLLECTION).orderBy("name").startAt(doctorName.uppercase()).endAt(doctorName+'\uf8ff').get()
+
+        task.addOnFailureListener {
+            callback(null, it.localizedMessage)
+        }
+
+        task.addOnSuccessListener {
+            if (it.documents.isNotEmpty()) {
+                val doctors = mutableListOf<Doctor>()
+                it.documents.forEach { doctor ->
+                    doctors.add(Doctor.fromDocument(doctor))
+                }
+                callback(doctors, null)
+            } else {
+                callback(null, null)
+            }
+        }
+    }
+
 }

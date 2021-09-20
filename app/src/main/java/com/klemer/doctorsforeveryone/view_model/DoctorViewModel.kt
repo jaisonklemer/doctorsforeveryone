@@ -37,6 +37,13 @@ class DoctorViewModel : ViewModel() {
         }
     }
 
+    fun fetchDoctorByName(nameDoc: String) {
+        repository.getDoctorByName(nameDoc) { listDoc, e ->
+            doctorGet.value = listDoc
+            error.value = e
+        }
+    }
+
     fun insertDoctor(doctor: Doctor) {
         repository.insertDoctor(doctor) { insertDoctor, e ->
             doctorInsert.value = insertDoctor

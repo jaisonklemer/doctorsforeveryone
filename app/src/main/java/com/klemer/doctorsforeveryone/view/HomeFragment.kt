@@ -1,22 +1,20 @@
 package com.klemer.doctorsforeveryone.view
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.recyclerview.widget.ConcatAdapter
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.SnapHelper
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseUser
 import com.klemer.doctorsforeveryone.R
-import com.klemer.doctorsforeveryone.adapter.*
+import com.klemer.doctorsforeveryone.adapter.CategoryAdapter
+import com.klemer.doctorsforeveryone.adapter.DoctorAdapter
 import com.klemer.doctorsforeveryone.databinding.HomeFragmentBinding
-import com.klemer.doctorsforeveryone.databinding.HomeHeaderBinding
 import com.klemer.doctorsforeveryone.model.Category
 import com.klemer.doctorsforeveryone.model.Doctor
 import com.klemer.doctorsforeveryone.model.User
@@ -109,7 +107,13 @@ class HomeFragment : Fragment(R.layout.home_fragment) {
             }
 
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                println(p0)
+                p0?.let {
+                    if (it.length > 2) {
+                        viewModelDoctor.fetchDoctorByName(it.toString())
+                    } else if (it.length == 0) {
+                        viewModelDoctor.fetchDoctor()
+                    }
+                }
             }
 
             override fun afterTextChanged(p0: Editable?) {
