@@ -144,7 +144,8 @@
             <com.google.android.material.textfield.MaterialAutoCompleteTextView
                 android:id="@+id/autoComplete_gender"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:inputType="none" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
