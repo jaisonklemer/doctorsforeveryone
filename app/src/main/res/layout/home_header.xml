@@ -51,7 +51,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/size_1"
-            android:text="Olá, Usuário"
+            android:text="Olá "
             android:textColor="@color/greenLight"
             android:textSize="@dimen/size_15"
             android:textStyle="bold" />

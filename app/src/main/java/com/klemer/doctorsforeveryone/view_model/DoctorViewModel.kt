@@ -2,11 +2,15 @@ package com.klemer.doctorsforeveryone.view_model
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.google.firebase.auth.FirebaseAuth
 import com.klemer.doctorsforeveryone.model.Appointment
 import com.klemer.doctorsforeveryone.model.Doctor
 import com.klemer.doctorsforeveryone.repository.AppointmentRepository
 import com.klemer.doctorsforeveryone.repository.DoctorRepository
+import com.klemer.doctorsforeveryone.utils.getCurrentDay
+import com.klemer.doctorsforeveryone.utils.getCurrentHour
+import kotlinx.coroutines.launch
 
 class DoctorViewModel : ViewModel() {
 
@@ -57,20 +61,23 @@ class DoctorViewModel : ViewModel() {
         }
     }
 
-    fun getDoctorHours(doctor: Doctor, date: String) {
+    fun getDoctorHours(doctor: Doctor, date: String, selectedDay: String) {
         val currentDoctorHours = doctor.calculateWorkingHours()
-        var availableHours = mutableListOf<String>()
+        val availableHours = mutableListOf<String>()
 
         appointmentRepository.getAppointmentsByDoctor(
             doctorId = doctor.id!!,
             date = date
-        ) { appointments, err ->
+        ) { appointments, _ ->
             appointments?.forEach { appointment ->
                 availableHours.add(appointment.hour)
             }
 
-            doctorHours.value =
-                currentDoctorHours.filter { x -> !availableHours.contains(x) } as MutableList<String>
+            val totalDoctorHours =
+                currentDoctorHours.filter { x -> !availableHours.contains(x) }
+                        as MutableList<String>
+
+            this.checkListOfHours(totalDoctorHours, selectedDay = selectedDay)
         }
     }
 
@@ -85,8 +92,24 @@ class DoctorViewModel : ViewModel() {
             hour = hour
         )
 
-        appointmentRepository.insert(appointment) { success, error ->
+        appointmentRepository.insert(appointment) { _, _ -> }
+    }
 
+    private fun checkListOfHours(listOfHours: List<String>, selectedDay: String) {
+        viewModelScope.launch {
+            if (selectedDay == getCurrentDay()) {
+                val finalList = mutableListOf<String>()
+                listOfHours.forEach {
+                    val hour = it.split(":")[0]
+                    if (hour.toInt() > getCurrentHour().toInt()) {
+                        finalList.add(it)
+                    }
+                }
+                doctorHours.value = finalList
+            } else {
+                doctorHours.value = listOfHours
+            }
         }
+
     }
 }
