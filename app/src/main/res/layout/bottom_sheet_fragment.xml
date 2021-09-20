@@ -25,6 +25,7 @@
             android:id="@+id/avatarDoctor"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/size_5"
             android:src="@drawable/ic_icon_profile" />
 
 
