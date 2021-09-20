@@ -4,7 +4,7 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.klemer.doctorsforeveryone.model.Doctor
 
-class DoctorsRepository {
+class DoctorRepository {
 
     private val DOCTOR_COLLECTION = "doctors"
 
@@ -48,6 +48,8 @@ class DoctorsRepository {
                     doctors.add(Doctor.fromDocument(doctor))
                 }
                 callback(doctors, null)
+            } else {
+                callback(null, null)
             }
         }
     }
@@ -68,4 +70,29 @@ class DoctorsRepository {
             callback(doctors, null)
         }
     }
+
+
+
+    fun getDoctorByName(doctorName: String, callback: (List<Doctor>?, String?) -> Unit) {
+
+        val task =
+            database.collection(DOCTOR_COLLECTION).orderBy("name").startAt(doctorName.uppercase()).endAt(doctorName+'\uf8ff').get()
+
+        task.addOnFailureListener {
+            callback(null, it.localizedMessage)
+        }
+
+        task.addOnSuccessListener {
+            if (it.documents.isNotEmpty()) {
+                val doctors = mutableListOf<Doctor>()
+                it.documents.forEach { doctor ->
+                    doctors.add(Doctor.fromDocument(doctor))
+                }
+                callback(doctors, null)
+            } else {
+                callback(null, null)
+            }
+        }
+    }
+
 }

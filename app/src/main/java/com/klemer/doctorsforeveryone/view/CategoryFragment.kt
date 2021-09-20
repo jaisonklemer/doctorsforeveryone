@@ -40,6 +40,7 @@ class CategoryFragment : Fragment(R.layout.category_fragment) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(this).get(CategoryViewModel::class.java)
 
+
         setupObservers()
         executeTest()
 
@@ -60,7 +61,9 @@ class CategoryFragment : Fragment(R.layout.category_fragment) {
 //        viewModel.deleteCategory("")
 //        viewModel.fetchCategory()
 //        viewModel.fetchCategoryById("IXhRMsR6bVkNWIFZnFFl")
+    }
 
+    private fun executeComponent() {
 
     }
 

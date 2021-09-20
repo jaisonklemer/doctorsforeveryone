@@ -3,7 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="../../../../layout/custom_preview.xml" value="0.3104166666666667" />
         <entry key="app/src/main/res/drawable/checkbox_selector.xml" value="0.24722222222222223" />
+        <entry key="app/src/main/res/drawable/chip_state_color_list.xml" value="0.20925925925925926" />
         <entry key="app/src/main/res/drawable/gradient.xml" value="0.24974358974358973" />
         <entry key="app/src/main/res/drawable/ic_icon_health.xml" value="0.25364583333333335" />
         <entry key="app/src/main/res/drawable/ic_icon_home.xml" value="0.25364583333333335" />
@@ -14,18 +16,23 @@
         <entry key="app/src/main/res/drawable/ic_logo_doctors_foreveryone.xml" value="0.25" />
         <entry key="app/src/main/res/drawable/ic_lupa.xml" value="0.24722222222222223" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.2375" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.125" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.375" />
         <entry key="app/src/main/res/layout/activity_start.xml" value="0.2375" />
         <entry key="app/src/main/res/layout/bottom_navigation_menu.xml" value="0.2375" />
+        <entry key="app/src/main/res/layout/bottom_sheet_fragment.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/category_list.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/doctor_fragment.xml" value="0.335" />
         <entry key="app/src/main/res/layout/fragment_schedules.xml" value="0.2234375" />
         <entry key="app/src/main/res/layout/health_fragment.xml" value="0.2375" />
-        <entry key="app/src/main/res/layout/home_fragment.xml" value="0.2375" />
-        <entry key="app/src/main/res/layout/news_list_item.xml" value="0.30512820512820515" />
-        <entry key="app/src/main/res/layout/home_fragment.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/home_fragment.xml" value="0.33408071748878926" />
+        <entry key="app/src/main/res/layout/home_header.xml" value="0.375" />
+        <entry key="app/src/main/res/layout/itens_cards_doctor_hours.xml" value="0.37962962962962965" />
         <entry key="app/src/main/res/layout/itens_cards_doctors.xml" value="0.25" />
         <entry key="app/src/main/res/layout/itens_cards_specialty.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/news_list_item.xml" value="0.30512820512820515" />
         <entry key="app/src/main/res/layout/profile_fragment.xml" value="0.25" />
         <entry key="app/src/main/res/layout/schedules_fragment.xml" value="0.2375" />
+        <entry key="app/src/main/res/layout/search_header.xml" value="0.2658514492753623" />
         <entry key="app/src/main/res/layout/sign_in_fragment.xml" value="0.22780797101449277" />
         <entry key="app/src/main/res/layout/sign_up_fragment.xml" value="0.1982727143297738" />
         <entry key="app/src/main/res/layout/splash_screen.xml" value="0.2375" />

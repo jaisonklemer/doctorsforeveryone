@@ -8,7 +8,7 @@ import com.klemer.doctorsforeveryone.model.Category
 
 class CategoryRepository {
 
-    private val CATEGORY_COLLECTION = "category"
+    private val CATEGORY_COLLECTION = "categories"
     private val database = Firebase.firestore
 
     fun insertCategory(category: Category, callback: (Boolean, String?) -> Unit) {

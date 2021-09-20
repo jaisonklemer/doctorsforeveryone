@@ -1,10 +1,8 @@
 package com.klemer.doctorsforeveryone.repository
 
 import android.app.Activity
-import android.content.ContentResolver
 import android.content.Context
 import android.content.Intent
-import android.provider.Settings.Global.getString
 import android.util.Log
 import androidx.fragment.app.Fragment
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -14,13 +12,15 @@ import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import com.klemer.doctorsforeveryone.R
 
 class AuthenticationRepository {
 
     private val auth = FirebaseAuth.getInstance()
-
-    private lateinit var googleSignInClient: GoogleSignInClient
+    private val database = Firebase.firestore
+    private val userRepository = UserRepository()
 
     fun signInWithEmailAndPassword(
         email: String,
@@ -46,6 +46,7 @@ class AuthenticationRepository {
 
         task.addOnSuccessListener { authResult ->
             authResult.user?.sendEmailVerification()
+            authResult.user?.let { this.createUserAtCollection(it) }
             callback(authResult.user, null)
         }
         task.addOnFailureListener { failureError ->
@@ -85,15 +86,11 @@ class AuthenticationRepository {
 
     fun currentUser(): FirebaseUser? = auth.currentUser
 
-    fun updateUI(user: FirebaseUser?) {
-
-    }
-
     fun signOut() {
         auth.signOut()
     }
 
-    private fun configureGoogleSignIn(context: Context) : GoogleSignInClient{
+    private fun configureGoogleSignIn(context: Context): GoogleSignInClient {
         // Congigure Google Sign In
         GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestIdToken(context.resources.getString(R.string.default_web_client_id))
@@ -110,19 +107,40 @@ class AuthenticationRepository {
         callback: (FirebaseUser?, String?) -> Unit
     ) {
         val credential = GoogleAuthProvider.getCredential(idToken, null)
+
         auth.signInWithCredential(credential)
             .addOnCompleteListener(activity) { task ->
                 if (task.isSuccessful) {
                     // Sign in success, update UI with the signed-in user's information
-                    Log.d(TAG, "signInWithCredential:success")
+                    println("signInWithCredential:success")
                     val user = auth.currentUser
+                    user?.let { firebaseUser ->
+                        userRepository.getUser(firebaseUser.uid) { user ->
+                            if (user == null) {
+                                this.createUserAtCollection(firebaseUser)
+                            }
+                        }
+                    }
                     callback(user, null)
                 } else {
-                    // If sign in fails, display a message to the user.
-                    Log.w(TAG, "signInWithCredential:failure", task.exception)
+                    println("signInWithCredential:failure ${task.exception}")
                     callback(null, task.exception.toString())
                 }
             }
+    }
+
+    private fun createUserAtCollection(user: FirebaseUser) {
+        val collection = "users"
+        val data = hashMapOf(
+            "admin" to false,
+            "name" to "",
+            "age" to "",
+            "weight" to "",
+            "height" to "",
+            "gender" to ""
+        )
+
+        database.collection(collection).document(user.uid).set(data)
     }
 
     companion object {

@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.DoctorFragment">
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/materialCardView"
+        android:layout_width="@dimen/size_80"
+        android:layout_height="@dimen/size_80"
+        android:layout_margin="@dimen/size_15"
+        app:cardBackgroundColor="@color/greenLightBackgroundDoctors"
+        app:cardCornerRadius="@dimen/size_10"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:strokeColor="@color/greenDark"
+        app:strokeWidth="@dimen/size_2">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <ImageView
+                android:id="@+id/img_doctor_avatar"
+                android:layout_width="@dimen/size_75"
+                android:layout_height="@dimen/size_75"
+                android:layout_marginTop="@dimen/size_5"
+                android:src="@drawable/ic_icon_profile"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <TextView
+        android:id="@+id/tv_doctor_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/size_10"
+        android:textColor="@color/greenDark"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/materialCardView"
+        tools:text="Dra. Daniela" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal|center_vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_doctor_name">
+
+        <TextView
+            android:id="@+id/tv_doctor_category"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/size_10"
+            android:textColor="@color/greenLight"
+            android:textSize="15sp"
+            android:textStyle="italic"
+            app:layout_constraintTop_toBottomOf="@+id/tv_doctor_name"
+            tools:layout_editor_absoluteX="10dp"
+            tools:text="Ginecologista" />
+
+        <ImageView
+            android:id="@+id/img_doctor_category"
+            android:layout_width="@dimen/size_20"
+            android:layout_height="@dimen/size_20"
+            android:layout_margin="@dimen/size_10"
+            android:layout_marginStart="280dp"
+            app:layout_constraintStart_toEndOf="@+id/tv_doctor_category"
+            app:layout_constraintTop_toBottomOf="@+id/tv_doctor_name"
+            tools:src="@drawable/ic_calendar" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_doctor_description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/size_10"
+        android:layout_marginTop="40dp"
+        android:textColor="@color/greenLight"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.473"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout5"
+        tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus laoreet ultricies lectus, sed lacinia lectus mattis ac. Donec euismod ultricies felis, eu hendrerit lectus egestas vel. Sed at nunc quis orci aliquet convallis et sit amet ipsum." />
+
+    <TextView
+        android:id="@+id/tv_choose_day"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/size_10"
+        android:text="@string/escolha_um_dia"
+        android:textColor="@color/greenLight"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_doctor_description" />
+
+    <com.harrywhewell.scrolldatepicker.DayScrollDatePicker
+        android:id="@+id/date_picker"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/size_10"
+        app:baseColor="@color/greenLightBackgroundDoctors"
+        app:baseTextColor="@color/greenDark"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_choose_day"
+        app:selectedColor="@color/greenLight"
+        app:selectedTextColor="@color/black"
+        app:showFullDate="false" />
+
+
+    <TextView
+        android:id="@+id/tv_select_hour"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/size_10"
+        android:text="@string/selecione_um_hor_rio"
+        android:textColor="@color/greenLight"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/date_picker" />
+
+    <ImageView
+        android:id="@+id/img_not_working"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:layout_margin="@dimen/size_10"
+        android:src="@drawable/not_working"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@+id/btn_make_appointment"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_select_hour" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_doctor_hours"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_margin="@dimen/size_10"
+        android:overScrollMode="never"
+        app:layout_constraintBottom_toTopOf="@+id/btn_make_appointment"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_select_hour"
+        tools:listitem="@layout/itens_cards_doctor_hours" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_make_appointment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/size_10"
+        android:text="@string/agendar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

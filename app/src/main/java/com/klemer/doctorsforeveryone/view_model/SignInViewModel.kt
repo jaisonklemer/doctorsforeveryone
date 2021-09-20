@@ -42,10 +42,6 @@ class SignInViewModel : ViewModel() {
         return repository.currentUser()
     }
 
-    fun updateUI(user: FirebaseUser?) {
-        repository.updateUI(user)
-    }
-
     fun signOut() {
         repository.signOut()
     }

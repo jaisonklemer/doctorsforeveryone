@@ -3,7 +3,8 @@
     <string name="email_exemple_com">email@exemple.com</string>
     <string name="password">password</string>
     <string name="sign_in">Sign In</string>
-    <string name="create_account">Create Account!!</string>
+    <string name="create_account">CRIAR CONTA</string>
+    <string name="signInGoogle">Entre com sua conta Google</string>
     <string name="sign_up">Sign Up</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
@@ -12,6 +13,7 @@
     <string name="schedules">Agendamentos</string>
     <string name="health">Saúde</string>
     <string name="profile">Perfil</string>
+    <string name="admin">Admin</string>
     <string name="subtitle">Encontre os melhores doutores aqui!</string>
     <string name="placeholder">Busque doutores:</string>
     <string name="placeholder_name">Nome completo</string>
@@ -22,12 +24,19 @@
     <string name="update_profile">Atualize seus dados</string>
     <string name="feminine">Feminino</string>
     <string name="masculine">Masculino</string>
-    <string name="not_response">Prefiro não responder</string>
+    <string name="not_response">Outro</string>
     <string name="Save">Salvar</string>
     <string name="Edit">Editar</string>
-
+    <string name="sexo">Sexo</string>
+    <string name="descriptionDoctor">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s</string>
+    <string name="appointment">Agendar</string>
+    <string name="agendar">Agendar</string>
+    <string name="selecione_um_hor_rio">Selecione um horário</string>
+    <string name="escolha_um_dia">Escolha um dia</string>
+    <string name="sair">Sair</string>
+    <string name="cancelar">Cancelar</string>
 
     <!-- TODO: Token Google-->
-<!--    <string name="default_web_client_id">886802055145-ov8mfaqmjiilp8c6jtptdh0mciue8c97.apps.googleusercontent.com</string>-->
+    <!--    <string name="default_web_client_id">886802055145-ov8mfaqmjiilp8c6jtptdh0mciue8c97.apps.googleusercontent.com</string>-->
 
 </resources>

@@ -7,11 +7,15 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseUser
 import com.klemer.doctorsforeveryone.MainActivity
 import com.klemer.doctorsforeveryone.R
 import com.klemer.doctorsforeveryone.StartActivity
 import com.klemer.doctorsforeveryone.databinding.SignInFragmentBinding
+import com.klemer.doctorsforeveryone.repository.UserRepository
+import com.klemer.doctorsforeveryone.utils.checkForInternet
+import com.klemer.doctorsforeveryone.utils.hideKeyboard
 import com.klemer.doctorsforeveryone.utils.replaceView
 import com.klemer.doctorsforeveryone.view_model.SignInViewModel
 
@@ -23,17 +27,22 @@ class SignInFragment : Fragment(R.layout.sign_in_fragment) {
 
     private lateinit var viewModel: SignInViewModel
     private lateinit var binding: SignInFragmentBinding
+    private val userRepository = UserRepository()
 
     private val loginSuccessful = Observer<FirebaseUser?> {
         //login successful
-        Intent(requireContext(), MainActivity::class.java).apply {
-            startActivity(this)
+        userRepository.getUser(it.uid) {
+            Intent(requireContext(), MainActivity::class.java).apply {
+                this.putExtra("admin", it?.admin)
+                startActivity(this)
+            }
+            (requireActivity() as StartActivity).finish()
         }
-        (requireActivity() as StartActivity).finish()
     }
 
     private val loginError = Observer<String?> {
-        Toast.makeText(requireContext(), "Error: $it", Toast.LENGTH_LONG).show()
+        if (it != null)
+            Toast.makeText(requireContext(), "Error: $it", Toast.LENGTH_LONG).show()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -59,7 +68,23 @@ class SignInFragment : Fragment(R.layout.sign_in_fragment) {
 
     private fun setupClickListeners() {
         //button SignIn
-        binding.buttonSignIn.setOnClickListener { loginUser() }
+        binding.buttonSignIn.setOnClickListener {
+            if (requireActivity().checkForInternet(requireContext())) {
+                if (binding.editTextInputEmailSignIn.text.isNullOrEmpty() &&
+                    binding.editTextInputPasswordSignIn.text.isNullOrEmpty()
+                ) {
+                    binding.editTextInputEmailSignIn.setError("Preencha o email")
+                    binding.editTextInputPasswordSignIn.setError("Preencha a senha")
+                } else {
+                    binding.progressBar.visibility = View.VISIBLE
+                    loginUser()
+                    requireActivity().hideKeyboard()
+                }
+            } else {
+                Snackbar.make(requireView(), "Sem conexao com a internet!", Snackbar.LENGTH_LONG)
+                    .show()
+            }
+        }
 
         //button create account
         binding.textViewCreateAccount.setOnClickListener {
@@ -68,7 +93,13 @@ class SignInFragment : Fragment(R.layout.sign_in_fragment) {
 
         //button SignIn With Google
         binding.signInButtonWithGoogle.setOnClickListener {
-            viewModel.signIn(this, requireContext())
+            if (requireActivity().checkForInternet(requireContext())) {
+                binding.progressBar.visibility = View.VISIBLE
+                viewModel.signIn(this, requireContext())
+            } else {
+                Snackbar.make(requireView(), "Sem conexao com a internet!", Snackbar.LENGTH_LONG)
+                    .show()
+            }
         }
     }
 
