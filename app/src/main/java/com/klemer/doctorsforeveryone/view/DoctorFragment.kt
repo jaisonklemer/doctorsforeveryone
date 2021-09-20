@@ -1,12 +1,14 @@
 package com.klemer.doctorsforeveryone.view
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.bumptech.glide.Glide
 import com.google.android.flexbox.AlignItems
 import com.google.android.flexbox.FlexboxLayoutManager
 import com.google.android.flexbox.JustifyContent
@@ -38,6 +40,7 @@ class DoctorFragment : Fragment(R.layout.doctor_fragment) {
 
     private val doctorObserver = Observer<Doctor> {
         currentDoctor = it
+        bindDoctorInfo(it)
     }
 
     private val doctorHoursObserver = Observer<List<String>> {
@@ -109,16 +112,18 @@ class DoctorFragment : Fragment(R.layout.doctor_fragment) {
     }
 
     private fun setupCalendar() {
-        val datePicker = binding.datepicker
+        val datePicker = binding.datePicker
 
         datePicker.getSelectedDate { date ->
             if (date != null) {
                 if (checkIfWeekendDay(date)) {
                     binding.rvDoctorHours.visibility = View.VISIBLE
+                    binding.imgNotWorking.visibility = View.GONE
                     selectedDate = formatDate(date)
                     getDoctorAvailableHours(currentDoctor, selectedDate!!)
                 } else {
                     binding.rvDoctorHours.visibility = View.GONE
+                    binding.imgNotWorking.visibility = View.VISIBLE
                 }
             }
         }
@@ -133,8 +138,31 @@ class DoctorFragment : Fragment(R.layout.doctor_fragment) {
     private fun createAppointment() {
         if (selectedDate != null && selectedHour != null) {
             viewModel.insertUserAppointment(currentDoctor, selectedDate!!, selectedHour!!)
-            (requireActivity() as DoctorActivity?)?.finish()
+            runActivityResult()
         }
+    }
+
+    private fun runActivityResult() {
+        Intent().let { intent ->
+            intent.putExtra("created_appointment", true)
+            (requireActivity() as DoctorActivity?)?.apply {
+                setResult(0, intent)
+                finish()
+            }
+        }
+    }
+
+    private fun bindDoctorInfo(doctor: Doctor) {
+        binding.imgDoctorAvatar.apply {
+            Glide.with(this).load(doctor.avatarDoctor).into(this)
+        }
+        binding.imgDoctorCategory.apply {
+            Glide.with(this).load(doctor.iconDoctorCategory).into(this)
+        }
+
+        binding.tvDoctorName.text = doctor.name
+        binding.tvDoctorCategory.text = doctor.category
+        binding.tvDoctorDescription.text = doctor.biography
     }
 }
 
