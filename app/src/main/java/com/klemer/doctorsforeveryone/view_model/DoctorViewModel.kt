@@ -5,7 +5,6 @@ import androidx.lifecycle.ViewModel
 import com.google.firebase.auth.FirebaseAuth
 import com.klemer.doctorsforeveryone.model.Appointment
 import com.klemer.doctorsforeveryone.model.Doctor
-import com.klemer.doctorsforeveryone.model.User
 import com.klemer.doctorsforeveryone.repository.AppointmentRepository
 import com.klemer.doctorsforeveryone.repository.DoctorRepository
 
@@ -29,6 +28,13 @@ class DoctorViewModel : ViewModel() {
 
     fun fetchDoctorByCategory(name: String) {
         repository.getDoctorByCategory(name) { listDoc, e ->
+            doctorGet.value = listDoc
+            error.value = e
+        }
+    }
+
+    fun fetchDoctorByName(nameDoc: String) {
+        repository.getDoctorByName(nameDoc) { listDoc, e ->
             doctorGet.value = listDoc
             error.value = e
         }
