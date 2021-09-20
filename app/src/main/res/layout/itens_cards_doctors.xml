@@ -71,7 +71,7 @@
                     android:layout_marginBottom="@dimen/size_4"
                     android:text="Dra.Daniela Silva"
                     android:textColor="@color/greenDark"
-                    android:textSize="@dimen/size_25"
+                    android:textSize="@dimen/size_20"
                     android:textStyle="bold"
                     app:layout_constraintStart_toEndOf="@+id/materialCardView"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -83,7 +83,7 @@
                     android:layout_marginTop="@dimen/size_4"
                     android:text="Ginecologista"
                     android:textColor="@color/greenLight"
-                    android:textSize="@dimen/size_20"
+                    android:textSize="@dimen/size_18"
                     android:textStyle="italic"
                     app:layout_constraintTop_toBottomOf="@+id/nameDoctor" />
 
