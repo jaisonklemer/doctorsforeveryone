@@ -1,5 +1,6 @@
 package com.klemer.doctorsforeveryone.utils
 
+import java.text.SimpleDateFormat
 import java.util.*
 
 fun getCurrentDay(): String {
@@ -10,4 +11,13 @@ fun getCurrentDay(): String {
 fun getCurrentHour(): String {
     val calendar = Calendar.getInstance()
     return calendar.get(Calendar.HOUR_OF_DAY).toString()
+}
+
+fun getCurrentDate(): String {
+    return formatDate(Date())
+}
+
+fun formatDate(date: Date): String {
+    val sdf = SimpleDateFormat("dd/MM/yyyy")
+    return sdf.format(date)
 }
