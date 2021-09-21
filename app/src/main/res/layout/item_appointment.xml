@@ -102,10 +102,12 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/size_20"
+                        android:layout_marginRight="@dimen/size_10"
                         android:text="@string/date"
                         android:textSize="@dimen/size_18"
                         android:textStyle="italic"
                         app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@+id/textViewDate"
                         app:layout_constraintTop_toTopOf="parent" />
 
