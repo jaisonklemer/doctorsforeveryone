@@ -1,19 +1,16 @@
 package com.klemer.doctorsforeveryone.view
 
-import android.os.Build
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
-import androidx.annotation.RequiresApi
-import androidx.core.widget.NestedScrollView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.appbar.AppBarLayout.OnOffsetChangedListener
 import com.google.android.material.snackbar.Snackbar
-import com.google.firebase.auth.FirebaseUser
 import com.klemer.doctorsforeveryone.R
 import com.klemer.doctorsforeveryone.adapter.CategoryAdapter
 import com.klemer.doctorsforeveryone.adapter.DoctorAdapter
@@ -25,8 +22,6 @@ import com.klemer.doctorsforeveryone.utils.hideKeyboard
 import com.klemer.doctorsforeveryone.view_model.CategoryViewModel
 import com.klemer.doctorsforeveryone.view_model.DoctorViewModel
 import com.klemer.doctorsforeveryone.view_model.HomeViewModel
-import com.google.android.material.appbar.AppBarLayout
-import com.google.android.material.appbar.AppBarLayout.OnOffsetChangedListener
 
 
 class HomeFragment : Fragment(R.layout.home_fragment) {
