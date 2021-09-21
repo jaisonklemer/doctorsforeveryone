@@ -27,4 +27,9 @@ class SchedulesViewModel : ViewModel() {
             }
         }
     }
+
+    fun changeStatus(appointment: Appointment, newStatus : String){
+        appointment.status = newStatus
+        repository.updateAppointment(appointment)
+    }
 }

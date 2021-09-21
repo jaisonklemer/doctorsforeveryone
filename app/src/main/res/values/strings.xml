@@ -34,8 +34,10 @@
     <string name="selecione_um_hor_rio">Selecione um horário</string>
     <string name="escolha_um_dia">Escolha um dia</string>
     <string name="sair">Sair</string>
+    <string name="yes">Sim</string>
     <string name="cancelar">Cancelar</string>
     <string name="hour">Hora</string>
+    <string name="no">Não</string>
     <string name="date">Data</string>
     <string name="cancel">CANCELAR</string>
     <string name="canceled">Cancelado</string>

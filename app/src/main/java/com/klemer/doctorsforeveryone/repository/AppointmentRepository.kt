@@ -39,10 +39,7 @@ class AppointmentRepository {
         }
     }
 
-    fun getAppointmentsByDoctor(
-        doctorId: String,
-        date: String,
-        callback: (List<Appointment>?, String?) -> Unit
+    fun getAppointmentsByDoctor(doctorId: String, date: String, callback: (List<Appointment>?, String?) -> Unit
     ) {
         val task =
             database.collection(APPOINTMENT_COLLECTION).whereEqualTo("doctor_id", doctorId)
@@ -61,6 +58,9 @@ class AppointmentRepository {
             callback(listOfAppointments, null)
         }
 
+    }
+    fun updateAppointment(appointment: Appointment){
+        database.collection(APPOINTMENT_COLLECTION).document(appointment.id!!).set(appointment)
     }
 
 }

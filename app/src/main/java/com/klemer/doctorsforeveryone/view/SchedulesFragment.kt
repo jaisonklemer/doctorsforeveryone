@@ -1,14 +1,21 @@
 package com.klemer.doctorsforeveryone.view
 
+import android.annotation.SuppressLint
+import android.app.AlertDialog
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.view.View.INVISIBLE
+import android.view.View.VISIBLE
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import com.klemer.doctorsforeveryone.R
+import com.klemer.doctorsforeveryone.StartActivity
 import com.klemer.doctorsforeveryone.adapter.AppointmentAdapter
+import com.klemer.doctorsforeveryone.databinding.ItemAppointmentBinding
 import com.klemer.doctorsforeveryone.databinding.SchedulesFragmentBinding
 import com.klemer.doctorsforeveryone.model.Appointment
 import com.klemer.doctorsforeveryone.repository.AuthenticationRepository
@@ -22,7 +29,9 @@ class SchedulesFragment : Fragment(R.layout.schedules_fragment) {
 
     private lateinit var viewModel: SchedulesViewModel
     private lateinit var binding: SchedulesFragmentBinding
-    private var adapterAppointment = AppointmentAdapter()
+    private var adapterAppointment = AppointmentAdapter{
+        alertCancelAppointment(it)
+    }
 
     private val observerAppoinment = Observer<List<Appointment>> {
         println(it)
@@ -30,7 +39,7 @@ class SchedulesFragment : Fragment(R.layout.schedules_fragment) {
     }
 
     private val observerError = Observer<String> {
-        Snackbar.make(requireView(), "Nenhum appointment cadastrado!", Snackbar.LENGTH_LONG)
+        Snackbar.make(requireView(), "Nenhuma consulta agendada!", Snackbar.LENGTH_LONG)
             .show()
     }
 
@@ -41,7 +50,6 @@ class SchedulesFragment : Fragment(R.layout.schedules_fragment) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         loadComponents(view)
         setupObserver()
         setupRecyclerView()
@@ -62,10 +70,18 @@ class SchedulesFragment : Fragment(R.layout.schedules_fragment) {
         adapter = adapterAppointment
 
     }
-
-    private fun executeComponents() {
-
+    private fun alertCancelAppointment(appointment: Appointment) {
+        AlertDialog.Builder(context)
+            .setTitle("Cancelar")
+            .setMessage("Deseja cancelar agendamento?")
+            .setPositiveButton(R.string.yes){dialog, which ->
+                viewModel.changeStatus(appointment, "Cancelado")
+                viewModel.fetchAppointmentByUser(AuthenticationRepository().currentUser()?.uid)
+            }
+            .setNegativeButton(R.string.no){dialog,which ->
+            }
+            .create()
+            .show()
     }
-
 
 }
