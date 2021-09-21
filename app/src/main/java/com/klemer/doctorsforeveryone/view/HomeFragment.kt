@@ -34,7 +34,6 @@ class HomeFragment : Fragment(R.layout.home_fragment) {
     private lateinit var viewModelCategory: CategoryViewModel
     private lateinit var viewModelDoctor: DoctorViewModel
     private lateinit var binding: HomeFragmentBinding
-    private lateinit var recyclerViewDoctor: RecyclerView
 
     private var adapterCategory = CategoryAdapter {
         viewModelDoctor.fetchDoctorByCategory(it.name)
@@ -80,9 +79,6 @@ class HomeFragment : Fragment(R.layout.home_fragment) {
         viewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
         viewModelCategory = ViewModelProvider(this).get(CategoryViewModel::class.java)
         viewModelDoctor = ViewModelProvider(this).get(DoctorViewModel::class.java)
-        recyclerViewDoctor = binding.recyclerViewDoctorsList
-
-
     }
 
     private fun setupOservers() {
@@ -100,19 +96,15 @@ class HomeFragment : Fragment(R.layout.home_fragment) {
     }
 
     private fun setupRecyclersView() {
-        binding.include.recyclerViewCategory.adapter = adapterCategory
-        binding.include.recyclerViewCategory.layoutManager =
-            LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-
-        recyclerViewDoctor.layoutManager = LinearLayoutManager(requireContext())
-        recyclerViewDoctor.adapter = adapterDoctor
+        setupRecyclerViewCategory()
+        setupRecyclerViewDoctor()
     }
+
 
     private fun setupSearchListener() {
         binding.headerFragment.includeSearch.searchDoctors.addTextChangedListener(object :
             TextWatcher {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-
             }
 
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
@@ -126,10 +118,27 @@ class HomeFragment : Fragment(R.layout.home_fragment) {
             }
 
             override fun afterTextChanged(p0: Editable?) {
-
             }
-
         })
+    }
+
+    private fun setupRecyclerViewCategory() = with(binding.include.recyclerViewCategory) {
+        //Lista de categorias
+        adapter = adapterCategory
+        layoutManager =
+            LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+
+        addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                super.onScrollStateChanged(recyclerView, newState)
+                requireActivity().hideKeyboard()
+            }
+        })
+    }
+
+    private fun setupRecyclerViewDoctor() = with(binding.recyclerViewDoctorsList) {
+        layoutManager = LinearLayoutManager(requireContext())
+        adapter = adapterDoctor
     }
 
     private fun showBottomSheetDialog(doctor: Doctor) {
