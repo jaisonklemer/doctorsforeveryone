@@ -94,7 +94,6 @@ class DoctorFragment : Fragment(R.layout.doctor_fragment) {
     }
 
     private fun getDoctorAvailableHours(doctor: Doctor, date: String) {
-        getCurrentDate()
         viewModel.getDoctorHours(doctor, date)
     }
 
