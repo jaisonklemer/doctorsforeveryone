@@ -10,7 +10,9 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.appbar.AppBarLayout.OnOffsetChangedListener
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.snackbar.Snackbar
+import com.klemer.doctorsforeveryone.MainActivity
 import com.klemer.doctorsforeveryone.R
 import com.klemer.doctorsforeveryone.adapter.CategoryAdapter
 import com.klemer.doctorsforeveryone.adapter.DoctorAdapter
@@ -18,6 +20,7 @@ import com.klemer.doctorsforeveryone.databinding.HomeFragmentBinding
 import com.klemer.doctorsforeveryone.model.Category
 import com.klemer.doctorsforeveryone.model.Doctor
 import com.klemer.doctorsforeveryone.model.User
+import com.klemer.doctorsforeveryone.utils.configSnackbar
 import com.klemer.doctorsforeveryone.utils.hideKeyboard
 import com.klemer.doctorsforeveryone.view_model.CategoryViewModel
 import com.klemer.doctorsforeveryone.view_model.DoctorViewModel
@@ -51,8 +54,9 @@ class HomeFragment : Fragment(R.layout.home_fragment) {
             adapterDoctor.refresh(it)
         } else {
             adapterDoctor.clear()
-            Snackbar.make(requireView(), "Nao foi encontrado Nenhum Doctor!", Snackbar.LENGTH_LONG)
-                .show()
+            val view =
+                (requireActivity() as MainActivity).findViewById<BottomNavigationView>(R.id.bottomNavigation)
+            configSnackbar(view,"Nenhum especialista encontrado!")
         }
     }
 

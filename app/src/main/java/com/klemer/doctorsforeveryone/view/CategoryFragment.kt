@@ -5,9 +5,12 @@ import androidx.fragment.app.Fragment
 import android.view.View
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.snackbar.Snackbar
+import com.klemer.doctorsforeveryone.MainActivity
 import com.klemer.doctorsforeveryone.R
 import com.klemer.doctorsforeveryone.model.Category
+import com.klemer.doctorsforeveryone.utils.configSnackbar
 import com.klemer.doctorsforeveryone.view_model.CategoryViewModel
 
 class CategoryFragment : Fragment(R.layout.category_fragment) {
@@ -19,7 +22,9 @@ class CategoryFragment : Fragment(R.layout.category_fragment) {
     private lateinit var viewModel: CategoryViewModel
 
     private val observerCategoryInsert = Observer<Boolean> {
-        Snackbar.make(requireView(), "Category created", Snackbar.LENGTH_LONG).show()
+        val view =
+            (requireActivity() as MainActivity).findViewById<BottomNavigationView>(R.id.bottomNavigation)
+        configSnackbar(view,"Categoria cadastrada com sucesso!")
     }
 
     private val categoryList = Observer<List<Category>> {
