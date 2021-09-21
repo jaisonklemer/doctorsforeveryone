@@ -13,10 +13,22 @@ import androidx.fragment.app.FragmentActivity
 import com.klemer.doctorsforeveryone.R
 import androidx.core.content.ContextCompat.getSystemService as getSystemService
 
-fun FragmentActivity.replaceView(fragment: Fragment, @IdRes containerId: Int = R.id.container) {
-    supportFragmentManager.beginTransaction()
-        .replace(containerId, fragment)
-        .commitNow()
+fun FragmentActivity.replaceView(
+    fragment: Fragment,
+    @IdRes containerId: Int = R.id.container,
+    addBackStack: Boolean = false
+) {
+    if(addBackStack){
+        supportFragmentManager.beginTransaction()
+            .replace(containerId, fragment)
+            .addToBackStack(null)
+            .commit()
+    }else{
+        supportFragmentManager.beginTransaction()
+            .replace(containerId, fragment)
+            .commit()
+    }
+
 }
 
 fun FragmentActivity.hideKeyboard() {
