@@ -1,15 +1,23 @@
 package com.klemer.doctorsforeveryone.utils
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
+import android.graphics.Color
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Build
+import android.view.Gravity
 import android.view.View
+import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
+import android.widget.FrameLayout
+import android.widget.Toast
 import androidx.annotation.IdRes
+import androidx.core.view.marginBottom
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
+import com.google.android.material.snackbar.Snackbar
 import com.klemer.doctorsforeveryone.R
 
 fun FragmentActivity.replaceView(
@@ -62,4 +70,13 @@ fun FragmentActivity.checkForInternet(context: Context): Boolean {
         @Suppress("DEPRECATION")
         return networkInfo.isConnected
     }
+}
+
+@SuppressLint("ResourceAsColor")
+ fun configSnackbar(view: View, message: String) {
+    val snackbar = Snackbar.make(view, message, Snackbar.LENGTH_LONG)
+        .setTextColor(Color.WHITE)
+        .setBackgroundTint(view.context.resources.getColor(R.color.greenDark))
+    snackbar.anchorView = view
+    snackbar.show()
 }

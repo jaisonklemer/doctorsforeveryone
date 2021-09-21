@@ -78,7 +78,7 @@ dependencies {
 
     //Datepicker
     implementation 'com.github.gastricspark:scrolldatepicker:0.0.1'
+
     //Recycler view for using concat adapter
     implementation "androidx.recyclerview:recyclerview:1.2.1"
-
 }
