@@ -90,7 +90,7 @@ class SignInFragment : Fragment(R.layout.sign_in_fragment) {
 
         //button create account
         binding.textViewCreateAccount.setOnClickListener {
-            requireActivity().replaceView(SignUpFragment.newInstance(), R.id.containerStart)
+            requireActivity().replaceView(SignUpFragment.newInstance(), R.id.containerStart, true)
         }
 
         //button SignIn With Google
