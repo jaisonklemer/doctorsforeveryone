@@ -3,6 +3,7 @@ package com.klemer.doctorsforeveryone.view
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.view.View.INVISIBLE
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -42,6 +43,7 @@ class SignInFragment : Fragment(R.layout.sign_in_fragment) {
 
     private val loginError = Observer<String?> {
         if (it != null)
+            binding.progressBar.visibility = INVISIBLE
             Toast.makeText(requireContext(), "Error: $it", Toast.LENGTH_LONG).show()
     }
 
@@ -70,7 +72,7 @@ class SignInFragment : Fragment(R.layout.sign_in_fragment) {
         //button SignIn
         binding.buttonSignIn.setOnClickListener {
             if (requireActivity().checkForInternet(requireContext())) {
-                if (binding.editTextInputEmailSignIn.text.isNullOrEmpty() &&
+                if (binding.editTextInputEmailSignIn.text.isNullOrEmpty() ||
                     binding.editTextInputPasswordSignIn.text.isNullOrEmpty()
                 ) {
                     binding.editTextInputEmailSignIn.setError("Preencha o email")
@@ -88,7 +90,7 @@ class SignInFragment : Fragment(R.layout.sign_in_fragment) {
 
         //button create account
         binding.textViewCreateAccount.setOnClickListener {
-            requireActivity().replaceView(SignUpFragment.newInstance(), R.id.containerStart)
+            requireActivity().replaceView(SignUpFragment.newInstance(), R.id.containerStart, true)
         }
 
         //button SignIn With Google

@@ -15,7 +15,7 @@
     <string name="profile">Perfil</string>
     <string name="admin">Admin</string>
     <string name="subtitle">Encontre os melhores doutores aqui!</string>
-    <string name="placeholder">Busque doutores:</string>
+    <string name="placeholder">Busque doutores</string>
     <string name="placeholder_name">Nome completo</string>
     <string name="placeholder_age">Idade</string>
     <string name="placeholder_weight">Peso</string>
