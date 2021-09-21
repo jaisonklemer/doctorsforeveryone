@@ -9,9 +9,8 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.appbar.AppBarLayout
+import com.google.android.material.appbar.AppBarLayout.OnOffsetChangedListener
 import com.google.android.material.snackbar.Snackbar
-import com.google.firebase.auth.FirebaseUser
 import com.klemer.doctorsforeveryone.R
 import com.klemer.doctorsforeveryone.adapter.CategoryAdapter
 import com.klemer.doctorsforeveryone.adapter.DoctorAdapter
@@ -23,6 +22,7 @@ import com.klemer.doctorsforeveryone.utils.hideKeyboard
 import com.klemer.doctorsforeveryone.view_model.CategoryViewModel
 import com.klemer.doctorsforeveryone.view_model.DoctorViewModel
 import com.klemer.doctorsforeveryone.view_model.HomeViewModel
+
 
 class HomeFragment : Fragment(R.layout.home_fragment) {
 
@@ -89,30 +89,40 @@ class HomeFragment : Fragment(R.layout.home_fragment) {
 
     private fun executeComponents() {
         viewModel.getCurrentUser()
-        //Lista de categorias
-        setupRecyclerViewCategory()
-        //Lista de médicos
-        setupRecyclerViewDoctor()
+        setupRecyclersView()
+        setupSearchListener()
+        bindingAppBarOnScroll()
 
+    }
+
+    private fun setupRecyclersView() {
+        setupRecyclerViewCategory()
+        setupRecyclerViewDoctor()
+    }
+
+
+    private fun setupSearchListener() {
         binding.headerFragment.includeSearch.searchDoctors.addTextChangedListener(object :
             TextWatcher {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
             }
+
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
                 p0?.let {
                     if (it.length > 2) {
                         viewModelDoctor.fetchDoctorByName(it.toString())
-                    } else if (it.length == 0) {
+                    } else if (it.isEmpty()) {
                         viewModelDoctor.fetchDoctor()
                     }
                 }
             }
+
             override fun afterTextChanged(p0: Editable?) {
             }
         })
     }
 
-    private fun setupRecyclerViewCategory() = with(binding.include.recyclerViewCategory){
+    private fun setupRecyclerViewCategory() = with(binding.include.recyclerViewCategory) {
         //Lista de categorias
         adapter = adapterCategory
         layoutManager =
@@ -127,16 +137,8 @@ class HomeFragment : Fragment(R.layout.home_fragment) {
     }
 
     private fun setupRecyclerViewDoctor() = with(binding.recyclerViewDoctorsList) {
-        //Lista de médicos
         layoutManager = LinearLayoutManager(requireContext())
         adapter = adapterDoctor
-
-        addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
-                super.onScrollStateChanged(recyclerView, newState)
-                requireActivity().hideKeyboard()
-            }
-        })
     }
 
     private fun showBottomSheetDialog(doctor: Doctor) {
@@ -145,5 +147,14 @@ class HomeFragment : Fragment(R.layout.home_fragment) {
         arguments.putSerializable("doctor", doctor)
         bottomSheet.arguments = arguments
         bottomSheet.show(parentFragmentManager, "dialog_doctors")
+    }
+
+    private fun bindingAppBarOnScroll() {
+        binding.appbarLayout.addOnOffsetChangedListener(OnOffsetChangedListener { appBarLayout, verticalOffset ->
+            println(verticalOffset)
+            if (verticalOffset < -binding.animToolbar.height)
+                requireActivity().hideKeyboard()
+        })
+
     }
 }

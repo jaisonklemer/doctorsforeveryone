@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.annotation.ColorInt
 import androidx.annotation.ColorRes
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.klemer.doctorsforeveryone.R
 import com.klemer.doctorsforeveryone.databinding.ItemAppointmentBinding
 import com.klemer.doctorsforeveryone.model.Appointment
@@ -47,6 +48,11 @@ class ItemAppointmentViewHolder(itemView: View) : RecyclerView.ViewHolder(itemVi
         binding.textViewDate.text = appointment.date
         binding.textViewHour.text = appointment.hour.split("-")[0]
         binding.textViewStatus.text = appointment.status
+      
+        Glide.with(itemView.context)
+            .load(appointment.iconDoctor)
+            .into(binding.iconSpecialtyDoctor)
+
 
         if (appointment.status == "Cancelado") {
             statusColor(R.color.red)

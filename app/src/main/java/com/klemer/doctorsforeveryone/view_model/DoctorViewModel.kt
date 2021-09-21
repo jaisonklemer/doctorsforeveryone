@@ -90,7 +90,9 @@ class DoctorViewModel : ViewModel() {
             doctor_id = doctor.id!!,
             date = date,
             doctor_name = doctor.name,
-            hour = hour
+            hour = hour,
+            iconDoctor = doctor.iconDoctorCategory
+
         )
 
         appointmentRepository.insert(appointment) { _, _ -> }
