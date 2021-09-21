@@ -11,7 +11,6 @@ import androidx.annotation.IdRes
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import com.klemer.doctorsforeveryone.R
-import androidx.core.content.ContextCompat.getSystemService as getSystemService
 
 fun FragmentActivity.replaceView(
     fragment: Fragment,
