@@ -39,6 +39,23 @@ class AppointmentRepository {
         }
     }
 
+    fun getAppointmentByStatus(userId: String?, appointmentStatus: String?, callback: (List<Appointment>?, String?) -> Unit) {
+        val task =
+            database.collection(APPOINTMENT_COLLECTION).whereEqualTo("user_id", userId).whereEqualTo("status", appointmentStatus).get()
+
+        task.addOnFailureListener {
+            callback(null, it.localizedMessage)
+        }
+        task.addOnSuccessListener { snapshots ->
+            val appointments = mutableListOf<Appointment>()
+            snapshots.documents.forEach { appointment ->
+                appointments.add(Appointment.fromDocument(appointment))
+            }
+
+            callback(appointments, null)
+        }
+    }
+
     fun getAppointmentsByDoctor(doctorId: String, date: String, callback: (List<Appointment>?, String?) -> Unit
     ) {
         val task =

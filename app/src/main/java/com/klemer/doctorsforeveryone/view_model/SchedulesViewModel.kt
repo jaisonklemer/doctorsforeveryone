@@ -5,10 +5,12 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.klemer.doctorsforeveryone.model.Appointment
 import com.klemer.doctorsforeveryone.repository.AppointmentRepository
+import com.klemer.doctorsforeveryone.repository.AuthenticationRepository
 
 class SchedulesViewModel : ViewModel() {
 
     private val repository = AppointmentRepository()
+    private val repositoryAuth = AuthenticationRepository()
 
     private val _appointmentUser = MutableLiveData<List<Appointment>>()
     var appointmentUser: LiveData<List<Appointment>> = _appointmentUser
@@ -19,6 +21,16 @@ class SchedulesViewModel : ViewModel() {
 
     fun fetchAppointmentByUser(userId: String?) {
         repository.getAppointmentByUser(userId) { listAppointment, e ->
+            if (listAppointment != null) {
+                _appointmentUser.value = listAppointment
+            }
+            if (e != null) {
+                _error.value = e
+            }
+        }
+    }
+    fun fetchAppointmentByStatus(status: String) {
+        repository.getAppointmentByStatus(repositoryAuth.currentUser()!!.uid, status) { listAppointment, e ->
             if (listAppointment != null) {
                 _appointmentUser.value = listAppointment
             }

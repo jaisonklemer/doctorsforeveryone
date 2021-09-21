@@ -29,23 +29,25 @@ class SchedulesFragment : Fragment(R.layout.schedules_fragment) {
 
     private lateinit var viewModel: SchedulesViewModel
     private lateinit var binding: SchedulesFragmentBinding
+
     private var adapterAppointment = AppointmentAdapter{
         alertCancelAppointment(it)
     }
 
     private val observerAppoinment = Observer<List<Appointment>> {
-        println(it)
+        if(it.isEmpty()){
+            Snackbar.make(requireView(), "Nenhuma consulta encontrada!", Snackbar.LENGTH_LONG).show()
+        }
         adapterAppointment.refresh(it)
     }
 
     private val observerError = Observer<String> {
-        Snackbar.make(requireView(), "Nenhuma consulta agendada!", Snackbar.LENGTH_LONG)
-            .show()
+        Snackbar.make(requireView(), "Nenhuma consulta agendada!", Snackbar.LENGTH_LONG).show()
     }
 
     override fun onStart() {
         super.onStart()
-        viewModel.fetchAppointmentByUser(AuthenticationRepository().currentUser()?.uid)
+        viewModel.fetchAppointmentByStatus("Agendado")
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -53,6 +55,7 @@ class SchedulesFragment : Fragment(R.layout.schedules_fragment) {
         loadComponents(view)
         setupObserver()
         setupRecyclerView()
+        getStatus()
     }
 
     private fun loadComponents(view: View) {
@@ -83,5 +86,16 @@ class SchedulesFragment : Fragment(R.layout.schedules_fragment) {
             .create()
             .show()
     }
+    private fun getStatus(){
+        binding.chipGroup.setOnCheckedChangeListener{ group, checkedId ->
+            when(checkedId){
+                R.id.chipAgendada -> viewModel.fetchAppointmentByStatus("Agendado")
+                R.id.chipCancelada -> viewModel.fetchAppointmentByStatus("Cancelado")
+                R.id.chipConcluida -> viewModel.fetchAppointmentByStatus("Concluído")
+            }
+        }
+
+    }
+
 
 }
