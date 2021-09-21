@@ -19,6 +19,13 @@
             android:layout_height="wrap_content"
             app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
+            <Toolbar
+                android:id="@+id/anim_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="110dp"
+                android:minHeight="90dp"
+                app:layout_scrollFlags="scroll|enterAlways" />
+
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -28,6 +35,7 @@
                     layout="@layout/home_header"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:elevation="@dimen/size_10"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -46,21 +54,13 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <Toolbar
-                android:id="@+id/anim_toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="110dp"
-                android:minHeight="90dp"
-                app:elevation="0dp"
-                app:layout_scrollFlags="scroll|enterAlways" />
-
         </com.google.android.material.appbar.CollapsingToolbarLayout>
 
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <androidx.recyclerview.widget.RecyclerView

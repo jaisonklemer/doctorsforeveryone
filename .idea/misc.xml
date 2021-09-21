@@ -33,8 +33,8 @@
         <entry key="app/src/main/res/layout/news_list_item.xml" value="0.30512820512820515" />
         <entry key="app/src/main/res/layout/profile_fragment.xml" value="0.25" />
         <entry key="app/src/main/res/layout/schedules_fragment.xml" value="0.2375" />
-        <entry key="app/src/main/res/layout/search_header.xml" value="0.2658514492753623" />
-        <entry key="app/src/main/res/layout/sign_in_fragment.xml" value="0.22780797101449277" />
+        <entry key="app/src/main/res/layout/search_header.xml" value="0.375" />
+        <entry key="app/src/main/res/layout/sign_in_fragment.xml" value="0.11036960985626283" />
         <entry key="app/src/main/res/layout/sign_up_fragment.xml" value="0.1982727143297738" />
         <entry key="app/src/main/res/layout/splash_screen.xml" value="0.2375" />
         <entry key="app/src/main/res/menu/bottom_navigation_menu.xml" value="0.2375" />
