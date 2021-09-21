@@ -151,7 +151,6 @@ class HomeFragment : Fragment(R.layout.home_fragment) {
 
     private fun bindingAppBarOnScroll() {
         binding.appbarLayout.addOnOffsetChangedListener(OnOffsetChangedListener { appBarLayout, verticalOffset ->
-            println(verticalOffset)
             if (verticalOffset < -binding.animToolbar.height)
                 requireActivity().hideKeyboard()
         })

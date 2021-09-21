@@ -72,11 +72,13 @@ class DoctorRepository {
     }
 
 
-
     fun getDoctorByName(doctorName: String, callback: (List<Doctor>?, String?) -> Unit) {
 
         val task =
-            database.collection(DOCTOR_COLLECTION).orderBy("name").startAt(doctorName.uppercase()).endAt(doctorName+'\uf8ff').get()
+            database.collection(DOCTOR_COLLECTION)
+                .orderBy("name")
+                .startAt(doctorName)
+                .endAt(doctorName + '\uf8ff').get()
 
         task.addOnFailureListener {
             callback(null, it.localizedMessage)
