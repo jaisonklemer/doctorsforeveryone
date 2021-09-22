@@ -30,9 +30,8 @@
     <string name="sexo">Sexo</string>
     <string name="descriptionDoctor">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s</string>
     <string name="appointment">Agendar</string>
-    <string name="agendar">Agendar</string>
     <string name="selecione_um_hor_rio">Selecione um horário</string>
-    <string name="escolha_um_dia">Escolha um dia</string>
+    <string name="escolha_um_dia">Escolha uma data</string>
     <string name="sair">Sair</string>
     <string name="yes">Sim</string>
     <string name="cancelar">Cancelar</string>
