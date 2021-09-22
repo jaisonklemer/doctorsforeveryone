@@ -8,6 +8,7 @@
     <dimen name="size_4">4dp</dimen>
     <dimen name="size_5">5dp</dimen>
     <dimen name="size_7.5">7.5dp</dimen>
+    <dimen name="size_8">8dp</dimen>
     <dimen name="size_10">10dp</dimen>
     <dimen name="size_11">11dp</dimen>
     <dimen name="size_12">12dp</dimen>
@@ -40,6 +41,7 @@
     <dimen name="size_180">180dp</dimen>
     <dimen name="size_190">190dp</dimen>
     <dimen name="size_200">200dp</dimen>
+    <dimen name="size_250">250dp</dimen>
     <dimen name="size_300">300dp</dimen>
     <dimen name="size_330">330dp</dimen>
     <dimen name="font_size_create_account">17sp</dimen>
