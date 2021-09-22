@@ -17,6 +17,7 @@
         <entry key="app/src/main/res/drawable/ic_lupa.xml" value="0.24722222222222223" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.2375" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_splash.xml" value="0.2375" />
         <entry key="app/src/main/res/layout/activity_start.xml" value="0.2375" />
         <entry key="app/src/main/res/layout/bottom_navigation_menu.xml" value="0.2375" />
         <entry key="app/src/main/res/layout/bottom_sheet_fragment.xml" value="0.375" />

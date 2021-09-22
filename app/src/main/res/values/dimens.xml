@@ -41,6 +41,7 @@
     <dimen name="size_180">180dp</dimen>
     <dimen name="size_190">190dp</dimen>
     <dimen name="size_200">200dp</dimen>
+    <dimen name="size_250">250dp</dimen>
     <dimen name="size_300">300dp</dimen>
     <dimen name="size_330">330dp</dimen>
     <dimen name="font_size_create_account">17sp</dimen>
