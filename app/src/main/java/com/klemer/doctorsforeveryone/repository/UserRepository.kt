@@ -1,8 +1,10 @@
 package com.klemer.doctorsforeveryone.repository
 
+import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.klemer.doctorsforeveryone.model.User
+import kotlinx.coroutines.tasks.await
 
 class UserRepository {
 
@@ -10,33 +12,11 @@ class UserRepository {
     private val database = Firebase.firestore
 
 
-    fun getUser(userId: String, callback: (User?) -> Unit) {
-        val task = database.collection(USERS_COLLECTION).document(userId).get()
-
-        task.addOnSuccessListener {
-            if (it.data != null) {
-                callback(User.fromDocument(it))
-            } else {
-                callback(null)
-            }
-        }
-
-        task.addOnFailureListener {
-            callback(null)
-            println(it.localizedMessage)
-        }
+    suspend fun getUser(userId: String): DocumentSnapshot {
+        return database.collection(USERS_COLLECTION).document(userId).get().await()
     }
 
-    fun updateUser(user: User, callback: (User?) -> Unit) {
-        database.collection(USERS_COLLECTION)
-            .document(user.id.toString())
-            .set(user)
-            .addOnSuccessListener {
-                println("Sucess")
-            }
-            .addOnFailureListener {
-                println("ERRO")
-            }
-
+    suspend fun updateUser(user: User) {
+        database.collection(USERS_COLLECTION).document(user.id).set(user).await()
     }
 }
