@@ -8,6 +8,7 @@
     <dimen name="size_4">4dp</dimen>
     <dimen name="size_5">5dp</dimen>
     <dimen name="size_7.5">7.5dp</dimen>
+    <dimen name="size_8">8dp</dimen>
     <dimen name="size_10">10dp</dimen>
     <dimen name="size_11">11dp</dimen>
     <dimen name="size_12">12dp</dimen>
