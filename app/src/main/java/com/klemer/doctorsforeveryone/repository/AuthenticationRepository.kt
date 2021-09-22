@@ -97,17 +97,19 @@ class AuthenticationRepository {
                     println("signInWithCredential:success")
                     val user = auth.currentUser
                     user?.let { firebaseUser ->
-                        CoroutineScope(Dispatchers.Default).launch {
+                        CoroutineScope(Dispatchers.Main).launch {
                             try {
                                 val result = userRepository.getUser(firebaseUser.uid)
-                                val userResult = User.fromDocument(result)
-                                createUserAtCollection(userResult.id)
+                                if (!result.exists()) {
+                                    createUserAtCollection(firebaseUser)
+                                }
+                                callback(user, null)
                             } catch (e: Exception) {
-
+                                e.printStackTrace()
+                                println(e.localizedMessage)
                             }
                         }
                     }
-                    callback(user, null)
                 } else {
                     println("signInWithCredential:failure ${task.exception}")
                     callback(null, task.exception.toString())
@@ -115,7 +117,7 @@ class AuthenticationRepository {
             }
     }
 
-    private fun createUserAtCollection(userId: String) {
+    private fun createUserAtCollection(user: FirebaseUser) {
         val collection = "users"
         val data = hashMapOf(
             "admin" to false,
@@ -126,7 +128,7 @@ class AuthenticationRepository {
             "gender" to ""
         )
 
-        database.collection(collection).document(userId).set(data)
+        database.collection(collection).document(user.uid).set(data)
     }
 
     companion object {

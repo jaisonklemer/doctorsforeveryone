@@ -58,7 +58,8 @@ class SignInViewModel : ViewModel() {
         viewModelScope.launch {
             try {
                 val result = userRepository.getUser(userId)
-                currentUserInfo.value = User.fromDocument(result)
+                if (result.exists())
+                    currentUserInfo.value = User.fromDocument(result)
             } catch (e: Exception) {
                 loginError.value = e.localizedMessage
             }
