@@ -15,7 +15,7 @@ class DoctorRepository {
     private val database = Firebase.firestore
 
 
-    suspend fun insertDoctor(doctor: Doctor): DocumentReference {
+     suspend fun insertDoctor(doctor: Doctor): DocumentReference {
         return database.collection(DOCTOR_COLLECTION).add(doctor).await()
     }
 
