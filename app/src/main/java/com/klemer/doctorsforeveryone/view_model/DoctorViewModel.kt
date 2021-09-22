@@ -9,7 +9,6 @@ import com.klemer.doctorsforeveryone.model.Doctor
 import com.klemer.doctorsforeveryone.repository.AppointmentRepository
 import com.klemer.doctorsforeveryone.repository.DoctorRepository
 import com.klemer.doctorsforeveryone.utils.getCurrentDate
-import com.klemer.doctorsforeveryone.utils.getCurrentDay
 import com.klemer.doctorsforeveryone.utils.getCurrentHour
 import kotlinx.coroutines.launch
 
@@ -18,47 +17,85 @@ class DoctorViewModel : ViewModel() {
     private val repository = DoctorRepository()
     private val appointmentRepository = AppointmentRepository()
 
-    var doctorGet = MutableLiveData<List<Doctor>>()
+    var doctorGet = MutableLiveData<List<Doctor>?>()
     var doctor = MutableLiveData<Doctor>()
     var doctorInsert = MutableLiveData<Boolean>()
+
     var error = MutableLiveData<String>()
     var doctorHours = MutableLiveData<List<String>>()
 
     fun fetchDoctor() {
-        repository.getAllDoctors { listDoc, e ->
-            doctorGet.value = listDoc
-            error.value = e
+        viewModelScope.launch {
+            try {
+                val result = repository.getAllDoctors()
+
+                val doctors = mutableListOf<Doctor>()
+                result.documents.forEach { document ->
+                    doctors.add(Doctor.fromDocument(document))
+                }
+
+                doctorGet.value = doctors
+
+            } catch (e: Exception) {
+                error.value = e.localizedMessage
+            }
         }
     }
 
     fun fetchDoctorByCategory(name: String) {
-        repository.getDoctorByCategory(name) { listDoc, e ->
-            doctorGet.value = listDoc
-            error.value = e
+        viewModelScope.launch {
+            try {
+                val result = repository.getDoctorByCategory(name)
+                val doctors = mutableListOf<Doctor>()
+
+                result.documents.forEach { doctor ->
+                    doctors.add(Doctor.fromDocument(doctor))
+                }
+                doctorGet.value = doctors
+
+            } catch (e: Exception) {
+                error.value = e.localizedMessage
+            }
         }
     }
 
     fun fetchDoctorByName(nameDoc: String) {
-        repository.getDoctorByName(nameDoc) { listDoc, e ->
-            doctorGet.value = listDoc
-            error.value = e
+        viewModelScope.launch {
+            try {
+                val result = repository.getDoctorByName(nameDoc)
+                val doctors = mutableListOf<Doctor>()
+
+                result.documents.forEach { doctor ->
+                    doctors.add(Doctor.fromDocument(doctor))
+                }
+                doctorGet.value = doctors
+
+            } catch (e: Exception) {
+                error.value = e.localizedMessage
+            }
         }
     }
 
     fun insertDoctor(doctor: Doctor) {
-        repository.insertDoctor(doctor) { insertDoctor, e ->
-            doctorInsert.value = insertDoctor
-            error.value = e
+        viewModelScope.launch {
+            try {
+                repository.insertDoctor(doctor)
+                doctorInsert.value = true
+            } catch (e: Exception) {
+                error.value = e.localizedMessage
+            }
         }
+
     }
 
     fun getDoctorById(doctorId: String) {
-        repository.getDoctorById(doctorId = doctorId) { doctorResult, err ->
-            if (doctorResult != null)
-                doctor.value = doctorResult
-
-            if (err != null)
-                error.value = err
+        viewModelScope.launch {
+            try {
+                val result = repository.getDoctorById(doctorId = doctorId)
+                doctor.value = Doctor.fromDocument(result)
+            } catch (e: Exception) {
+                error.value = e.localizedMessage
+            }
         }
     }
 
@@ -66,36 +103,56 @@ class DoctorViewModel : ViewModel() {
         val currentDoctorHours = doctor.calculateWorkingHours()
         val availableHours = mutableListOf<String>()
 
-        appointmentRepository.getAppointmentsByDoctor(
-            doctorId = doctor.id!!,
-            date = date
-        ) { appointments, _ ->
-            appointments?.forEach { appointment ->
-                availableHours.add(appointment.hour)
+        viewModelScope.launch {
+            try {
+                val result = appointmentRepository.getAppointmentsByDoctor(
+                    doctorId = doctor.id!!,
+                    date = date
+                )
+                val listOfAppointments = mutableListOf<Appointment>()
+                result.documents.forEach { appointment ->
+                    listOfAppointments.add(Appointment.fromDocument(appointment))
+                }
+
+                listOfAppointments.forEach { appointment ->
+                    availableHours.add(appointment.hour)
+                }
+
+                val totalDoctorHours =
+                    currentDoctorHours.filter { x -> !availableHours.contains(x) }
+                            as MutableList<String>
+
+                checkListOfHours(totalDoctorHours, selectedDate = date)
+
+            } catch (e: Exception) {
+                error.value = e.localizedMessage
             }
-
-            val totalDoctorHours =
-                currentDoctorHours.filter { x -> !availableHours.contains(x) }
-                        as MutableList<String>
-
-            this.checkListOfHours(totalDoctorHours, selectedDate = date)
         }
     }
 
     fun insertUserAppointment(doctor: Doctor, date: String, hour: String) {
-        val user = FirebaseAuth.getInstance().currentUser
-        val appointment = Appointment(
-            id = null,
-            user_id = user?.uid!!,
-            doctor_id = doctor.id!!,
-            date = date,
-            doctor_name = doctor.name,
-            hour = hour,
-            iconDoctor = doctor.iconDoctorCategory
 
-        )
+        viewModelScope.launch {
+            try {
+                val user = FirebaseAuth.getInstance().currentUser
+                val appointment = Appointment(
+                    id = null,
+                    user_id = user?.uid!!,
+                    doctor_id = doctor.id!!,
+                    date = date,
+                    doctor_name = doctor.name,
+                    hour = hour,
+                    iconDoctor = doctor.iconDoctorCategory
+                )
 
-        appointmentRepository.insert(appointment) { _, _ -> }
+                appointmentRepository.insert(appointment)
+
+            } catch (e: Exception) {
+                error.value = e.localizedMessage
+            }
+        }
+
+
     }
 
     private fun checkListOfHours(listOfHours: List<String>, selectedDate: String) {

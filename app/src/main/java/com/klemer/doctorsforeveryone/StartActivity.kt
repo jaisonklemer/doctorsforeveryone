@@ -10,6 +10,10 @@ import com.klemer.doctorsforeveryone.view.SignInFragment
 import com.klemer.doctorsforeveryone.view_model.SignInViewModel
 import com.google.android.material.snackbar.Snackbar
 import com.klemer.doctorsforeveryone.utils.checkForInternet
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 
 class StartActivity : AppCompatActivity() {
@@ -23,30 +27,32 @@ class StartActivity : AppCompatActivity() {
 
         loadComponents()
         removeActionBar()
-        verifyConnection()
-//        singOut()
+
+        CoroutineScope(Dispatchers.Main).launch {
+            verifyConnection()
+        }
     }
 
     private fun loadComponents() {
         viewModel = ViewModelProvider(this).get(SignInViewModel::class.java)
     }
 
-    private fun singOut() {
-//        TODO: Remove signOut after
-        viewModel.signOut()
-    }
-
     private fun removeActionBar() {
         supportActionBar?.hide()
     }
 
-    private fun executeComponents() {
+    private suspend fun executeComponents() {
         if (viewModel.currentUser() != null) {
-            userRepository.getUser(viewModel.currentUser()!!.uid) {
-                Intent(this, MainActivity::class.java).apply {
-                    this.putExtra("admin", it?.admin)
-                    startActivity(this)
-                    finish()
+            withContext(Dispatchers.IO) {
+                try {
+                    val result = userRepository.getUser(viewModel.currentUser()!!.uid)
+                    Intent(this@StartActivity, MainActivity::class.java).let { newIntent ->
+                        newIntent.putExtra("admin", result.get("admin") as Boolean)
+                        startActivity(newIntent)
+                        finish()
+                    }
+                } catch (e: Exception) {
+                    println(e.localizedMessage)
                 }
             }
 
@@ -55,13 +61,16 @@ class StartActivity : AppCompatActivity() {
         }
     }
 
-    private fun verifyConnection() {
+    private suspend fun verifyConnection() {
         if (checkForInternet(this)) {
             executeComponents()
         } else {
             replaceView(SignInFragment.newInstance(), R.id.containerStart)
-            Snackbar.make(this.findViewById(R.id.containerStart), "Sem conexao com a internet!", Snackbar.LENGTH_LONG).show()
+            Snackbar.make(
+                this.findViewById(R.id.containerStart),
+                "Sem conexao com a internet!",
+                Snackbar.LENGTH_LONG
+            ).show()
         }
     }
-
 }
