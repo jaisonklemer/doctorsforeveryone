@@ -82,7 +82,7 @@ class SchedulesFragment : Fragment(R.layout.schedules_fragment) {
             .setMessage("Deseja cancelar agendamento?")
             .setPositiveButton(R.string.yes) { dialog, which ->
                 viewModel.changeStatus(appointment, "Cancelado")
-                viewModel.fetchAppointmentByUser(AuthenticationRepository().currentUser()?.uid)
+                viewModel.fetchAppointmentByStatus("Agendado")
             }
             .setNegativeButton(R.string.no) { dialog, which ->
             }

@@ -10,8 +10,8 @@
         android:id="@+id/imageView"
         android:layout_width="@dimen/size_300"
         android:layout_height="@dimen/size_300"
-        android:layout_marginTop="@dimen/size_200"
         android:src="@drawable/ic_logo_doctors_for_everyone"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -52,13 +52,13 @@
         android:id="@+id/lottieAnimationView"
         android:layout_width="@dimen/size_200"
         android:layout_height="@dimen/size_200"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView"
         app:lottie_autoPlay="true"
         app:lottie_loop="true"
-        app:lottie_url="https://assets9.lottiefiles.com/packages/lf20_E3llVz.json"
-        tools:ignore="MissingClass" />
+        app:lottie_rawRes="@raw/animation_splash" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
