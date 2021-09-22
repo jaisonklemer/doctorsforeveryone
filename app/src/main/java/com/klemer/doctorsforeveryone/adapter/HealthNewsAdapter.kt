@@ -45,7 +45,11 @@ class HealthNewsVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
     fun bind(news: HealthNews) {
         binding.imgNews.apply {
-            Glide.with(this).load(news.urlToImage).into(this)
+            Glide.with(this)
+                .load(news.urlToImage)
+                .placeholder(R.drawable.gradient)
+                .into(this)
+
         }
 
         binding.tvNewsTitle.text = news.title
