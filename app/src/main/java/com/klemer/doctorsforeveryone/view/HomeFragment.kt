@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.appbar.AppBarLayout.OnOffsetChangedListener
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.android.material.snackbar.Snackbar
 import com.klemer.doctorsforeveryone.MainActivity
 import com.klemer.doctorsforeveryone.R
 import com.klemer.doctorsforeveryone.adapter.CategoryAdapter
@@ -49,14 +48,14 @@ class HomeFragment : Fragment(R.layout.home_fragment) {
         adapterCategory.refresh(it)
     }
 
-    private val observerDoctorGetALL = Observer<List<Doctor>> {
-        if (it != null) {
+    private val observerDoctorGetALL = Observer<List<Doctor>?> {
+        if (!it.isNullOrEmpty()) {
             adapterDoctor.refresh(it)
         } else {
             adapterDoctor.clear()
             val view =
                 (requireActivity() as MainActivity).findViewById<BottomNavigationView>(R.id.bottomNavigation)
-            configSnackbar(view,"Nenhum especialista encontrado!")
+            configSnackbar(view, "Nenhum especialista encontrado!")
         }
     }
 
@@ -96,7 +95,6 @@ class HomeFragment : Fragment(R.layout.home_fragment) {
         setupRecyclersView()
         setupSearchListener()
         bindingAppBarOnScroll()
-
     }
 
     private fun setupRecyclersView() {

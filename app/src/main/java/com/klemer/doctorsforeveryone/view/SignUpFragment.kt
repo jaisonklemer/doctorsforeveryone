@@ -31,7 +31,12 @@ class SignUpFragment : Fragment(R.layout.sign_up_fragment) {
 
     private val errorObserver = Observer<String?> {
         //error at create user
-        Toast.makeText(requireContext(), "Error: $it", Toast.LENGTH_LONG).show()
+        if (it != null) {
+            binding.progressBarSignUp.visibility = View.GONE
+//            Toast.makeText(requireContext(), "Error: $it", Toast.LENGTH_LONG).show()
+            Snackbar.make(requireView(), it, Snackbar.LENGTH_LONG).show()
+        }
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -53,11 +58,13 @@ class SignUpFragment : Fragment(R.layout.sign_up_fragment) {
             if (requireActivity().checkForInternet(requireContext())) {
                 registerUser()
             } else {
-                Snackbar.make(requireView(), "Sem conexao com a internet!", Snackbar.LENGTH_LONG).show()
+                Snackbar.make(requireView(), "Sem conexao com a internet!", Snackbar.LENGTH_LONG)
+                    .show()
             }
         }
         binding.imageViewArrowBack.setOnClickListener {
-            requireActivity().replaceView(SignInFragment.newInstance(), R.id.containerStart) }
+            requireActivity().replaceView(SignInFragment.newInstance(), R.id.containerStart)
+        }
     }
 
     private fun registerUser() {
