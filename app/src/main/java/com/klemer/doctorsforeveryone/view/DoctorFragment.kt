@@ -17,7 +17,6 @@ import com.klemer.doctorsforeveryone.adapter.DoctorHourAdapter
 import com.klemer.doctorsforeveryone.databinding.DoctorFragmentBinding
 import com.klemer.doctorsforeveryone.model.Doctor
 import com.klemer.doctorsforeveryone.utils.formatDate
-import com.klemer.doctorsforeveryone.utils.getCurrentDate
 import com.klemer.doctorsforeveryone.view_model.DoctorViewModel
 import java.util.*
 
@@ -32,7 +31,6 @@ class DoctorFragment : Fragment(R.layout.doctor_fragment) {
     private lateinit var binding: DoctorFragmentBinding
     private var selectedHour: String? = null
     private var selectedDate: String? = null
-    private var selectedDay: String? = null
 
     private val adapter = DoctorHourAdapter {
         selectedHour = it

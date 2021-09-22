@@ -1,7 +1,6 @@
 package com.klemer.doctorsforeveryone.utils
 
 import java.text.SimpleDateFormat
-import java.time.LocalDate
 import java.util.*
 
 fun getCurrentDay(): String {

@@ -40,15 +40,6 @@ class ProfileViewModel : ViewModel() {
                 _error.value = e.localizedMessage
             }
         }
-
-//        repository.getUser(auth.currentUser?.uid!!) { user ->
-//            if (user != null) {
-//
-//
-//                repository.updateUser(user) {
-//                }
-//            }
-//        }
     }
 
     fun getCurrentUser() {
@@ -61,11 +52,6 @@ class ProfileViewModel : ViewModel() {
                 _error.value = e.localizedMessage
             }
         }
-//        repository.getUser(auth.currentUser?.uid!!) { user ->
-//            if (user != null) {
-//                _user.value = user
-//            }
-//        }
     }
 
     fun signOut() {
