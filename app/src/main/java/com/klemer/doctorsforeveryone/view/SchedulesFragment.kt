@@ -3,6 +3,8 @@ package com.klemer.doctorsforeveryone.view
 import android.app.AlertDialog
 import android.os.Bundle
 import android.view.View
+import android.view.View.INVISIBLE
+import android.view.View.VISIBLE
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -31,6 +33,7 @@ class SchedulesFragment : Fragment(R.layout.schedules_fragment) {
     }
 
     private val observerAppoinment = Observer<List<Appointment>> {
+        binding.progressBarAppointment.visibility = INVISIBLE
         if (it.isEmpty()) {
             val view =
                 (requireActivity() as MainActivity).findViewById<BottomNavigationView>(R.id.bottomNavigation)
@@ -93,9 +96,18 @@ class SchedulesFragment : Fragment(R.layout.schedules_fragment) {
     private fun getStatus() {
         binding.chipGroup.setOnCheckedChangeListener { group, checkedId ->
             when (checkedId) {
-                R.id.chipAgendada -> viewModel.fetchAppointmentByStatus("Agendado")
-                R.id.chipCancelada -> viewModel.fetchAppointmentByStatus("Cancelado")
-                R.id.chipConcluida -> viewModel.fetchAppointmentByStatus("Concluído")
+                R.id.chipAgendada -> {
+                    binding.progressBarAppointment.visibility = VISIBLE
+                    viewModel.fetchAppointmentByStatus("Agendado")
+                }
+                R.id.chipCancelada -> {
+                    binding.progressBarAppointment.visibility = VISIBLE
+                    viewModel.fetchAppointmentByStatus("Cancelado")
+                }
+                R.id.chipConcluida -> {
+                    binding.progressBarAppointment.visibility = VISIBLE
+                    viewModel.fetchAppointmentByStatus("Concluído")
+                }
             }
         }
     }

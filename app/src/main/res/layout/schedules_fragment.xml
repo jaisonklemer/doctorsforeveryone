@@ -89,10 +89,22 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="@dimen/size_5"
+        android:overScrollMode="never"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/chipGroup"
         tools:listitem="@layout/item_appointment" />
 
+    <ProgressBar
+        android:id="@+id/progressBarAppointment"
+        android:layout_width="@dimen/size_70"
+        android:layout_height="@dimen/size_70"
+        android:elevation="@dimen/size_4"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
 </androidx.constraintlayout.widget.ConstraintLayout>

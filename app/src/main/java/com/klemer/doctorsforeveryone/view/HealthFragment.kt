@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.View
+import android.view.View.INVISIBLE
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.klemer.doctorsforeveryone.R
@@ -29,6 +30,7 @@ class HealthFragment : Fragment(R.layout.health_fragment) {
     }
 
     private val newsObserver = Observer<HealthNewsResponse> {
+        binding.progressBarHealth.visibility = INVISIBLE
         adapter.submitList(it.articles)
     }
 

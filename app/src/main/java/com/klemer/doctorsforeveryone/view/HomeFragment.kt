@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
+import android.view.View.INVISIBLE
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -49,6 +50,7 @@ class HomeFragment : Fragment(R.layout.home_fragment) {
     }
 
     private val observerDoctorGetALL = Observer<List<Doctor>?> {
+        binding.progressBarHome.visibility = INVISIBLE
         if (!it.isNullOrEmpty()) {
             adapterDoctor.refresh(it)
         } else {

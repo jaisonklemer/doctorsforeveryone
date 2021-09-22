@@ -81,4 +81,20 @@
 
     </androidx.core.widget.NestedScrollView>
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <ProgressBar
+            android:id="@+id/progressBarHome"
+            android:layout_width="@dimen/size_70"
+            android:layout_height="@dimen/size_70"
+            android:elevation="@dimen/size_4"
+            android:visibility="visible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
