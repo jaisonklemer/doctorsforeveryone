@@ -1,19 +1,18 @@
 package com.klemer.doctorsforeveryone
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Handler
-import androidx.annotation.LayoutRes
-import androidx.core.view.children
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.klemer.doctorsforeveryone.databinding.ActivityMainBinding
 import com.klemer.doctorsforeveryone.utils.replaceView
 import com.klemer.doctorsforeveryone.view.*
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding

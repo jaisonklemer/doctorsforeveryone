@@ -44,6 +44,8 @@
     <string name="agendada">Agendadas</string>
     <string name="cancelada">Canceladas</string>
     <string name="concluida">Concluídas</string>
+    <string name="noticias">Notícias de Saúde</string>
+    <string name="toque">Toque para expandir</string>
 
     <!-- TODO: Token Google-->
     <!--    <string name="default_web_client_id">886802055145-ov8mfaqmjiilp8c6jtptdh0mciue8c97.apps.googleusercontent.com</string>-->
