@@ -76,7 +76,7 @@ class SignInFragment : Fragment(R.layout.sign_in_fragment) {
     private fun setupClickListeners() {
         //button SignIn
         binding.buttonSignIn.setOnClickListener {
-            if (requireActivity().checkForInternet(requireContext())) {
+            if (checkForInternet(requireContext())) {
                 if (binding.editTextInputEmailSignIn.text.isNullOrEmpty() ||
                     binding.editTextInputPasswordSignIn.text.isNullOrEmpty()
                 ) {
@@ -100,7 +100,7 @@ class SignInFragment : Fragment(R.layout.sign_in_fragment) {
 
         //button SignIn With Google
         binding.signInButtonWithGoogle.setOnClickListener {
-            if (requireActivity().checkForInternet(requireContext())) {
+            if (checkForInternet(requireContext())) {
                 binding.progressBar.visibility = View.VISIBLE
                 viewModel.signIn(this, requireContext())
             } else {
