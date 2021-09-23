@@ -41,6 +41,7 @@ class HomeFragment : Fragment(R.layout.home_fragment) {
     private var adapterCategory = CategoryAdapter {
         viewModelDoctor.fetchDoctorByCategory(it.name)
     }
+
     private var adapterDoctor = DoctorAdapter {
         showBottomSheetDialog(it)
     }

@@ -29,10 +29,11 @@ class CategoryRepository {
     }
 
     suspend fun getAllCategory(): QuerySnapshot {
-        return database.collection(CATEGORY_COLLECTION).get().await()
+        return database.collection(CATEGORY_COLLECTION).orderBy("order").get().await()
     }
 
     suspend fun getCategoryById(categoryId: String): DocumentSnapshot {
         return database.collection(CATEGORY_COLLECTION).document(categoryId).get().await()
     }
+
 }
