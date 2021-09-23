@@ -50,6 +50,7 @@ class HomeFragment : Fragment(R.layout.home_fragment) {
         }
         requireActivity().hideKeyboard()
     }
+
     private var adapterDoctor = DoctorAdapter {
         showBottomSheetDialog(it)
     }

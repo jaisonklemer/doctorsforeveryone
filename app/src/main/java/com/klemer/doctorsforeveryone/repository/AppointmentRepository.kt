@@ -1,6 +1,7 @@
 package com.klemer.doctorsforeveryone.repository
 
 import com.google.firebase.firestore.DocumentReference
+import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.QuerySnapshot
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -30,7 +31,21 @@ class AppointmentRepository {
         appointmentStatus: String?
     ): QuerySnapshot {
         return database.collection(APPOINTMENT_COLLECTION).whereEqualTo("user_id", userId)
-            .whereEqualTo("status", appointmentStatus).get().await()
+            .whereEqualTo("status", appointmentStatus)
+            .orderBy("date", Query.Direction.ASCENDING)
+            .orderBy("hour", Query.Direction.ASCENDING)
+            .get().await()
+    }
+
+    suspend fun getAppointmentByStatusAndDate(
+        userId: String,
+        appointmentStatus: String,
+        date: String,
+        hour: String
+    ): QuerySnapshot {
+        return database.collection(APPOINTMENT_COLLECTION).whereEqualTo("user_id", userId)
+            .whereEqualTo("hour", hour)
+            .whereEqualTo("status", appointmentStatus).whereEqualTo("date", date).get().await()
     }
 
     suspend fun getAppointmentsByDoctor(doctorId: String, date: String): QuerySnapshot {

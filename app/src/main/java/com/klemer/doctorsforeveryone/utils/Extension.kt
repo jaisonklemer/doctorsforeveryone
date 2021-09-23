@@ -2,6 +2,7 @@ package com.klemer.doctorsforeveryone.utils
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.app.AlertDialog
 import android.content.Context
 import android.graphics.Color
 import android.net.ConnectivityManager
@@ -9,6 +10,7 @@ import android.net.NetworkCapabilities
 import android.os.Build
 import android.view.View
 import android.view.inputmethod.InputMethodManager
+import androidx.annotation.DrawableRes
 import androidx.annotation.IdRes
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
@@ -20,12 +22,12 @@ fun FragmentActivity.replaceView(
     @IdRes containerId: Int = R.id.container,
     addBackStack: Boolean = false
 ) {
-    if(addBackStack){
+    if (addBackStack) {
         supportFragmentManager.beginTransaction()
             .replace(containerId, fragment)
             .addToBackStack(null)
             .commit()
-    }else{
+    } else {
         supportFragmentManager.beginTransaction()
             .replace(containerId, fragment)
             .commit()
@@ -82,4 +84,34 @@ fun configSnackbar(
     }
     snackbar.anchorView = view
     snackbar.show()
+}
+
+fun showAlertDialog(
+    context: Context,
+    title: String,
+    message: String,
+    positiveText: String,
+    negativeText: String?,
+    @DrawableRes icon: Int?,
+    callback: (Boolean, Boolean) -> Unit
+) {
+
+    val dialog = AlertDialog.Builder(context)
+    dialog.setTitle(title)
+    dialog.setMessage(message)
+    dialog.setPositiveButton(positiveText) { _, _ ->
+        callback(true, false)
+    }
+
+    if (negativeText != null) {
+        dialog.setNegativeButton(negativeText) { _, _ ->
+            callback(false, true)
+        }
+    }
+
+    if (icon != null) {
+        dialog.setIcon(icon)
+    }
+
+    dialog.create().show()
 }

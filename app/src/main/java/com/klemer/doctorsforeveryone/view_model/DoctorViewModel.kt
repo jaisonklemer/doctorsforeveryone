@@ -23,6 +23,7 @@ class DoctorViewModel : ViewModel() {
 
     var error = MutableLiveData<String>()
     var doctorHours = MutableLiveData<List<String>>()
+    var appointmentInserted = MutableLiveData<Boolean>()
 
     fun fetchDoctor() {
         viewModelScope.launch {
@@ -168,6 +169,7 @@ class DoctorViewModel : ViewModel() {
                 )
 
                 appointmentRepository.insert(appointment)
+                appointmentInserted.value = true
 
             } catch (e: Exception) {
                 error.value = e.localizedMessage
