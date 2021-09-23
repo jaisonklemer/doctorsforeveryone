@@ -21,11 +21,13 @@ class SchedulesViewModel : ViewModel() {
     var error: LiveData<String> = _error
 
 
-    fun fetchAppointmentByUser(userId: String?) {
+    fun fetchAppointmentByStatusAndDate(status: String, date: String, hour: String) {
         viewModelScope.launch {
             try {
                 val appointments = mutableListOf<Appointment>()
-                val result = repository.getAppointmentByUser(userId)
+                val result = repository.getAppointmentByStatusAndDate(
+                    repositoryAuth.currentUser()!!.uid, status, date, hour
+                )
 
                 result.documents.forEach { appointment ->
                     appointments.add(Appointment.fromDocument(appointment))

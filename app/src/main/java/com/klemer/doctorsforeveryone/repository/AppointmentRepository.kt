@@ -33,6 +33,17 @@ class AppointmentRepository {
             .whereEqualTo("status", appointmentStatus).get().await()
     }
 
+    suspend fun getAppointmentByStatusAndDate(
+        userId: String,
+        appointmentStatus: String,
+        date: String,
+        hour: String
+    ): QuerySnapshot {
+        return database.collection(APPOINTMENT_COLLECTION).whereEqualTo("user_id", userId)
+            .whereEqualTo("hour", hour)
+            .whereEqualTo("status", appointmentStatus).whereEqualTo("date", date).get().await()
+    }
+
     suspend fun getAppointmentsByDoctor(doctorId: String, date: String): QuerySnapshot {
         return database.collection(APPOINTMENT_COLLECTION).whereEqualTo("doctor_id", doctorId)
             .whereEqualTo("date", date).get().await()
