@@ -7,6 +7,7 @@
     <color name="greenDark">#027A7A</color>
     <color name="greenLightBackgroundDoctors">#c7f7f6</color>
     <color name="black">#FF000000</color>
+    <color name="red">#F60404</color>
     <color name="white">#FFFFFFFF</color>
 
     <style name="colorCheckbox" parent="android:Theme.Material.Dialog">

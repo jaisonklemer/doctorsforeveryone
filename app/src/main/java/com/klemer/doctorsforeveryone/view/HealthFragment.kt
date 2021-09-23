@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.View
+import android.view.View.INVISIBLE
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.klemer.doctorsforeveryone.R
@@ -13,7 +14,9 @@ import com.klemer.doctorsforeveryone.adapter.HealthNewsAdapter
 import com.klemer.doctorsforeveryone.databinding.HealthFragmentBinding
 import com.klemer.doctorsforeveryone.model.HealthNewsResponse
 import com.klemer.doctorsforeveryone.view_model.HealthViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class HealthFragment : Fragment(R.layout.health_fragment) {
 
     companion object {
@@ -27,6 +30,7 @@ class HealthFragment : Fragment(R.layout.health_fragment) {
     }
 
     private val newsObserver = Observer<HealthNewsResponse> {
+        binding.progressBarHealth.visibility = INVISIBLE
         adapter.submitList(it.articles)
     }
 
@@ -42,7 +46,7 @@ class HealthFragment : Fragment(R.layout.health_fragment) {
     }
 
     private fun setupObservers() {
-        viewModel.news.observe(viewLifecycleOwner, newsObserver)
+        viewModel.newsResponse.observe(viewLifecycleOwner, newsObserver)
     }
 
     private fun setupRecyclerView() {

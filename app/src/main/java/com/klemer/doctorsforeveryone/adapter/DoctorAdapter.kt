@@ -49,7 +49,7 @@ class ItemDoctorViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
     private var binding = ItensCardsDoctorsBinding.bind(itemView)
 
     fun bind(doctor: Doctor) {
-        binding.nameDoctor.text = doctor.name
+        binding.nameDoctor.text = "Dr. ${doctor.name}"
         binding.nameDoctorCategory.text = doctor.category
         Glide.with(itemView.context).load(doctor.avatarDoctor).into(binding.avatarDoctor)
         Glide.with(itemView.context).load(doctor.iconDoctorCategory).into(binding.iconSpecialtyDoctor)

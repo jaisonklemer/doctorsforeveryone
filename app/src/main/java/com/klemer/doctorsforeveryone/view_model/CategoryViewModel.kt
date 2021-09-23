@@ -2,8 +2,10 @@ package com.klemer.doctorsforeveryone.view_model
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.klemer.doctorsforeveryone.model.Category
 import com.klemer.doctorsforeveryone.repository.CategoryRepository
+import kotlinx.coroutines.launch
 
 class CategoryViewModel : ViewModel() {
 
@@ -15,36 +17,64 @@ class CategoryViewModel : ViewModel() {
     var error = MutableLiveData<String>()
 
     fun insertCategory(category: Category) {
-        repository.insertCategory(category) { insert, e ->
-            categoryInsertDelete.value = insert
-            error.value = e
+        viewModelScope.launch {
+            try {
+                repository.insertCategory(category)
+                categoryInsertDelete.value = true
+            } catch (e: Exception) {
+                categoryInsertDelete.value = false
+                error.value = e.localizedMessage
+            }
         }
     }
 
     fun updateCategory(categoryUpdate: Category) {
-        repository.updateCategory(categoryUpdate) { cat, e ->
-            category.value = cat
-            error.value = e
+        viewModelScope.launch {
+            try {
+                repository.updateCategory(categoryUpdate)
+            } catch (e: Exception) {
+                error.value = e.localizedMessage
+            }
         }
     }
 
     fun deleteCategory(uid: String) {
-        repository.deleteCategory(uid) { boolean ->
-            categoryInsertDelete.value = boolean
+        viewModelScope.launch {
+            try {
+                repository.deleteCategory(uid)
+                categoryInsertDelete.value = true
+            } catch (e: Exception) {
+                error.value = e.localizedMessage
+                categoryInsertDelete.value = false
+            }
         }
     }
 
     fun fetchCategory() {
-        repository.getAllCategory { list, e ->
-            categoryGet.value = list
-            error.value = e
+        viewModelScope.launch {
+            try {
+                val listOfCategory = repository.getAllCategory()
+                mutableListOf<Category>().let {
+                    listOfCategory.forEach { document ->
+                        it.add(Category.fromDocument(document))
+                    }
+
+                    categoryGet.value = it
+                }
+            } catch (e: Exception) {
+                error.value = e.localizedMessage
+            }
         }
     }
 
     fun fetchCategoryById(categoryId: String) {
-        repository.getCategoryById(categoryId) { cat, e ->
-            category.value = cat
-            error.value = e
+        viewModelScope.launch {
+            try {
+                val categorySnapshot = repository.getCategoryById(categoryId)
+                category.value = Category.fromDocument(categorySnapshot)
+            } catch (e: Exception) {
+                error.value = e.localizedMessage
+            }
         }
     }
 

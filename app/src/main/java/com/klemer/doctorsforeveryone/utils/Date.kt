@@ -21,3 +21,8 @@ fun formatDate(date: Date): String {
     val sdf = SimpleDateFormat("dd/MM/yyyy")
     return sdf.format(date)
 }
+
+fun parseDate(date: String): Date {
+    val sdf = SimpleDateFormat("dd/MM/yyyy")
+    return sdf.parse(date)
+}

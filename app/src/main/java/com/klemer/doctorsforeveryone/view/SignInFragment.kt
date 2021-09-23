@@ -3,7 +3,7 @@ package com.klemer.doctorsforeveryone.view
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
+import android.view.View.GONE
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -13,7 +13,7 @@ import com.klemer.doctorsforeveryone.MainActivity
 import com.klemer.doctorsforeveryone.R
 import com.klemer.doctorsforeveryone.StartActivity
 import com.klemer.doctorsforeveryone.databinding.SignInFragmentBinding
-import com.klemer.doctorsforeveryone.repository.UserRepository
+import com.klemer.doctorsforeveryone.model.User
 import com.klemer.doctorsforeveryone.utils.checkForInternet
 import com.klemer.doctorsforeveryone.utils.hideKeyboard
 import com.klemer.doctorsforeveryone.utils.replaceView
@@ -27,22 +27,28 @@ class SignInFragment : Fragment(R.layout.sign_in_fragment) {
 
     private lateinit var viewModel: SignInViewModel
     private lateinit var binding: SignInFragmentBinding
-    private val userRepository = UserRepository()
 
     private val loginSuccessful = Observer<FirebaseUser?> {
         //login successful
-        userRepository.getUser(it.uid) {
-            Intent(requireContext(), MainActivity::class.java).apply {
-                this.putExtra("admin", it?.admin)
-                startActivity(this)
-            }
-            (requireActivity() as StartActivity).finish()
+
+        viewModel.getCurrentUserInfo(it.uid)
+    }
+
+    private val currentUserInfo = Observer<User> {
+        Intent(requireContext(), MainActivity::class.java).apply {
+            this.putExtra("admin", it?.admin)
+            startActivity(this)
         }
+        (requireActivity() as StartActivity).finish()
     }
 
     private val loginError = Observer<String?> {
-        if (it != null)
-            Toast.makeText(requireContext(), "Error: $it", Toast.LENGTH_LONG).show()
+        if (it != null) {
+            binding.progressBar.visibility = GONE
+//            Toast.makeText(requireContext(), "Error: $it", Toast.LENGTH_LONG).show()
+            Snackbar.make(requireView(), it, Snackbar.LENGTH_LONG).show()
+        }
+
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -64,13 +70,14 @@ class SignInFragment : Fragment(R.layout.sign_in_fragment) {
     private fun setupObservers() {
         viewModel.loginUser.observe(viewLifecycleOwner, loginSuccessful)
         viewModel.loginError.observe(viewLifecycleOwner, loginError)
+        viewModel.currentUserInfo.observe(viewLifecycleOwner, currentUserInfo)
     }
 
     private fun setupClickListeners() {
         //button SignIn
         binding.buttonSignIn.setOnClickListener {
-            if (requireActivity().checkForInternet(requireContext())) {
-                if (binding.editTextInputEmailSignIn.text.isNullOrEmpty() &&
+            if (checkForInternet(requireContext())) {
+                if (binding.editTextInputEmailSignIn.text.isNullOrEmpty() ||
                     binding.editTextInputPasswordSignIn.text.isNullOrEmpty()
                 ) {
                     binding.editTextInputEmailSignIn.setError("Preencha o email")
@@ -88,12 +95,12 @@ class SignInFragment : Fragment(R.layout.sign_in_fragment) {
 
         //button create account
         binding.textViewCreateAccount.setOnClickListener {
-            requireActivity().replaceView(SignUpFragment.newInstance(), R.id.containerStart)
+            requireActivity().replaceView(SignUpFragment.newInstance(), R.id.containerStart, true)
         }
 
         //button SignIn With Google
         binding.signInButtonWithGoogle.setOnClickListener {
-            if (requireActivity().checkForInternet(requireContext())) {
+            if (checkForInternet(requireContext())) {
                 binding.progressBar.visibility = View.VISIBLE
                 viewModel.signIn(this, requireContext())
             } else {

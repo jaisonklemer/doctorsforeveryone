@@ -11,8 +11,8 @@ import com.klemer.doctorsforeveryone.R
 import com.klemer.doctorsforeveryone.databinding.NewsListItemBinding
 import com.klemer.doctorsforeveryone.model.HealthNews
 
-class HealthNewsAdapter(val itemClick: (String) -> Unit) :
-    ListAdapter<HealthNews, HealthNewsVH>(HealthNewsDiff()) {
+
+class HealthNewsAdapter(val itemClick: (String) -> Unit) : ListAdapter<HealthNews, HealthNewsVH>(HealthNewsDiff()) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HealthNewsVH {
         LayoutInflater.from(parent.context)
             .inflate(R.layout.news_list_item, parent, false).apply {

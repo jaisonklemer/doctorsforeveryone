@@ -1,7 +1,9 @@
 package com.klemer.doctorsforeveryone.utils
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
+import android.graphics.Color
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Build
@@ -10,13 +12,25 @@ import android.view.inputmethod.InputMethodManager
 import androidx.annotation.IdRes
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
+import com.google.android.material.snackbar.Snackbar
 import com.klemer.doctorsforeveryone.R
-import androidx.core.content.ContextCompat.getSystemService as getSystemService
 
-fun FragmentActivity.replaceView(fragment: Fragment, @IdRes containerId: Int = R.id.container) {
-    supportFragmentManager.beginTransaction()
-        .replace(containerId, fragment)
-        .commitNow()
+fun FragmentActivity.replaceView(
+    fragment: Fragment,
+    @IdRes containerId: Int = R.id.container,
+    addBackStack: Boolean = false
+) {
+    if(addBackStack){
+        supportFragmentManager.beginTransaction()
+            .replace(containerId, fragment)
+            .addToBackStack(null)
+            .commit()
+    }else{
+        supportFragmentManager.beginTransaction()
+            .replace(containerId, fragment)
+            .commit()
+    }
+
 }
 
 fun FragmentActivity.hideKeyboard() {
@@ -28,7 +42,7 @@ fun Context.hideKeyboard(view: View) {
     inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
 }
 
-fun FragmentActivity.checkForInternet(context: Context): Boolean {
+fun checkForInternet(context: Context): Boolean {
     val connectivityManager =
         context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
 
@@ -51,4 +65,13 @@ fun FragmentActivity.checkForInternet(context: Context): Boolean {
         @Suppress("DEPRECATION")
         return networkInfo.isConnected
     }
+}
+
+@SuppressLint("ResourceAsColor")
+ fun configSnackbar(view: View, message: String) {
+    val snackbar = Snackbar.make(view, message, Snackbar.LENGTH_LONG)
+        .setTextColor(Color.WHITE)
+        .setBackgroundTint(view.context.resources.getColor(R.color.greenDark))
+    snackbar.anchorView = view
+    snackbar.show()
 }

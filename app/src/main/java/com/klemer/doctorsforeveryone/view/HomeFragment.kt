@@ -4,13 +4,15 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
+import android.view.View.INVISIBLE
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.snackbar.Snackbar
-import com.google.firebase.auth.FirebaseUser
+import com.google.android.material.appbar.AppBarLayout.OnOffsetChangedListener
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.klemer.doctorsforeveryone.MainActivity
 import com.klemer.doctorsforeveryone.R
 import com.klemer.doctorsforeveryone.adapter.CategoryAdapter
 import com.klemer.doctorsforeveryone.adapter.DoctorAdapter
@@ -18,9 +20,12 @@ import com.klemer.doctorsforeveryone.databinding.HomeFragmentBinding
 import com.klemer.doctorsforeveryone.model.Category
 import com.klemer.doctorsforeveryone.model.Doctor
 import com.klemer.doctorsforeveryone.model.User
+import com.klemer.doctorsforeveryone.utils.configSnackbar
+import com.klemer.doctorsforeveryone.utils.hideKeyboard
 import com.klemer.doctorsforeveryone.view_model.CategoryViewModel
 import com.klemer.doctorsforeveryone.view_model.DoctorViewModel
 import com.klemer.doctorsforeveryone.view_model.HomeViewModel
+
 
 class HomeFragment : Fragment(R.layout.home_fragment) {
 
@@ -32,7 +37,6 @@ class HomeFragment : Fragment(R.layout.home_fragment) {
     private lateinit var viewModelCategory: CategoryViewModel
     private lateinit var viewModelDoctor: DoctorViewModel
     private lateinit var binding: HomeFragmentBinding
-    private lateinit var recyclerViewDoctor: RecyclerView
 
     private var adapterCategory = CategoryAdapter {
         viewModelDoctor.fetchDoctorByCategory(it.name)
@@ -45,13 +49,15 @@ class HomeFragment : Fragment(R.layout.home_fragment) {
         adapterCategory.refresh(it)
     }
 
-    private val observerDoctorGetALL = Observer<List<Doctor>> {
-        if (it != null) {
+    private val observerDoctorGetALL = Observer<List<Doctor>?> {
+        binding.progressBarHome.visibility = INVISIBLE
+        if (!it.isNullOrEmpty()) {
             adapterDoctor.refresh(it)
         } else {
             adapterDoctor.clear()
-            Snackbar.make(requireView(), "Nao foi encontrado Nenhum Doctor!", Snackbar.LENGTH_LONG)
-                .show()
+            val view =
+                (requireActivity() as MainActivity).findViewById<BottomNavigationView>(R.id.bottomNavigation)
+            configSnackbar(view, "Nenhum especialista encontrado!")
         }
     }
 
@@ -78,9 +84,6 @@ class HomeFragment : Fragment(R.layout.home_fragment) {
         viewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
         viewModelCategory = ViewModelProvider(this).get(CategoryViewModel::class.java)
         viewModelDoctor = ViewModelProvider(this).get(DoctorViewModel::class.java)
-        recyclerViewDoctor = binding.recyclerViewDoctorsList
-
-
     }
 
     private fun setupOservers() {
@@ -91,37 +94,55 @@ class HomeFragment : Fragment(R.layout.home_fragment) {
 
     private fun executeComponents() {
         viewModel.getCurrentUser()
-        //Lista de categorias
-        binding.include.recyclerViewCategory.adapter = adapterCategory
-        binding.include.recyclerViewCategory.layoutManager =
-            LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        setupRecyclersView()
+        setupSearchListener()
+        bindingAppBarOnScroll()
+    }
 
-        //Lista de médicos
-        recyclerViewDoctor.layoutManager = LinearLayoutManager(requireContext())
-        recyclerViewDoctor.adapter = adapterDoctor
+    private fun setupRecyclersView() {
+        setupRecyclerViewCategory()
+        setupRecyclerViewDoctor()
+    }
 
+
+    private fun setupSearchListener() {
         binding.headerFragment.includeSearch.searchDoctors.addTextChangedListener(object :
             TextWatcher {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-
             }
 
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
                 p0?.let {
                     if (it.length > 2) {
                         viewModelDoctor.fetchDoctorByName(it.toString())
-                    } else if (it.length == 0) {
+                    } else if (it.isEmpty()) {
                         viewModelDoctor.fetchDoctor()
                     }
                 }
             }
 
             override fun afterTextChanged(p0: Editable?) {
-
             }
-
         })
+    }
 
+    private fun setupRecyclerViewCategory() = with(binding.include.recyclerViewCategory) {
+        //Lista de categorias
+        adapter = adapterCategory
+        layoutManager =
+            LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+
+        addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                super.onScrollStateChanged(recyclerView, newState)
+                requireActivity().hideKeyboard()
+            }
+        })
+    }
+
+    private fun setupRecyclerViewDoctor() = with(binding.recyclerViewDoctorsList) {
+        layoutManager = LinearLayoutManager(requireContext())
+        adapter = adapterDoctor
     }
 
     private fun showBottomSheetDialog(doctor: Doctor) {
@@ -130,5 +151,13 @@ class HomeFragment : Fragment(R.layout.home_fragment) {
         arguments.putSerializable("doctor", doctor)
         bottomSheet.arguments = arguments
         bottomSheet.show(parentFragmentManager, "dialog_doctors")
+    }
+
+    private fun bindingAppBarOnScroll() {
+        binding.appbarLayout.addOnOffsetChangedListener(OnOffsetChangedListener { appBarLayout, verticalOffset ->
+            if (verticalOffset < -binding.animToolbar.height)
+                requireActivity().hideKeyboard()
+        })
+
     }
 }
