@@ -15,7 +15,6 @@ import com.klemer.doctorsforeveryone.R
 import com.klemer.doctorsforeveryone.adapter.AppointmentAdapter
 import com.klemer.doctorsforeveryone.databinding.SchedulesFragmentBinding
 import com.klemer.doctorsforeveryone.model.Appointment
-import com.klemer.doctorsforeveryone.repository.AuthenticationRepository
 import com.klemer.doctorsforeveryone.utils.configSnackbar
 import com.klemer.doctorsforeveryone.view_model.SchedulesViewModel
 
