@@ -3,48 +3,22 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:elevation="@dimen/size_5"
-    app:cardCornerRadius="@dimen/size_15"
-    android:layout_margin="@dimen/size_10">
+    android:layout_height="120dp"
+    android:layout_margin="@dimen/size_20">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/cardImage"
-            android:layout_width="@dimen/size_120"
-            android:layout_height="@dimen/size_100"
-            android:layout_margin="@dimen/size_10"
-            app:cardCornerRadius="@dimen/size_10"
-            android:elevation="@dimen/size_4"
-            app:strokeColor="@color/greenDark"
-            app:strokeWidth="@dimen/size_2"
+        <ImageView
+            android:id="@+id/img_news"
+            android:layout_width="120dp"
+            android:layout_height="match_parent"
+            android:layout_margin="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <ImageView
-                    android:id="@+id/img_news"
-                    android:layout_width="@dimen/size_120"
-                    android:layout_height="@dimen/size_100"
-                    android:layout_margin="10dp"
-                    android:scaleType="centerCrop"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:src="@drawable/ic_launcher_background" />
-
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-        </com.google.android.material.card.MaterialCardView>
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@drawable/ic_launcher_background" />
 
         <TextView
             android:id="@+id/tv_news_title"
@@ -54,24 +28,11 @@
             android:ellipsize="end"
             android:textSize="16sp"
             android:textStyle="bold"
-            android:textColor="@color/greenDark"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/cardImage"
+            app:layout_constraintStart_toEndOf="@+id/img_news"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="News Title" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/size_5"
-            android:text="@string/toque"
-            android:textColor="@color/greenLight"
-            android:textSize="@dimen/size_12"
-            android:textStyle="italic"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cardImage" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -2,10 +2,8 @@ package com.klemer.doctorsforeveryone.view_model
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import com.google.firebase.auth.FirebaseUser
 import com.klemer.doctorsforeveryone.repository.AuthenticationRepository
-import kotlinx.coroutines.launch
 
 class SignUpViewModel : ViewModel() {
 
@@ -15,13 +13,11 @@ class SignUpViewModel : ViewModel() {
     var createUserError = MutableLiveData<String?>()
 
     fun signUpWithEmailAndPassword(email: String, password: String) {
-        viewModelScope.launch {
-            try {
-                val result =
-                    repository.signUpWithEmailAndPassword(email = email, password = password)
-                registeredUser.value = result.user
-            } catch (e: Exception) {
-                createUserError.value = e.localizedMessage
+        repository.signUpWithEmailAndPassword(email = email, password = password) { user, error ->
+            if (user != null) {
+                registeredUser.value = user
+            } else {
+                createUserError.value = error
             }
         }
     }

@@ -4,10 +4,10 @@
     android:layout_height="@dimen/size_120"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <com.google.android.material.card.MaterialCardView
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="@dimen/size_110"
-        android:elevation="@dimen/size_5"
+        android:elevation="@dimen/size_4"
         app:cardCornerRadius="@dimen/size_15"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -63,7 +63,6 @@
                 app:layout_constraintStart_toEndOf="@+id/materialCardView"
                 app:layout_constraintTop_toTopOf="@+id/materialCardView">
 
-
                 <TextView
                     android:id="@+id/nameDoctor"
                     android:layout_width="wrap_content"
@@ -71,7 +70,7 @@
                     android:layout_marginBottom="@dimen/size_4"
                     android:text="Dra.Daniela Silva"
                     android:textColor="@color/greenDark"
-                    android:textSize="@dimen/size_20"
+                    android:textSize="@dimen/size_25"
                     android:textStyle="bold"
                     app:layout_constraintStart_toEndOf="@+id/materialCardView"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -83,26 +82,27 @@
                     android:layout_marginTop="@dimen/size_4"
                     android:text="Ginecologista"
                     android:textColor="@color/greenLight"
-                    android:textSize="@dimen/size_18"
+                    android:textSize="@dimen/size_20"
                     android:textStyle="italic"
+                    app:layout_constraintStart_toEndOf="@+id/materialCardView"
                     app:layout_constraintTop_toBottomOf="@+id/nameDoctor" />
-
 
             </LinearLayout>
 
             <ImageView
                 android:id="@+id/iconSpecialtyDoctor"
-                android:layout_width="@dimen/size_30"
-                android:layout_height="@dimen/size_30"
+                android:layout_width="@dimen/size_40"
+                android:layout_height="@dimen/size_40"
                 android:src="@drawable/ic_logo_app"
-                android:layout_marginRight="@dimen/size_20"
+                android:layout_margin="@dimen/size_30"
                 app:layout_constraintBottom_toBottomOf="@+id/linearLayout"
-                app:layout_constraintEnd_toEndOf="parent" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/linearLayout" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </com.google.android.material.card.MaterialCardView>
+    </androidx.cardview.widget.CardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 
