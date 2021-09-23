@@ -14,9 +14,7 @@ class DoctorRepositoryTest {
             category = "Dentista",
             biography = "Lorem Ipsum",
             working_hours = 4,
-            working_period = "Tarde",
-            avatarDoctor = "https://firebasestorage.googleapis.com/v0/b/doctors-for-everyone.appspot.com/o/Dr_1.png?alt=media&token=79dc3235-6c82-4173-84a1-89bcf352cea4",
-            iconDoctorCategory = "https://firebasestorage.googleapis.com/v0/b/doctors-for-everyone.appspot.com/o/icon_green_oftalmologista.png?alt=media&token=484ad008-bfb7-42cc-b47c-60303c8d30b4"
+            working_period = "Tarde"
         )
         repository.insertDoctor(doctor) { success, error ->
 

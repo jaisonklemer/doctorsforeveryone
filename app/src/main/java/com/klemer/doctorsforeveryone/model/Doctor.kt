@@ -68,7 +68,7 @@ data class Doctor(
                 working_hours = document["working_hours"] as Long,
                 working_period = document["working_period"] as String,
                 avatarDoctor = document["avatarDoctor"] as String?,
-                iconDoctorCategory = document["iconDoctorCategory"] as String?
+                iconDoctorCategory = document["avatarDoctorCategory"] as String?
             )
         }
     }

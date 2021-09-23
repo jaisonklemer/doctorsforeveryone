@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.View
 import android.view.View.VISIBLE
+import android.widget.Toast
 import androidx.lifecycle.Observer
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseUser
@@ -30,12 +31,7 @@ class SignUpFragment : Fragment(R.layout.sign_up_fragment) {
 
     private val errorObserver = Observer<String?> {
         //error at create user
-        if (it != null) {
-            binding.progressBarSignUp.visibility = View.GONE
-//            Toast.makeText(requireContext(), "Error: $it", Toast.LENGTH_LONG).show()
-            Snackbar.make(requireView(), it, Snackbar.LENGTH_LONG).show()
-        }
-
+        Toast.makeText(requireContext(), "Error: $it", Toast.LENGTH_LONG).show()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -54,16 +50,14 @@ class SignUpFragment : Fragment(R.layout.sign_up_fragment) {
 
     private fun setupClickListeners() {
         binding.buttonSignUp.setOnClickListener {
-            if (checkForInternet(requireContext())) {
+            if (requireActivity().checkForInternet(requireContext())) {
                 registerUser()
             } else {
-                Snackbar.make(requireView(), "Sem conexao com a internet!", Snackbar.LENGTH_LONG)
-                    .show()
+                Snackbar.make(requireView(), "Sem conexao com a internet!", Snackbar.LENGTH_LONG).show()
             }
         }
         binding.imageViewArrowBack.setOnClickListener {
-            requireActivity().replaceView(SignInFragment.newInstance(), R.id.containerStart)
-        }
+            requireActivity().replaceView(SignInFragment.newInstance(), R.id.containerStart) }
     }
 
     private fun registerUser() {

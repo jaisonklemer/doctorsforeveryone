@@ -9,8 +9,7 @@ data class Appointment(
     var hour: String, // 08:00-09:00
     var date: String, //dia da consulta
     var doctor_name: String,
-    var status: String = "Agendado",
-    var iconDoctor: String?
+    var status: String = "Agendado"
 
 ) {
 
@@ -23,8 +22,7 @@ data class Appointment(
                 hour = document["hour"] as String,
                 date = document["date"] as String,
                 doctor_name = document["doctor_name"] as String,
-                status = document["status"] as String,
-                iconDoctor = document["iconDoctor"] as String?
+                status = document["status"] as String
             )
         }
     }

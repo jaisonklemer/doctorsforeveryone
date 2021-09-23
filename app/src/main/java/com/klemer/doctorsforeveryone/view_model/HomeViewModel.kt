@@ -2,31 +2,33 @@ package com.klemer.doctorsforeveryone.view_model
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import com.klemer.doctorsforeveryone.model.User
 import com.klemer.doctorsforeveryone.repository.AuthenticationRepository
 import com.klemer.doctorsforeveryone.repository.UserRepository
-import kotlinx.coroutines.launch
 
 class HomeViewModel : ViewModel() {
 
     private val auth = AuthenticationRepository()
     private val userRepository = UserRepository()
 
+
+    private var query: String? = null
     val currentUser = MutableLiveData<User>()
-    val error = MutableLiveData<String>()
+
+    fun searchDoctors(q: String) {
+        query = q
+    }
 
     fun getCurrentUser() {
-        viewModelScope.launch {
-            try {
-                val firebaseUser = auth.currentUser()
-                firebaseUser?.let {
-                    currentUser.value = User.fromDocument(userRepository.getUser(firebaseUser.uid))
+        auth.currentUser().let { user ->
+            if (user != null) {
+                userRepository.getUser(user.uid) {
+                    currentUser.value = it
                 }
-            } catch (e: Exception) {
-                error.value = e.localizedMessage
             }
         }
+
+
     }
 
 }

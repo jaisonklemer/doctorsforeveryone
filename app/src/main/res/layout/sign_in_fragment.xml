@@ -12,10 +12,10 @@
         android:layout_height="@dimen/size_180"
         android:layout_marginTop="@dimen/size_40"
         android:src="@drawable/ic_logo_doctors_for_everyone"
-        app:layout_constraintBottom_toTopOf="@id/outlinedTextFieldEmailSignIn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/outlinedTextFieldEmailSignIn"/>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/outlinedTextFieldEmailSignIn"
@@ -24,16 +24,15 @@
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/size_20"
         android:hint="@string/email_exemple_com"
-        app:layout_constraintBottom_toTopOf="@id/outlinedTextFieldPasswordSignIn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/outlinedTextFieldPasswordSignIn"
         app:layout_constraintTop_toBottomOf="@+id/imageViewLogoSignIn">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/editTextInputEmailSignIn"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="textEmailAddress" />
+            android:layout_height="wrap_content" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -45,9 +44,9 @@
         android:layout_margin="@dimen/size_20"
         android:hint="@string/password"
         app:endIconMode="password_toggle"
-        app:layout_constraintBottom_toTopOf="@id/buttonSignIn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/buttonSignIn"
         app:layout_constraintTop_toBottomOf="@+id/outlinedTextFieldEmailSignIn">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -85,8 +84,8 @@
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/size_40"
         android:text="@string/create_account"
-        android:textColor="@color/greenDark"
         android:textSize="@dimen/font_size_create_account"
+        android:textColor="@color/greenDark"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

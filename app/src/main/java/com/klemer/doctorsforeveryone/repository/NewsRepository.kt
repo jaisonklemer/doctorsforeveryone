@@ -1,25 +1,28 @@
 package com.klemer.doctorsforeveryone.repository
 
 import com.klemer.doctorsforeveryone.model.HealthNewsResponse
-import com.klemer.doctorsforeveryone.services.HealthServiceAPI
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.async
+import com.klemer.doctorsforeveryone.services.RetrofitService
+import retrofit2.Call
+import retrofit2.Callback
 import retrofit2.Response
-import javax.inject.Inject
 
-class NewsRepository @Inject constructor(private val service: HealthServiceAPI) {
+class NewsRepository {
 
-    suspend fun getNews(): HealthNewsResponse? {
-        return CoroutineScope(Dispatchers.Default).async {
-            val response = service.getHealthNews()
-            processData(response)
-        }.await()
-    }
+    private val api = RetrofitService().getHealthService()
 
-    private fun <T> processData(response: Response<T>): T? {
-        return if (response.isSuccessful) response.body()
-        else null
+    fun getNews(callback: (HealthNewsResponse) -> Unit) {
+        api.getHealthNews().enqueue(object : Callback<HealthNewsResponse> {
+            override fun onResponse(
+                call: Call<HealthNewsResponse>,
+                response: Response<HealthNewsResponse>
+            ) {
+                response.body()?.let { callback(it) }
+            }
+
+            override fun onFailure(call: Call<HealthNewsResponse>, t: Throwable) {
+                println(t.localizedMessage)
+            }
+
+        })
     }
 }
-

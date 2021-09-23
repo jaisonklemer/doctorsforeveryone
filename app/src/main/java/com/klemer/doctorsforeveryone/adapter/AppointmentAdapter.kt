@@ -3,30 +3,24 @@ package com.klemer.doctorsforeveryone.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.annotation.ColorRes
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.klemer.doctorsforeveryone.R
 import com.klemer.doctorsforeveryone.databinding.ItemAppointmentBinding
 import com.klemer.doctorsforeveryone.model.Appointment
-import com.klemer.doctorsforeveryone.utils.getCurrentDate
-import com.klemer.doctorsforeveryone.utils.parseDate
 
-class AppointmentAdapter(private val onCancelClick: (Appointment) -> Unit) :
-    RecyclerView.Adapter<ItemAppointmentViewHolder>() {
+class AppointmentAdapter: RecyclerView.Adapter<ItemAppointmentViewHolder>() {
 
     private val listOfAppointment = mutableListOf<Appointment>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemAppointmentViewHolder {
-        LayoutInflater.from(parent.context).inflate(R.layout.item_appointment, parent, false)
-            .apply {
-                return ItemAppointmentViewHolder(this)
-            }
+        LayoutInflater.from(parent.context).inflate(R.layout.item_appointment, parent, false).apply {
+            return ItemAppointmentViewHolder(this)
+        }
     }
 
     override fun onBindViewHolder(holder: ItemAppointmentViewHolder, position: Int) {
         listOfAppointment[position].apply {
-            holder.bind(this, onCancelClick)
+            holder.bind(this)
         }
     }
 
@@ -41,50 +35,13 @@ class AppointmentAdapter(private val onCancelClick: (Appointment) -> Unit) :
     }
 }
 
-
-class ItemAppointmentViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+class ItemAppointmentViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
     private val binding = ItemAppointmentBinding.bind(itemView)
 
-    fun bind(appointment: Appointment, onCancelClick: (Appointment) -> Unit) {
+    fun bind(appointment: Appointment) {
         binding.textViewDoctor.text = "Dr. ${appointment.doctor_name}"
         binding.textViewDate.text = appointment.date
         binding.textViewHour.text = appointment.hour.split("-")[0]
         binding.textViewStatus.text = appointment.status
-
-        Glide.with(itemView.context)
-            .load(appointment.iconDoctor)
-            .into(binding.iconSpecialtyDoctor)
-
-
-        if (appointment.status == "Cancelado") {
-            statusColor(R.color.red)
-            binding.cancel.visibility = View.GONE
-        }
-        if (appointment.status == "Agendado") {
-            statusColor(R.color.greenLight)
-            binding.cancel.visibility = View.VISIBLE
-        }
-        binding.cancel.setOnClickListener {
-            onCancelClick(appointment)
-        }
-
-        checkCancelButton(appointment)
-    }
-
-    private fun statusColor(@ColorRes color: Int) {
-        binding.colorStatus.setBackgroundColor(itemView.resources.getColor(color))
-        binding.colorStatusCircle.setBackgroundColor(itemView.resources.getColor(color))
-    }
-
-    private fun checkCancelButton(appointment: Appointment) {
-        val currentDate = parseDate(getCurrentDate())
-        val appointmentDate = parseDate(appointment.date)
-
-        if (currentDate > appointmentDate || appointment.status == "Cancelado" ||
-            appointment.status == "Concluído") {
-            binding.cancel.visibility = View.GONE
-        } else {
-            binding.cancel.visibility = View.VISIBLE
-        }
     }
 }
