@@ -17,8 +17,8 @@ fun getCurrentDate(): String {
     return formatDate(Date())
 }
 
-fun formatDate(date: Date): String {
-    val sdf = SimpleDateFormat("dd/MM/yyyy")
+fun formatDate(date: Date, pattern: String = "dd/MM/yyyy"): String {
+    val sdf = SimpleDateFormat(pattern)
     return sdf.format(date)
 }
 
