@@ -225,7 +225,7 @@ class DoctorFragment : Fragment(R.layout.doctor_fragment) {
     }
 
     private fun showProgressBar(show: Boolean) {
-        binding.progressBar.visibility = if (show) View.VISIBLE else View.GONE
+        binding.lottieAnimationView.visibility = if (show) View.VISIBLE else View.GONE
     }
 
 }

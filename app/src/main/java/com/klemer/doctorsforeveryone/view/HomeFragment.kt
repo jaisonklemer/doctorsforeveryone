@@ -51,7 +51,7 @@ class HomeFragment : Fragment(R.layout.home_fragment) {
     }
 
     private val observerDoctorGetALL = Observer<List<Doctor>?> {
-        binding.progressBarHome.visibility = INVISIBLE
+        binding.lottieAnimationView.visibility = INVISIBLE
         if (!it.isNullOrEmpty()) {
             adapterDoctor.refresh(it)
         } else {
