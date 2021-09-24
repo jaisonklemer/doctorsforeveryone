@@ -42,12 +42,17 @@ class HomeFragment : Fragment(R.layout.home_fragment) {
 
     private var adapterCategory = CategoryAdapter {
         searchCategory = it.name
-        if (!binding.headerFragment.includeSearch.searchDoctors.text.isNullOrEmpty()) {
-            binding.headerFragment.includeSearch.searchDoctors.clearFocus()
-            binding.headerFragment.includeSearch.searchDoctors.setText("")
+        if (it.order.toInt() != 0) {
+            if (!binding.headerFragment.includeSearch.searchDoctors.text.isNullOrEmpty()) {
+                binding.headerFragment.includeSearch.searchDoctors.clearFocus()
+                binding.headerFragment.includeSearch.searchDoctors.setText("")
+            } else {
+                viewModelDoctor.fetchDoctorByCategory(it.name)
+            }
         } else {
-            viewModelDoctor.fetchDoctorByCategory(it.name)
+            viewModelDoctor.fetchDoctor()
         }
+
         requireActivity().hideKeyboard()
     }
 
