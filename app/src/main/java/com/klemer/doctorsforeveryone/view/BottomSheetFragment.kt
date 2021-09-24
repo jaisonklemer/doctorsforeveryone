@@ -84,12 +84,12 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
         doctorActivityResult =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
                 if (result.data?.hasExtra("created_appointment") == true) {
-                    this.dismiss()
                     (requireActivity() as MainActivity?)?.changeBottomSelectedItem(
                         SchedulesFragment.newInstance(),
                         1
                     )
                 }
+                this.dismiss()
             }
     }
 }

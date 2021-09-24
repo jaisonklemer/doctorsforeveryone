@@ -18,6 +18,7 @@ import com.klemer.doctorsforeveryone.adapter.DoctorHourAdapter
 import com.klemer.doctorsforeveryone.databinding.DoctorFragmentBinding
 import com.klemer.doctorsforeveryone.model.Appointment
 import com.klemer.doctorsforeveryone.model.Doctor
+import com.klemer.doctorsforeveryone.utils.checkForInternet
 import com.klemer.doctorsforeveryone.utils.formatDate
 import com.klemer.doctorsforeveryone.utils.showAlertDialog
 import com.klemer.doctorsforeveryone.view_model.DoctorViewModel
@@ -192,9 +193,19 @@ class DoctorFragment : Fragment(R.layout.doctor_fragment) {
     }
 
     private fun createAppointment() {
-        if (selectedDate != null && selectedHour != null) {
+        if (selectedDate != null && selectedHour != null && checkForInternet(requireContext())) {
             showProgressBar(true)
             viewModel.insertUserAppointment(currentDoctor, selectedDate!!, selectedHour!!)
+        } else {
+            showProgressBar(false)
+            showAlertDialog(
+                requireContext(),
+                getString(R.string.warning),
+                getString(R.string.no_connection),
+                getString(R.string.understand_label),
+                null,
+                null
+            ) { _, _ -> }
         }
     }
 

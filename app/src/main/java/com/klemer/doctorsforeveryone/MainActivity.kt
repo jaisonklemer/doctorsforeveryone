@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.klemer.doctorsforeveryone.databinding.ActivityMainBinding
+import com.klemer.doctorsforeveryone.utils.changeBehaviorForConnection
 import com.klemer.doctorsforeveryone.utils.replaceView
 import com.klemer.doctorsforeveryone.view.*
 import dagger.hilt.android.AndroidEntryPoint
@@ -27,6 +28,9 @@ class MainActivity : AppCompatActivity() {
         setupBottomNavigation()
         bottomNav()
         replaceView(HomeFragment.newInstance())
+
+        changeBehaviorForConnection(binding.root, this, R.id.container)
+
     }
 
     private fun bottomNav() {
@@ -34,8 +38,6 @@ class MainActivity : AppCompatActivity() {
             when (item.itemId) {
                 R.id.navHome -> {
                     replaceView(HomeFragment.newInstance())
-                    // Insert test category
-//                    replaceView(CategoryFragment.newInstance())
                 }
                 R.id.navSchedules -> {
                     replaceView(SchedulesFragment.newInstance())
