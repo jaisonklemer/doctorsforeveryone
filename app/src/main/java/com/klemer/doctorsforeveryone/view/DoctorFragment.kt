@@ -34,7 +34,6 @@ class DoctorFragment : Fragment(R.layout.doctor_fragment) {
 
     private lateinit var viewModel: DoctorViewModel
     private lateinit var appointmentViewModel: SchedulesViewModel
-
     private lateinit var binding: DoctorFragmentBinding
     private var selectedHour: String? = null
     private var selectedDate: String? = null
@@ -51,6 +50,11 @@ class DoctorFragment : Fragment(R.layout.doctor_fragment) {
 
     private val doctorHoursObserver = Observer<List<String>> {
         adapter.update(it)
+        if (it.isEmpty()){
+            binding.imgNotWorkingInDate.visibility = View.VISIBLE
+        }else{
+            binding.imgNotWorkingInDate.visibility = View.GONE
+        }
     }
 
     private val appointmentInsertedObserver = Observer<Boolean> {
@@ -236,7 +240,7 @@ class DoctorFragment : Fragment(R.layout.doctor_fragment) {
     }
 
     private fun showProgressBar(show: Boolean) {
-        binding.progressBar.visibility = if (show) View.VISIBLE else View.GONE
+        binding.lottieAnimationView.visibility = if (show) View.VISIBLE else View.GONE
     }
 
 }

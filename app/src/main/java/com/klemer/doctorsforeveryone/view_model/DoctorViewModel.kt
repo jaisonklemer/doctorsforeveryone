@@ -60,6 +60,28 @@ class DoctorViewModel : ViewModel() {
         }
     }
 
+    fun fetchDoctorWithCategory(doctorName: String, doctorCategory: String) {
+        viewModelScope.launch {
+            try {
+                repository.getDoctorsWithCateogry(doctorName.capitalize(), doctorCategory).apply {
+                    if (documents.size > 0) {
+                        documents.forEach { doctor ->
+                            mutableListOf<Doctor>().let {
+                                it.add(Doctor.fromDocument(doctor))
+                                doctorGet.value = it
+                            }
+                        }
+                    } else {
+                        doctorGet.value = emptyList()
+                        error.value = "Nenhum medico encontrado!"
+                    }
+                }
+            } catch (e: Exception) {
+                error.value = e.localizedMessage
+            }
+        }
+    }
+
     fun fetchDoctorByName(nameDoc: String) {
         viewModelScope.launch {
             try {
@@ -157,7 +179,7 @@ class DoctorViewModel : ViewModel() {
 
     }
 
-    private fun checkListOfHours(listOfHours: List<String>, selectedDate: String) {
+     fun checkListOfHours(listOfHours: List<String>, selectedDate: String) {
         viewModelScope.launch {
             if (selectedDate == getCurrentDate()) {
                 val finalList = mutableListOf<String>()

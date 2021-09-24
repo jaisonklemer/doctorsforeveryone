@@ -70,10 +70,18 @@ fun checkForInternet(context: Context): Boolean {
 }
 
 @SuppressLint("ResourceAsColor")
-fun configSnackbar(view: View, message: String) {
-    val snackbar = Snackbar.make(view, message, Snackbar.LENGTH_LONG)
+fun configSnackbar(
+    view: View,
+    message: String,
+    duration: Int = Snackbar.LENGTH_SHORT,
+    action: Boolean = false
+) {
+    val snackbar = Snackbar.make(view, message, duration)
         .setTextColor(Color.WHITE)
         .setBackgroundTint(view.context.resources.getColor(R.color.greenDark))
+    if (action == true) {
+        snackbar.setAction("Fechar") { }
+    }
     snackbar.anchorView = view
     snackbar.show()
 }

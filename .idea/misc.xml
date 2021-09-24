@@ -16,9 +16,10 @@
         <entry key="app/src/main/res/drawable/ic_logo_doctors_foreveryone.xml" value="0.25" />
         <entry key="app/src/main/res/drawable/ic_lupa.xml" value="0.24722222222222223" />
         <entry key="app/src/main/res/layout/activity_doctor.xml" value="0.1408514492753623" />
+        <entry key="app/src/main/res/layout/activity_doctor.xml" value="0.2375" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.2375" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/activity_splash.xml" value="0.45" />
+        <entry key="app/src/main/res/layout/activity_splash.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_start.xml" value="0.2375" />
         <entry key="app/src/main/res/layout/bottom_navigation_menu.xml" value="0.2375" />
         <entry key="app/src/main/res/layout/bottom_sheet_fragment.xml" value="0.375" />
@@ -28,7 +29,7 @@
         <entry key="app/src/main/res/layout/health_fragment.xml" value="0.2375" />
         <entry key="app/src/main/res/layout/home_fragment.xml" value="0.25" />
         <entry key="app/src/main/res/layout/home_header.xml" value="0.375" />
-        <entry key="app/src/main/res/layout/item_appointment.xml" value="0.5" />
+        <entry key="app/src/main/res/layout/item_appointment.xml" value="0.4134275618374558" />
         <entry key="app/src/main/res/layout/itens_cards_doctor_hours.xml" value="0.37962962962962965" />
         <entry key="app/src/main/res/layout/itens_cards_doctors.xml" value="0.25" />
         <entry key="app/src/main/res/layout/itens_cards_specialty.xml" value="0.335" />

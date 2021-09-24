@@ -33,7 +33,7 @@ class HealthFragment : Fragment(R.layout.health_fragment), NetworkConnectionInte
     }
 
     private val newsObserver = Observer<HealthNewsResponse> {
-        binding.progressBarHealth.visibility = INVISIBLE
+        binding.lottieAnimationView.visibility = INVISIBLE
         adapter.submitList(it.articles)
     }
 

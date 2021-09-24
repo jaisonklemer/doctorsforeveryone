@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.appbar.AppBarLayout.OnOffsetChangedListener
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.snackbar.Snackbar
 import com.klemer.doctorsforeveryone.MainActivity
 import com.klemer.doctorsforeveryone.R
 import com.klemer.doctorsforeveryone.adapter.CategoryAdapter
@@ -37,10 +38,24 @@ class HomeFragment : Fragment(R.layout.home_fragment) {
     private lateinit var viewModelCategory: CategoryViewModel
     private lateinit var viewModelDoctor: DoctorViewModel
     private lateinit var binding: HomeFragmentBinding
+    private var searchCategory = String()
 
     private var adapterCategory = CategoryAdapter {
-        viewModelDoctor.fetchDoctorByCategory(it.name)
+        searchCategory = it.name
+        if (it.order.toInt() != 0) {
+            if (!binding.headerFragment.includeSearch.searchDoctors.text.isNullOrEmpty()) {
+                binding.headerFragment.includeSearch.searchDoctors.clearFocus()
+                binding.headerFragment.includeSearch.searchDoctors.setText("")
+            } else {
+                viewModelDoctor.fetchDoctorByCategory(it.name)
+            }
+        } else {
+            viewModelDoctor.fetchDoctor()
+        }
+
+        requireActivity().hideKeyboard()
     }
+
     private var adapterDoctor = DoctorAdapter {
         showBottomSheetDialog(it)
     }
@@ -50,15 +65,23 @@ class HomeFragment : Fragment(R.layout.home_fragment) {
     }
 
     private val observerDoctorGetALL = Observer<List<Doctor>?> {
-        binding.progressBarHome.visibility = INVISIBLE
+        binding.lottieAnimationView.visibility = INVISIBLE
         if (!it.isNullOrEmpty()) {
             adapterDoctor.refresh(it)
         } else {
             adapterDoctor.clear()
             val view =
                 (requireActivity() as MainActivity).findViewById<BottomNavigationView>(R.id.bottomNavigation)
+            requireActivity().hideKeyboard()
             configSnackbar(view, "Nenhum especialista encontrado!")
         }
+    }
+
+    private val observerError = Observer<String> {
+        val view =
+            (requireActivity() as MainActivity).findViewById<BottomNavigationView>(R.id.bottomNavigation)
+        requireActivity().hideKeyboard()
+        configSnackbar(view, "Nenhum especialista encontrado!", Snackbar.LENGTH_INDEFINITE, true)
     }
 
     private val currentUserObserver = Observer<User> {
@@ -89,6 +112,7 @@ class HomeFragment : Fragment(R.layout.home_fragment) {
     private fun setupOservers() {
         viewModelCategory.categoryGet.observe(viewLifecycleOwner, observerCategoryGetAll)
         viewModelDoctor.doctorGet.observe(viewLifecycleOwner, observerDoctorGetALL)
+        viewModelDoctor.error.observe(viewLifecycleOwner, observerError)
         viewModel.currentUser.observe(viewLifecycleOwner, currentUserObserver)
     }
 
@@ -114,9 +138,19 @@ class HomeFragment : Fragment(R.layout.home_fragment) {
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
                 p0?.let {
                     if (it.length > 2) {
-                        viewModelDoctor.fetchDoctorByName(it.toString())
+                        if (searchCategory.isNullOrEmpty()) {
+                            viewModelDoctor.fetchDoctorByName(it.toString())
+                        } else {
+                            viewModelDoctor.fetchDoctorWithCategory(it.toString(), searchCategory)
+                        }
                     } else if (it.isEmpty()) {
-                        viewModelDoctor.fetchDoctor()
+                        if (!searchCategory.isNullOrEmpty()) {
+                            viewModelDoctor.fetchDoctorByCategory(searchCategory)
+                            requireActivity().hideKeyboard()
+                        } else {
+                            viewModelDoctor.fetchDoctor()
+                            requireActivity().hideKeyboard()
+                        }
                     }
                 }
             }
@@ -158,6 +192,5 @@ class HomeFragment : Fragment(R.layout.home_fragment) {
             if (verticalOffset < -binding.animToolbar.height)
                 requireActivity().hideKeyboard()
         })
-
     }
 }

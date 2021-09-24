@@ -2,6 +2,7 @@ package com.klemer.doctorsforeveryone.repository
 
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.DocumentSnapshot
+import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.QuerySnapshot
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -15,7 +16,7 @@ class DoctorRepository {
     private val database = Firebase.firestore
 
 
-     suspend fun insertDoctor(doctor: Doctor): DocumentReference {
+    suspend fun insertDoctor(doctor: Doctor): DocumentReference {
         return database.collection(DOCTOR_COLLECTION).add(doctor).await()
     }
 
@@ -23,12 +24,22 @@ class DoctorRepository {
         return database.collection(DOCTOR_COLLECTION).document(doctorId).get().await()
     }
 
-    suspend fun getDoctorByCategory(doctorCategory: String) : QuerySnapshot{
-        return database.collection(DOCTOR_COLLECTION).whereEqualTo("category", doctorCategory).get().await()
+    suspend fun getDoctorByCategory(doctorCategory: String): QuerySnapshot {
+        return database.collection(DOCTOR_COLLECTION).whereEqualTo("category", doctorCategory)
+            .orderBy("name").get().await()
     }
 
     suspend fun getAllDoctors(): QuerySnapshot {
-        return database.collection(DOCTOR_COLLECTION).get().await()
+        return database.collection(DOCTOR_COLLECTION).orderBy("name").get().await()
+    }
+
+    suspend fun getDoctorsWithCateogry(doctorName: String, doctorCategory: String): QuerySnapshot {
+        return database.collection(DOCTOR_COLLECTION)
+            .whereEqualTo("category", doctorCategory)
+            .orderBy("name")
+            .startAt(doctorName)
+            .endAt(doctorName + '\uf8ff')
+            .get().await()
     }
 
 

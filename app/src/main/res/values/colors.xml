@@ -9,6 +9,7 @@
     <color name="black">#FF000000</color>
     <color name="red">#F60404</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="gray">#A5A5A5</color>
 
     <style name="colorCheckbox" parent="android:Theme.Material.Dialog">
         <item name="android:colorAccent">@color/greenDark</item>
