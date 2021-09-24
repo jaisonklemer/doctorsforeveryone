@@ -14,7 +14,7 @@ class CategoryAdapter(private val onClick: (Category) -> Unit) :
     RecyclerView.Adapter<ItemCategoryViewHolder>() {
 
     private val listOfCategory = mutableListOf<Category>()
-    private var itemCheck = -1
+    private var itemCheck = 0
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemCategoryViewHolder {
         LayoutInflater.from(parent.context).inflate(R.layout.itens_cards_specialty, parent, false)
