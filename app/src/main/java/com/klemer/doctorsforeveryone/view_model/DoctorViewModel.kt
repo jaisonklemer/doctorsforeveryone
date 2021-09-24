@@ -179,7 +179,7 @@ class DoctorViewModel : ViewModel() {
 
     }
 
-    private fun checkListOfHours(listOfHours: List<String>, selectedDate: String) {
+     fun checkListOfHours(listOfHours: List<String>, selectedDate: String) {
         viewModelScope.launch {
             if (selectedDate == getCurrentDate()) {
                 val finalList = mutableListOf<String>()
