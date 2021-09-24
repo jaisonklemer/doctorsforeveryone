@@ -15,6 +15,7 @@
         <entry key="app/src/main/res/drawable/ic_logo_doctors_for_everyone.xml" value="0.25364583333333335" />
         <entry key="app/src/main/res/drawable/ic_logo_doctors_foreveryone.xml" value="0.25" />
         <entry key="app/src/main/res/drawable/ic_lupa.xml" value="0.24722222222222223" />
+        <entry key="app/src/main/res/layout/activity_doctor.xml" value="0.2375" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.2375" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_splash.xml" value="0.25" />
