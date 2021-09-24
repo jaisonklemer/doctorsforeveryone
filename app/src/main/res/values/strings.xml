@@ -54,6 +54,8 @@
     <string name="completed">Concluído</string>
     <string name="appointment_success_label">Agendamento realizado com sucesso!</string>
     <string name="select_hour_and_date_warning">Selecione uma data e um horário</string>
+    <string name="netwatch_target_ping_server_ip_add">8.8.8.8</string>
+    <string name="netwatch_lost_connection">Sem conexão com a internet</string>
     <!-- TODO: Token Google-->
     <!--    <string name="default_web_client_id">886802055145-ov8mfaqmjiilp8c6jtptdh0mciue8c97.apps.googleusercontent.com</string>-->
 

@@ -1,7 +1,7 @@
 package com.klemer.doctorsforeveryone
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.klemer.doctorsforeveryone.databinding.ActivityDoctorBinding
 import com.klemer.doctorsforeveryone.utils.replaceView
 import com.klemer.doctorsforeveryone.view.DoctorFragment
