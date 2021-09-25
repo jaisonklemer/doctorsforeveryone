@@ -7,13 +7,19 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.google.firebase.auth.FirebaseAuthException
 import com.google.firebase.auth.FirebaseUser
 import com.klemer.doctorsforeveryone.model.User
 import com.klemer.doctorsforeveryone.repository.AuthenticationRepository
 import com.klemer.doctorsforeveryone.repository.UserRepository
+import com.klemer.doctorsforeveryone.utils.getFirebaseError
+import dagger.hilt.android.lifecycle.HiltViewModel
+import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class SignInViewModel : ViewModel() {
+@HiltViewModel
+class SignInViewModel @Inject constructor(@ApplicationContext val context: Context) : ViewModel() {
 
     private val repository = AuthenticationRepository()
     private val userRepository = UserRepository()
@@ -29,8 +35,8 @@ class SignInViewModel : ViewModel() {
                 val authResult = repository.signInWithEmailAndPassword(email, password)
                 loginUser.value = authResult.user
 
-            } catch (e: Exception) {
-                loginError.value = e.localizedMessage
+            } catch (e: FirebaseAuthException) {
+                loginError.value = context.getFirebaseError(e.errorCode)
             }
         }
     }

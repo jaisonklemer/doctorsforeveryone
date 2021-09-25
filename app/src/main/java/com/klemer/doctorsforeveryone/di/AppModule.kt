@@ -13,17 +13,17 @@ import retrofit2.converter.gson.GsonConverterFactory
 object AppModule {
 
     @Provides
-    fun getInstance(path: String): Retrofit{
+    fun getInstance(path: String): Retrofit {
         return Retrofit
-        .Builder()
-        .addConverterFactory(GsonConverterFactory.create())
-        .baseUrl(path)
-        .build()
+            .Builder()
+            .addConverterFactory(GsonConverterFactory.create())
+            .baseUrl(path)
+            .build()
     }
 
     @Provides
     fun getHealthService(): HealthServiceAPI {
-    return getInstance("https://newsapi.org/").create(HealthServiceAPI::class.java)
-}
+        return getInstance("https://newsapi.org/").create(HealthServiceAPI::class.java)
+    }
 
 }
