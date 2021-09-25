@@ -74,12 +74,12 @@ fun configSnackbar(
     view: View,
     message: String,
     duration: Int = Snackbar.LENGTH_SHORT,
-    action: Boolean = false
+    action: Boolean = false,
 ) {
     val snackbar = Snackbar.make(view, message, duration)
         .setTextColor(Color.WHITE)
         .setBackgroundTint(view.context.resources.getColor(R.color.greenDark))
-    if (action == true) {
+    if (action) {
         snackbar.setAction("Fechar") { }
     }
     snackbar.anchorView = view
@@ -114,4 +114,14 @@ fun showAlertDialog(
     }
 
     dialog.create().show()
+}
+
+fun Context.getFirebaseError(name: String): String {
+    val errorCode = name.replace("-", "_").lowercase()
+    return try {
+        getString(resources.getIdentifier(errorCode, "string", packageName))
+    } catch (e: Exception) {
+        "Ocorreu um erro. Tente novamente"
+    }
+
 }

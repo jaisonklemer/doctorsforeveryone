@@ -1,13 +1,20 @@
 package com.klemer.doctorsforeveryone.view_model
 
+import android.content.Context
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.google.firebase.auth.FirebaseAuthException
 import com.google.firebase.auth.FirebaseUser
 import com.klemer.doctorsforeveryone.repository.AuthenticationRepository
+import com.klemer.doctorsforeveryone.utils.getFirebaseError
+import dagger.hilt.android.lifecycle.HiltViewModel
+import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class SignUpViewModel : ViewModel() {
+@HiltViewModel
+class SignUpViewModel @Inject constructor(@ApplicationContext val context: Context) : ViewModel() {
 
     private val repository = AuthenticationRepository()
 
@@ -20,8 +27,8 @@ class SignUpViewModel : ViewModel() {
                 val result =
                     repository.signUpWithEmailAndPassword(email = email, password = password)
                 registeredUser.value = result.user
-            } catch (e: Exception) {
-                createUserError.value = e.localizedMessage
+            } catch (e: FirebaseAuthException) {
+                createUserError.value = context.getFirebaseError(e.errorCode)
             }
         }
     }

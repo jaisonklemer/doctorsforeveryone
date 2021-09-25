@@ -9,8 +9,10 @@ import com.klemer.doctorsforeveryone.databinding.ActivitySplashBinding
 import com.klemer.doctorsforeveryone.repository.UserRepository
 import com.klemer.doctorsforeveryone.utils.checkForInternet
 import com.klemer.doctorsforeveryone.view_model.SignInViewModel
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.*
 
+@AndroidEntryPoint
 class SplashActivity : AppCompatActivity() {
 
     lateinit var binding: ActivitySplashBinding
@@ -65,7 +67,12 @@ class SplashActivity : AppCompatActivity() {
                     try {
                         val result = userRepository.getUser(viewModel.currentUser()!!.uid)
                         Intent(this@SplashActivity, MainActivity::class.java).let { newIntent ->
-                            newIntent.putExtra("admin", result.get("admin") as Boolean)
+                            var admin = false
+                            if (result["admin"] != null) {
+                                admin = result["admin"] as Boolean
+                            }
+
+                            newIntent.putExtra("admin", admin)
                             startActivity(newIntent)
                             finish()
                         }

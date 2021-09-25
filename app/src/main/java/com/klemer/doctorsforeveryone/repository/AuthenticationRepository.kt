@@ -33,7 +33,9 @@ class AuthenticationRepository {
     }
 
     suspend fun signUpWithEmailAndPassword(email: String, password: String): AuthResult {
-        return auth.createUserWithEmailAndPassword(email, password).await()
+        val authResult = auth.createUserWithEmailAndPassword(email, password).await()
+        authResult.user?.let { this.createUserAtCollection(it) }
+        return authResult
     }
 
     fun signInGoogleOnActivityResult(
