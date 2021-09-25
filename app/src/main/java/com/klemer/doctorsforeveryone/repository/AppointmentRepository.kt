@@ -11,7 +11,6 @@ import kotlinx.coroutines.tasks.await
 class AppointmentRepository {
 
     private val APPOINTMENT_COLLECTION = "appointments"
-    private val DOCTOR_COLLECTION = "doctors"
 
     private val database = Firebase.firestore
 
@@ -49,8 +48,11 @@ class AppointmentRepository {
     }
 
     suspend fun getAppointmentsByDoctor(doctorId: String, date: String): QuerySnapshot {
-        return database.collection(APPOINTMENT_COLLECTION).whereEqualTo("doctor_id", doctorId)
-            .whereEqualTo("date", date).get().await()
+        return database.collection(APPOINTMENT_COLLECTION)
+            .whereEqualTo("doctor_id", doctorId)
+            .whereEqualTo("date", date)
+            .whereNotEqualTo("status", "Cancelado")
+            .get().await()
 
     }
 
