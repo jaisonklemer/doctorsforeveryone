@@ -65,7 +65,12 @@ class SplashActivity : AppCompatActivity() {
                     try {
                         val result = userRepository.getUser(viewModel.currentUser()!!.uid)
                         Intent(this@SplashActivity, MainActivity::class.java).let { newIntent ->
-                            newIntent.putExtra("admin", result.get("admin") as Boolean)
+                            var admin = false
+                            if (result["admin"] != null) {
+                                admin = result["admin"] as Boolean
+                            }
+
+                            newIntent.putExtra("admin", admin)
                             startActivity(newIntent)
                             finish()
                         }

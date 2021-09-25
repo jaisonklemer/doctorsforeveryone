@@ -1,8 +1,8 @@
 <resources>
     <string name="app_name">Doctors For Everyone</string>
-    <string name="email_exemple_com">email@exemple.com</string>
-    <string name="password">password</string>
-    <string name="sign_in">Login</string>
+    <string name="email_exemple_com">Email</string>
+    <string name="password">Senha</string>
+    <string name="sign_in">Entrar</string>
     <string name="create_account">CRIAR CONTA</string>
     <string name="try_again">TENTAR NOVAMENTE</string>
     <string name="signInGoogle">Entre com sua conta Google</string>
