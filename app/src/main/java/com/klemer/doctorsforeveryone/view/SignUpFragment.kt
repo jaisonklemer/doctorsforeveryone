@@ -14,9 +14,12 @@ import com.klemer.doctorsforeveryone.SplashActivity
 import com.klemer.doctorsforeveryone.StartActivity
 import com.klemer.doctorsforeveryone.databinding.SignUpFragmentBinding
 import com.klemer.doctorsforeveryone.utils.checkForInternet
+import com.klemer.doctorsforeveryone.utils.hideKeyboard
 import com.klemer.doctorsforeveryone.utils.replaceView
 import com.klemer.doctorsforeveryone.view_model.SignUpViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class SignUpFragment : Fragment(R.layout.sign_up_fragment) {
 
     companion object {
@@ -61,6 +64,7 @@ class SignUpFragment : Fragment(R.layout.sign_up_fragment) {
 
     private fun setupClickListeners() {
         binding.buttonSignUp.setOnClickListener {
+            requireActivity().hideKeyboard()
             if (checkForInternet(requireContext())) {
                 registerUser()
             } else {

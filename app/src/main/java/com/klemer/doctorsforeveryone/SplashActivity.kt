@@ -9,8 +9,10 @@ import com.klemer.doctorsforeveryone.databinding.ActivitySplashBinding
 import com.klemer.doctorsforeveryone.repository.UserRepository
 import com.klemer.doctorsforeveryone.utils.checkForInternet
 import com.klemer.doctorsforeveryone.view_model.SignInViewModel
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.*
 
+@AndroidEntryPoint
 class SplashActivity : AppCompatActivity() {
 
     lateinit var binding: ActivitySplashBinding

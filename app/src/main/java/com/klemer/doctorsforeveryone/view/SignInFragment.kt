@@ -18,7 +18,9 @@ import com.klemer.doctorsforeveryone.utils.checkForInternet
 import com.klemer.doctorsforeveryone.utils.hideKeyboard
 import com.klemer.doctorsforeveryone.utils.replaceView
 import com.klemer.doctorsforeveryone.view_model.SignInViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class SignInFragment : Fragment(R.layout.sign_in_fragment) {
 
     companion object {
@@ -45,7 +47,6 @@ class SignInFragment : Fragment(R.layout.sign_in_fragment) {
     private val loginError = Observer<String?> {
         if (it != null) {
             binding.progressBar.visibility = GONE
-//            Toast.makeText(requireContext(), "Error: $it", Toast.LENGTH_LONG).show()
             Snackbar.make(requireView(), it, Snackbar.LENGTH_LONG).show()
         }
 
@@ -88,7 +89,11 @@ class SignInFragment : Fragment(R.layout.sign_in_fragment) {
                     requireActivity().hideKeyboard()
                 }
             } else {
-                Snackbar.make(requireView(), "Sem conexao com a internet!", Snackbar.LENGTH_LONG)
+                Snackbar.make(
+                    requireView(),
+                    getString(R.string.no_connection),
+                    Snackbar.LENGTH_LONG
+                )
                     .show()
             }
         }
