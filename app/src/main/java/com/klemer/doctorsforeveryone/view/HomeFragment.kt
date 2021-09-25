@@ -121,6 +121,7 @@ class HomeFragment : Fragment(R.layout.home_fragment) {
         setupRecyclersView()
         setupSearchListener()
         bindingAppBarOnScroll()
+        bindingToShowProfile()
     }
 
     private fun setupRecyclersView() {
@@ -192,5 +193,14 @@ class HomeFragment : Fragment(R.layout.home_fragment) {
             if (verticalOffset < -binding.animToolbar.height)
                 requireActivity().hideKeyboard()
         })
+    }
+
+    private fun bindingToShowProfile() {
+        binding.headerFragment.clickToShowProfile.setOnClickListener {
+            (requireActivity() as MainActivity).changeBottomSelectedItem(
+                ProfileFragment.newInstance(),
+                3
+            )
+        }
     }
 }
