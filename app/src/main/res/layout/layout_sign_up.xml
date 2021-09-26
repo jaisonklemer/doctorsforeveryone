@@ -6,7 +6,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         android:gravity="center">
 
@@ -31,7 +31,7 @@
             android:id="@+id/imageViewLogoSignUp"
             android:layout_width="@dimen/size_180"
             android:layout_height="@dimen/size_180"
-            android:layout_marginTop="@dimen/size_0"
+            android:layout_marginTop="-20dp"
             android:src="@drawable/ic_logo_doctors_for_everyone"
             app:layout_constraintBottom_toTopOf="@id/outlinedTextFieldEmailSignUp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -98,17 +98,23 @@
             app:layout_constraintTop_toBottomOf="@+id/outlinedTextFieldPasswordSignUp" />
 
 
-        <com.airbnb.lottie.LottieAnimationView
-            android:id="@+id/progressBarSignUp"
+        <LinearLayout
             android:layout_width="@dimen/size_110"
             android:layout_height="@dimen/size_110"
-            android:visibility="gone"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/buttonSignUp"
-            app:lottie_autoPlay="true"
-            app:lottie_loop="true"
-            app:lottie_rawRes="@raw/animation_splash" />
+            android:layout_marginTop="@dimen/size_20"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/progressBarSignUp"
+                android:layout_width="@dimen/size_110"
+                android:layout_height="@dimen/size_110"
+                android:visibility="gone"
+                app:lottie_autoPlay="true"
+                app:lottie_loop="true"
+                app:lottie_rawRes="@raw/animation_splash" />
+
+        </LinearLayout>
 
     </LinearLayout>
 
