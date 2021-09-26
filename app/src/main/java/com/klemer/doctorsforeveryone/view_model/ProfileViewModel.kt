@@ -19,13 +19,17 @@ class ProfileViewModel : ViewModel() {
     val error: LiveData<String> = _error
 
     private val repository = UserRepository()
-    private val logOut = AuthenticationRepository()
+    private val authentication = AuthenticationRepository()
     private val auth = FirebaseAuth.getInstance()
 
 
     fun userUpdate(name: String, age: String, weight: String, height: String, gender: String) {
         viewModelScope.launch {
             try {
+                val isComplete =
+                    (name != "" && age != "" && weight != "" && height != "" && gender != "")
+
+
                 val userInfo = repository.getUser(auth.currentUser?.uid!!)
                 User.fromDocument(userInfo).let { user ->
                     user.name = name
@@ -33,6 +37,7 @@ class ProfileViewModel : ViewModel() {
                     user.height = height
                     user.weight = weight
                     user.gender = gender
+                    user.profile_completed = isComplete
 
                     repository.updateUser(user)
                 }
@@ -55,6 +60,6 @@ class ProfileViewModel : ViewModel() {
     }
 
     fun signOut() {
-        logOut.signOut()
+        authentication.signOut()
     }
 }

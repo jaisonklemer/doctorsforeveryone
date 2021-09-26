@@ -74,13 +74,15 @@ fun configSnackbar(
     view: View,
     message: String,
     duration: Int = Snackbar.LENGTH_SHORT,
-    action: Boolean = false,
+    action: String? = "Fechar",
+    actionCallback: ((Boolean) -> Unit)? = null
 ) {
     val snackbar = Snackbar.make(view, message, duration)
         .setTextColor(Color.WHITE)
         .setBackgroundTint(view.context.resources.getColor(R.color.greenDark))
-    if (action) {
-        snackbar.setAction("Fechar") { }
+
+    if (action != null && actionCallback != null) {
+        snackbar.setAction(action) { actionCallback(true) }
     }
     snackbar.anchorView = view
     snackbar.show()

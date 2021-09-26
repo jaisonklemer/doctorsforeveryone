@@ -19,8 +19,8 @@
     <string name="placeholder">Busque doutores</string>
     <string name="placeholder_name">Nome completo</string>
     <string name="placeholder_age">Idade</string>
-    <string name="placeholder_weight">Peso</string>
-    <string name="placeholder_height">Altura</string>
+    <string name="placeholder_weight">Peso (Kg)</string>
+    <string name="placeholder_height">Altura (cm)</string>
     <string name="search_specialty">Pesquise por especialidade:</string>
     <string name="update_profile">Atualize seus dados</string>
     <string name="feminine">Feminino</string>
@@ -65,6 +65,9 @@
     <string name="error_wrong_password">Senha Incorreta</string>
     <string name="error_weak_password">A senha informada é muito fraca. Forneça uma senha com pelo menos 6 caracteres</string>
     <string name="error_invalid_password">A senha é inválida, precisa ter pelo menos 6 caracteres</string>
+    <string name="profile_must_be_completed">Você deve completar o seu cadastro antes de continuar!</string>
+    <string name="complete">Completar</string>
+    <string name="no_doctor_found">Nenhum especialista encontrado!</string>
     <!--    Firebase Errors-->
 
 

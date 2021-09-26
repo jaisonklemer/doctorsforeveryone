@@ -73,6 +73,7 @@ class SplashActivity : AppCompatActivity() {
                             }
 
                             newIntent.putExtra("admin", admin)
+                            newIntent.putExtra("complete", result["profile_completed"] as Boolean)
                             startActivity(newIntent)
                             finish()
                         }
