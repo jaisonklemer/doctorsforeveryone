@@ -12,6 +12,7 @@ import com.google.firebase.auth.FirebaseUser
 import com.klemer.doctorsforeveryone.MainActivity
 import com.klemer.doctorsforeveryone.R
 import com.klemer.doctorsforeveryone.StartActivity
+import com.klemer.doctorsforeveryone.databinding.LayoutSignInBinding
 import com.klemer.doctorsforeveryone.databinding.SignInFragmentBinding
 import com.klemer.doctorsforeveryone.model.User
 import com.klemer.doctorsforeveryone.utils.checkForInternet
@@ -28,7 +29,7 @@ class SignInFragment : Fragment(R.layout.sign_in_fragment) {
     }
 
     private lateinit var viewModel: SignInViewModel
-    private lateinit var binding: SignInFragmentBinding
+    private lateinit var binding: LayoutSignInBinding
 
     private val loginSuccessful = Observer<FirebaseUser?> {
         //login successful
@@ -61,7 +62,7 @@ class SignInFragment : Fragment(R.layout.sign_in_fragment) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(this)[SignInViewModel::class.java]
-        binding = SignInFragmentBinding.bind(view)
+        binding = LayoutSignInBinding.bind(view)
 
         setupObservers()
         setupClickListeners()

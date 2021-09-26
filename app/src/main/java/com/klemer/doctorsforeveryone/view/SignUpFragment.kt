@@ -12,6 +12,7 @@ import com.google.firebase.auth.FirebaseUser
 import com.klemer.doctorsforeveryone.R
 import com.klemer.doctorsforeveryone.SplashActivity
 import com.klemer.doctorsforeveryone.StartActivity
+import com.klemer.doctorsforeveryone.databinding.LayoutSignUpBinding
 import com.klemer.doctorsforeveryone.databinding.SignUpFragmentBinding
 import com.klemer.doctorsforeveryone.utils.checkForInternet
 import com.klemer.doctorsforeveryone.utils.hideKeyboard
@@ -27,7 +28,7 @@ class SignUpFragment : Fragment(R.layout.sign_up_fragment) {
     }
 
     private lateinit var viewModel: SignUpViewModel
-    private lateinit var binding: SignUpFragmentBinding
+    private lateinit var binding: LayoutSignUpBinding
 
     private val userRegistered = Observer<FirebaseUser?> {
 //        requireActivity().replaceView(SignInFragment.newInstance(), R.id.containerStart)
@@ -51,7 +52,7 @@ class SignUpFragment : Fragment(R.layout.sign_up_fragment) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(this)[SignUpViewModel::class.java]
-        binding = SignUpFragmentBinding.bind(view)
+        binding = LayoutSignUpBinding.bind(view)
 
         setupObservers()
         setupClickListeners()
