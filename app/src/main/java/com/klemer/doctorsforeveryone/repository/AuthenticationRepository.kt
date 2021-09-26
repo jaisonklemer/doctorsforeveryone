@@ -127,7 +127,8 @@ class AuthenticationRepository {
             "age" to "",
             "weight" to "",
             "height" to "",
-            "gender" to ""
+            "gender" to "",
+            "profile_completed" to false
         )
 
         database.collection(collection).document(user.uid).set(data)

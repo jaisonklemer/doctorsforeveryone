@@ -38,6 +38,7 @@ class HomeFragment : Fragment(R.layout.home_fragment) {
     private lateinit var viewModelCategory: CategoryViewModel
     private lateinit var viewModelDoctor: DoctorViewModel
     private lateinit var binding: HomeFragmentBinding
+    private lateinit var currentUser: User
     private var searchCategory = String()
 
     private var adapterCategory = CategoryAdapter {
@@ -57,7 +58,11 @@ class HomeFragment : Fragment(R.layout.home_fragment) {
     }
 
     private var adapterDoctor = DoctorAdapter {
-        showBottomSheetDialog(it)
+        if (currentUser.profile_completed) {
+            showBottomSheetDialog(it)
+        } else {
+            (requireActivity() as MainActivity).checkIfProfileIsCompleted(currentUser)
+        }
     }
 
     private val observerCategoryGetAll = Observer<List<Category>> {
@@ -73,7 +78,7 @@ class HomeFragment : Fragment(R.layout.home_fragment) {
             val view =
                 (requireActivity() as MainActivity).findViewById<BottomNavigationView>(R.id.bottomNavigation)
             requireActivity().hideKeyboard()
-            configSnackbar(view, "Nenhum especialista encontrado!")
+            configSnackbar(view, getString(R.string.no_doctor_found))
         }
     }
 
@@ -81,10 +86,11 @@ class HomeFragment : Fragment(R.layout.home_fragment) {
         val view =
             (requireActivity() as MainActivity).findViewById<BottomNavigationView>(R.id.bottomNavigation)
         requireActivity().hideKeyboard()
-        configSnackbar(view, "Nenhum especialista encontrado!", Snackbar.LENGTH_INDEFINITE, true)
+        configSnackbar(view, "Nenhum especialista encontrado!", Snackbar.LENGTH_INDEFINITE)
     }
 
     private val currentUserObserver = Observer<User> {
+        currentUser = it
         binding.headerFragment.nameUser.text = "Olá ${it.name}"
     }
 
