@@ -9,12 +9,12 @@
 </p>
 
 ## Sumario
-- [Sobre o Projeto](Sobre-o-Projeto)
-- [Pré-requisitos](💻-Pré-requisitos)
-- [Sobre o App](Sobre-o-App)
-- [Screenshots](Screenshots)
-- [Dependencias usadas](Dependencias-usadas)
-- [Baixe o Apk](Baixe-o-Apk)
+- [Sobre o Projeto](#sobre-o-projeto)
+- [Pré-requisitos](#-pré-requisitos)
+- [Sobre o App](#sobre-o-app)
+- [Screenshots](#screenshots)
+- [Dependencias usadas](#dependencias-usadas)
+- [Baixe o Apk](#baixe-o-apk)
 
 
 ### Sobre o Projeto
