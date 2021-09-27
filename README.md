@@ -4,17 +4,17 @@
 
 ![GitHub repo size](https://img.shields.io/github/repo-size/jaisonklemer/projeto-final-serasa)
 
-## Foto inicial do App
-
-
+<p>
+  <img src="https://github.com/jaisonklemer/projeto-final-serasa/blob/master/images/Mockup%20doctor%20png.png" />
+</p>
 
 ## Sumario
-- [Sobre o Projeto](#Sobre-o-Projeto)
-- [Pré-requisitos](#💻-Pré-requisitos)
-- [Sobre o App](#Sobre-o-App)
-- [Screenshots](Screenshots)
-- [Dependencias usadas](Dependencias-usadas)
-- [Baixe o Apk](Baixe-o-Apk)
+- [Sobre o Projeto](#sobre-o-projeto)
+- [Pré-requisitos](#-pré-requisitos)
+- [Sobre o App](#sobre-o-app)
+- [Screenshots](#screenshots)
+- [Dependencias usadas](#dependencias-usadas)
+- [Baixe o Apk](#baixe-o-apk)
 
 
 ### Sobre o Projeto
@@ -25,6 +25,9 @@
 Antes de começar, verifique se você atendeu aos seguintes requisitos:
 <!---Estes são apenas requisitos de exemplo. Adicionar, duplicar ou remover conforme necessário--->
 * Baixar AndroidStudio: [AQUI](https://developer.android.com/studio)
+* Clonar o repositoruo: ```git clone https://github.com/jaisonklemer/projeto-final-serasa.git```
+* Sincronizar o Gradle
+* Executar o App
 
 ## Sobre o App
 - Tem o foco em facilitar a vida tanto dos doutores quanto dos pacientes.
