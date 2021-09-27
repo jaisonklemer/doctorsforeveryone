@@ -20,6 +20,10 @@ import com.klemer.doctorsforeveryone.utils.hideKeyboard
 import com.klemer.doctorsforeveryone.utils.replaceView
 import com.klemer.doctorsforeveryone.view_model.SignInViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import android.text.method.PasswordTransformationMethod
+
+
+
 
 @AndroidEntryPoint
 class SignInFragment : Fragment(R.layout.sign_in_fragment) {
@@ -79,23 +83,17 @@ class SignInFragment : Fragment(R.layout.sign_in_fragment) {
         //button SignIn
         binding.buttonSignIn.setOnClickListener {
             if (checkForInternet(requireContext())) {
-                if (binding.editTextInputEmailSignIn.text.isNullOrEmpty() ||
-                    binding.editTextInputPasswordSignIn.text.isNullOrEmpty()
-                ) {
-                    binding.editTextInputEmailSignIn.setError("Preencha o email")
-                    binding.editTextInputPasswordSignIn.setError("Preencha a senha")
+                if (binding.editTextInputEmailSignIn.text.isNullOrEmpty()) {
+                    binding.editTextInputEmailSignIn.setError("Informe um email válido")
+                } else if(binding.editTextInputPasswordSignIn.text?.length!! < 6){
+                    binding.editTextInputPasswordSignIn.setError("A senha deve conter no mínimo 6 caracteres")
                 } else {
                     binding.progressBar.visibility = View.VISIBLE
                     loginUser()
                     requireActivity().hideKeyboard()
                 }
             } else {
-                Snackbar.make(
-                    requireView(),
-                    getString(R.string.no_connection),
-                    Snackbar.LENGTH_LONG
-                )
-                    .show()
+                Snackbar.make(requireView(), getString(R.string.no_connection), Snackbar.LENGTH_LONG).show()
             }
         }
 

@@ -56,6 +56,7 @@
     <string name="select_hour_and_date_warning">Selecione uma data e um horário</string>
     <string name="netwatch_target_ping_server_ip_add">8.8.8.8</string>
     <string name="netwatch_lost_connection">Sem conexão com a internet</string>
+    <string name="warning_password">A senha deve conter no mínimo 6 caracteres.</string>
 
 
     <!--    Firebase Errors-->

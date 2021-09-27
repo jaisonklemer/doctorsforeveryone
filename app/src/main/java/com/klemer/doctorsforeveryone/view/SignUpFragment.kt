@@ -67,11 +67,20 @@ class SignUpFragment : Fragment(R.layout.sign_up_fragment) {
         binding.buttonSignUp.setOnClickListener {
             requireActivity().hideKeyboard()
             if (checkForInternet(requireContext())) {
-                registerUser()
+                if (binding.editTextInputEmailSignUp.text.isNullOrEmpty()){
+                    binding.editTextInputEmailSignUp.setError("Informe um email válido")
+                }else if (binding.editTextInputPasswordSignUp.text?.length!! < 6){
+                    binding.editTextInputPasswordSignUp.setError("A senha deve conter no mínimo 6 caracteres")
+                }else{
+                    binding.progressBarSignUp.visibility = View.VISIBLE
+                    registerUser()
+                    requireActivity().hideKeyboard()
+                }
             } else {
-                Snackbar.make(requireView(), "Sem conexao com a internet!", Snackbar.LENGTH_LONG)
+                Snackbar.make(requireView(),getString(R.string.no_connection), Snackbar.LENGTH_LONG)
                     .show()
             }
+
         }
         binding.imageViewArrowBack.setOnClickListener {
             requireActivity().replaceView(SignInFragment.newInstance(), R.id.containerStart)
@@ -84,10 +93,8 @@ class SignUpFragment : Fragment(R.layout.sign_up_fragment) {
         if (email.isNotEmpty() && pass.isNotEmpty()) {
             binding.progressBarSignUp.visibility = VISIBLE
             viewModel.signUpWithEmailAndPassword(email, pass)
-        } else {
-            binding.editTextInputEmailSignUp.setError("Preencha o email")
-            binding.editTextInputPasswordSignUp.setError("Preencha se senha")
         }
     }
+
 
 }
