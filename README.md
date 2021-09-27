@@ -12,7 +12,8 @@
 - [Sobre o Projeto](#sobre-o-projeto)
 - [Pré-requisitos](#-pré-requisitos)
 - [Sobre o App](#sobre-o-app)
-- [Screenshots](#screenshots)
+- [Passo a Passo](#passo-a-passo)
+- [Screenshots](#mockup)
 - [Dependencias usadas](#dependencias-usadas)
 - [Baixe o Apk](#baixe-o-apk)
 
@@ -24,17 +25,32 @@
 
 Antes de começar, verifique se você atendeu aos seguintes requisitos:
 <!---Estes são apenas requisitos de exemplo. Adicionar, duplicar ou remover conforme necessário--->
-* Baixar AndroidStudio: [AQUI](https://developer.android.com/studio)
-* Clonar o repositoruo: ```git clone https://github.com/jaisonklemer/projeto-final-serasa.git```
-* Sincronizar o Gradle
-* Executar o App
+* Baixar Android Studio: [AQUI](https://developer.android.com/studio)
+* Clonar o repositório: ```git clone https://github.com/jaisonklemer/projeto-final-serasa.git```
+* Abrir Android Studio.
+* Abrir o repositório onde está o projeto.
+* Sincronizar o Gradle.
+* Executar o App.
 
 ## Sobre o App
-- Tem o foco em facilitar a vida tanto dos doutores quanto dos pacientes.
-- Através do mesmo é possivel agendar consultas com qualquer doutor disponivel na plataforma.
+- O objetivo principal do DoctorsForEveryone é a agilidade para agendar uma consulta com algum especialista na área da saúde.
+- Com praticidade e rapidez, é possível selecionar o especialista desejado, escolher uma data e horário disponível e realizar o agendamento. 
+- É possível também acompanhar cada agendamento e até mesmo cancelar.
 
-## Screenshots
+## Passo-a-Passo
+1. Criar conta ou logar caso já exista.
+2. Completar os dados de cadastro no perfil.
+3. Pode selecionar um médico de prefenrência e filtrar por especialidade.
+4. Depois de escolhido o médico é possivel escolher data e hora para a consulta.
+5. É possível verificar quais consultas já foram agendadas/canceladas/concluídas.
+6. Temos também uma aba de notícias sobre a saúde.
 
+## Mockup
+<p>
+  <img src="https://github.com/jaisonklemer/projeto-final-serasa/blob/master/images/Page1.png" />
+  <img src="https://github.com/jaisonklemer/projeto-final-serasa/blob/master/images/Page2.png" />
+  <img src="https://github.com/jaisonklemer/projeto-final-serasa/blob/master/images/Page3.png" />
+</p>
 
 ## Dependencias usadas
 ```sh
@@ -74,9 +90,24 @@ Antes de começar, verifique se você atendeu aos seguintes requisitos:
 
     //Recycler view for using concat adapter
     implementation "androidx.recyclerview:recyclerview:1.2.1"
+    
+    //Lottie animation
+    def lottieVersion = "3.4.0"
+    implementation "com.airbnb.android:lottie:$lottieVersion"
+
+    //Hilt
+    implementation "com.google.dagger:hilt-android:2.37"
+    kapt "com.google.dagger:hilt-android-compiler:2.37"
+
+    //Network Watch
+    implementation 'com.github.draxdave:netWatch:0.d.21'
 ```
 ## Baixe o Apk
-- Apk: [AQUI](link.com)
+- Apk: [AQUI](https://drive.google.com/file/d/14bR_dVVt-05-QceZyA1Ppe27cMPmvBw5/view?usp=sharing)
 
 ### Implementações futuras 
-- 
+- Push para Notificações.
+- Favoritar doutores.
+- Tela de favoritos.
+- Tela para cadastrar especialidades e doutores.
+- Fazer um app de gerenciamento voltado para os doutores.
