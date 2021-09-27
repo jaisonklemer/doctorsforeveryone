@@ -8,15 +8,15 @@
   <img src="https://github.com/jaisonklemer/projeto-final-serasa/blob/master/images/Mockup%20doctor%20png.png" />
 </p>
 
-## Sumario
+## Sumário
 - [Sobre o Projeto](#sobre-o-projeto)
 - [Pré-requisitos](#-pré-requisitos)
 - [Sobre o App](#sobre-o-app)
 - [Passo a Passo](#passo-a-passo)
-- [Screenshots](#mockup)
-- [Dependencias usadas](#dependencias-usadas)
+- [Mockup](#mockup)
+- [Dependências usadas](#dependências-usadas)
 - [Baixe o Apk](#baixe-o-apk)
-
+- [Implementações futuras](#implementações-futuras)
 
 ### Sobre o Projeto
 - Projeto final para o curso de Codigo para Todxs Versao Mobile - Serasa
@@ -52,7 +52,7 @@ Antes de começar, verifique se você atendeu aos seguintes requisitos:
   <img src="https://github.com/jaisonklemer/projeto-final-serasa/blob/master/images/Page3.png" />
 </p>
 
-## Dependencias usadas
+## Dependências usadas
 ```sh
     //Retrofit dependencies
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
@@ -105,7 +105,7 @@ Antes de começar, verifique se você atendeu aos seguintes requisitos:
 ## Baixe o Apk
 - Apk: [AQUI](https://drive.google.com/file/d/14bR_dVVt-05-QceZyA1Ppe27cMPmvBw5/view?usp=sharing)
 
-### Implementações futuras 
+### Implementações futuras
 - Push para Notificações.
 - Favoritar doutores.
 - Tela de favoritos.
