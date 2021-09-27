@@ -1,13 +1,8 @@
 package com.klemer.doctorsforeveryone.repository
 
-import com.google.firebase.firestore.DocumentReference
-import com.google.firebase.firestore.DocumentSnapshot
-import com.google.firebase.firestore.Query
-import com.google.firebase.firestore.QuerySnapshot
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.klemer.doctorsforeveryone.model.Doctor
-import kotlinx.coroutines.tasks.await
 
 class DoctorRepository {
 
@@ -16,39 +11,88 @@ class DoctorRepository {
     private val database = Firebase.firestore
 
 
-    suspend fun insertDoctor(doctor: Doctor): DocumentReference {
-        return database.collection(DOCTOR_COLLECTION).add(doctor).await()
+    fun insertDoctor(doctor: Doctor, callback: (Boolean, String?) -> Unit) {
+        val task = database.collection(DOCTOR_COLLECTION).add(doctor)
+
+        task.addOnFailureListener {
+            callback(false, it.localizedMessage)
+        }
+        task.addOnSuccessListener {
+            callback(true, null)
+        }
     }
 
-    suspend fun getDoctorById(doctorId: String): DocumentSnapshot {
-        return database.collection(DOCTOR_COLLECTION).document(doctorId).get().await()
+    fun getDoctorById(doctorId: String, callback: (Doctor?, String?) -> Unit) {
+        val task = database.collection(DOCTOR_COLLECTION).document(doctorId).get()
+
+        task.addOnFailureListener {
+            callback(null, it.localizedMessage)
+        }
+        task.addOnSuccessListener {
+            callback(Doctor.fromDocument(it), null)
+        }
     }
 
-    suspend fun getDoctorByCategory(doctorCategory: String): QuerySnapshot {
-        return database.collection(DOCTOR_COLLECTION).whereEqualTo("category", doctorCategory)
-            .orderBy("name").get().await()
+    fun getDoctorByCategory(doctorCategory: String, callback: (List<Doctor>?, String?) -> Unit) {
+        val task =
+            database.collection(DOCTOR_COLLECTION).whereEqualTo("category", doctorCategory).get()
+
+        task.addOnFailureListener {
+            callback(null, it.localizedMessage)
+        }
+
+        task.addOnSuccessListener {
+            if (it.documents.isNotEmpty()) {
+                val doctors = mutableListOf<Doctor>()
+                it.documents.forEach { doctor ->
+                    doctors.add(Doctor.fromDocument(doctor))
+                }
+                callback(doctors, null)
+            } else {
+                callback(null, null)
+            }
+        }
     }
 
-    suspend fun getAllDoctors(): QuerySnapshot {
-        return database.collection(DOCTOR_COLLECTION).orderBy("name").get().await()
+    fun getAllDoctors(callback: (List<Doctor>?, String?) -> Unit) {
+        val task = database.collection(DOCTOR_COLLECTION).get()
+
+        task.addOnFailureListener {
+            callback(null, it.localizedMessage)
+        }
+
+        task.addOnSuccessListener { listDocuments ->
+            val doctors = mutableListOf<Doctor>()
+
+            listDocuments.forEach { document ->
+                doctors.add(Doctor.fromDocument(document))
+            }
+            callback(doctors, null)
+        }
     }
 
-    suspend fun getDoctorsWithCateogry(doctorName: String, doctorCategory: String): QuerySnapshot {
-        return database.collection(DOCTOR_COLLECTION)
-            .whereEqualTo("category", doctorCategory)
-            .orderBy("name")
-            .startAt(doctorName)
-            .endAt(doctorName + '\uf8ff')
-            .get().await()
-    }
 
 
-    suspend fun getDoctorByName(doctorName: String): QuerySnapshot {
-        return database.collection(DOCTOR_COLLECTION)
-            .orderBy("name")
-            .startAt(doctorName)
-            .endAt(doctorName + '\uf8ff').get().await()
+    fun getDoctorByName(doctorName: String, callback: (List<Doctor>?, String?) -> Unit) {
 
+        val task =
+            database.collection(DOCTOR_COLLECTION).orderBy("name").startAt(doctorName.uppercase()).endAt(doctorName+'\uf8ff').get()
+
+        task.addOnFailureListener {
+            callback(null, it.localizedMessage)
+        }
+
+        task.addOnSuccessListener {
+            if (it.documents.isNotEmpty()) {
+                val doctors = mutableListOf<Doctor>()
+                it.documents.forEach { doctor ->
+                    doctors.add(Doctor.fromDocument(doctor))
+                }
+                callback(doctors, null)
+            } else {
+                callback(null, null)
+            }
+        }
     }
 
 }

@@ -81,8 +81,7 @@
             android:id="@+id/profileAge"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:enabled="false"
-            android:inputType="number" />
+            android:enabled="false" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -100,8 +99,7 @@
             android:id="@+id/profileWeight"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:enabled="false"
-            android:inputType="number" />
+            android:enabled="false" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -120,8 +118,7 @@
             android:id="@+id/profileHeight"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:enabled="false"
-            android:inputType="number" />
+            android:enabled="false" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -156,7 +153,7 @@
 
     <Button
         android:id="@+id/buttonEdit"
-        android:layout_width="wrap_content"
+        android:layout_width="@dimen/size_0"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/size_20"
         android:text="@string/Edit"
@@ -171,19 +168,20 @@
         android:layout_margin="@dimen/size_20"
         android:enabled="false"
         android:text="@string/Save"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/buttonLogOut"
         app:layout_constraintStart_toEndOf="@+id/buttonEdit"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
 
-
-    <ImageView
+    <Button
         android:id="@+id/buttonLogOut"
-        android:layout_width="wrap_content"
+        android:layout_width="@dimen/size_0"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/size_20"
-        android:src="@drawable/ic_logout"
+        android:text="@string/sair"
+        app:layout_constraintStart_toEndOf="@id/buttonSave"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

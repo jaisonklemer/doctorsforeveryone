@@ -9,8 +9,7 @@ data class User(
     var age: String,
     var weight: String,
     var height: String,
-    var gender: String,
-    var profile_completed: Boolean
+    var gender: String
 ) {
     companion object {
         fun fromDocument(document: DocumentSnapshot): User {
@@ -21,8 +20,7 @@ data class User(
                 age = document["age"] as String,
                 weight = document["weight"] as String,
                 height = document["height"] as String,
-                gender = document["gender"] as String,
-                profile_completed = document["profile_completed"] as Boolean
+                gender = document["gender"] as String
             )
         }
     }

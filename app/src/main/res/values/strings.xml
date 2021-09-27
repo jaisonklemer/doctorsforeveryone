@@ -1,26 +1,25 @@
 <resources>
     <string name="app_name">Doctors For Everyone</string>
-    <string name="email_exemple_com">Email</string>
-    <string name="password">Senha</string>
-    <string name="sign_in">Entrar</string>
+    <string name="email_exemple_com">email@exemple.com</string>
+    <string name="password">password</string>
+    <string name="sign_in">Sign In</string>
     <string name="create_account">CRIAR CONTA</string>
-    <string name="try_again">TENTAR NOVAMENTE</string>
     <string name="signInGoogle">Entre com sua conta Google</string>
     <string name="sign_up">Sign Up</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <string name="home">Home</string>
-    <string name="schedules">Consultas</string>
+    <string name="schedules">Agendamentos</string>
     <string name="health">Saúde</string>
     <string name="profile">Perfil</string>
     <string name="admin">Admin</string>
     <string name="subtitle">Encontre os melhores doutores aqui!</string>
-    <string name="placeholder">Busque doutores</string>
+    <string name="placeholder">Busque doutores:</string>
     <string name="placeholder_name">Nome completo</string>
     <string name="placeholder_age">Idade</string>
-    <string name="placeholder_weight">Peso (Kg)</string>
-    <string name="placeholder_height">Altura (cm)</string>
+    <string name="placeholder_weight">Peso</string>
+    <string name="placeholder_height">Altura</string>
     <string name="search_specialty">Pesquise por especialidade:</string>
     <string name="update_profile">Atualize seus dados</string>
     <string name="feminine">Feminino</string>
@@ -31,47 +30,11 @@
     <string name="sexo">Sexo</string>
     <string name="descriptionDoctor">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s</string>
     <string name="appointment">Agendar</string>
+    <string name="agendar">Agendar</string>
     <string name="selecione_um_hor_rio">Selecione um horário</string>
-    <string name="escolha_um_dia">Escolha uma data</string>
+    <string name="escolha_um_dia">Escolha um dia</string>
     <string name="sair">Sair</string>
-    <string name="yes">Sim</string>
     <string name="cancelar">Cancelar</string>
-    <string name="hour">Hora</string>
-    <string name="no">Não</string>
-    <string name="date">Data</string>
-    <string name="cancel">CANCELAR</string>
-    <string name="canceled">Cancelado</string>
-    <string name="status">Agendado</string>
-    <string name="agendada">Agendadas</string>
-    <string name="cancelada">Canceladas</string>
-    <string name="concluida">Concluídas</string>
-    <string name="no_connection">Sem conexão com a internet</string>
-    <string name="noticias">Notícias de Saúde</string>
-    <string name="toque">Toque para expandir</string>
-    <string name="appointment_warning_alert">Você já possui um agendamento com o dia e horário selecionado. Você deve cancelá-lo antes de marcar outro agendamento</string>
-    <string name="understand_label">Entendi</string>
-    <string name="warning">Aviso</string>
-    <string name="completed">Concluído</string>
-    <string name="appointment_success_label">Agendamento realizado com sucesso!</string>
-    <string name="select_hour_and_date_warning">Selecione uma data e um horário</string>
-    <string name="netwatch_target_ping_server_ip_add">8.8.8.8</string>
-    <string name="netwatch_lost_connection">Sem conexão com a internet</string>
-    <string name="warning_password">A senha deve conter no mínimo 6 caracteres.</string>
-
-
-    <!--    Firebase Errors-->
-    <string name="error_timeout">Tempo Excedido</string>
-    <string name="error_email_already_in_use">Email já está sendo utilizado</string>
-    <string name="error_invalid_email">Forneca um email válido</string>
-    <string name="error_wrong_password">Senha Incorreta</string>
-    <string name="error_weak_password">A senha informada é muito fraca. Forneça uma senha com pelo menos 6 caracteres</string>
-    <string name="error_invalid_password">A senha é inválida, precisa ter pelo menos 6 caracteres</string>
-    <string name="profile_must_be_completed">Você deve completar o seu cadastro antes de continuar!</string>
-    <string name="complete">Completar</string>
-    <string name="no_doctor_found">Nenhum especialista encontrado!</string>
-    <string name="an_error_has_occurred">Ocorreu um erro. Tente novamente</string>
-    <!--    Firebase Errors-->
-
 
     <!-- TODO: Token Google-->
     <!--    <string name="default_web_client_id">886802055145-ov8mfaqmjiilp8c6jtptdh0mciue8c97.apps.googleusercontent.com</string>-->

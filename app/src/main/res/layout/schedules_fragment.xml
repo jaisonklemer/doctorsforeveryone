@@ -1,30 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".view.SchedulesFragment">
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/cardView2"
-        android:layout_width="@dimen/size_35"
-        android:layout_height="@dimen/size_35"
-        android:layout_margin="@dimen/size_18"
-        android:elevation="@dimen/size_4"
-        app:cardCornerRadius="@dimen/size_17"
+        android:id="@+id/cardView3"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:elevation="8dp"
+        app:cardCornerRadius="@dimen/size_20"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/greenLight">
+            android:background="#027A7A">
 
             <ImageView
-                android:id="@+id/imageUser"
-                android:layout_width="@dimen/size_20"
-                android:layout_height="@dimen/size_20"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
                 android:src="@drawable/ic_icon_schedule"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -35,90 +34,14 @@
 
     </androidx.cardview.widget.CardView>
 
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/size_12"
-        android:text="@string/schedules"
-        android:textColor="@color/greenLight"
-        android:textSize="@dimen/size_15"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/cardView2"
-        app:layout_constraintStart_toEndOf="@+id/cardView2"
-        app:layout_constraintTop_toTopOf="@+id/cardView2" />
-
-    <com.google.android.material.chip.ChipGroup
-        android:id="@+id/chipGroup"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/size_10"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardView2"
-        app:selectionRequired="true"
-        app:singleSelection="true">
-
-        <com.google.android.material.chip.Chip
-            android:id="@+id/chipAgendada"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:checked="true"
-            android:text="@string/agendada"
-            android:textAlignment="center" />
-
-        <com.google.android.material.chip.Chip
-            android:id="@+id/chipCancelada"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/size_10"
-            android:layout_marginRight="@dimen/size_10"
-            android:text="@string/cancelada"
-            android:textAlignment="center" />
-
-        <com.google.android.material.chip.Chip
-            android:id="@+id/chipConcluida"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/concluida"
-            android:textAlignment="center" />
-
-    </com.google.android.material.chip.ChipGroup>
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewAppointment"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="@dimen/size_5"
-        android:overScrollMode="never"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/chipGroup"
-        tools:listitem="@layout/item_appointment" />
-
-    <!--    <ProgressBar-->
-    <!--        android:id="@+id/progressBarAppointment"-->
-    <!--        android:layout_width="@dimen/size_70"-->
-    <!--        android:layout_height="@dimen/size_70"-->
-    <!--        android:elevation="@dimen/size_4"-->
-    <!--        android:visibility="visible"-->
-    <!--        app:layout_constraintEnd_toEndOf="parent"-->
-    <!--        app:layout_constraintStart_toStartOf="parent"-->
-    <!--        app:layout_constraintTop_toTopOf="parent"-->
-    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
-    <!--        />-->
-
-    <com.airbnb.lottie.LottieAnimationView
-        android:id="@+id/lottieAnimationView"
-        android:layout_width="@dimen/size_150"
-        android:layout_height="@dimen/size_150"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/chipGroup"
-        app:lottie_autoPlay="true"
-        app:lottie_loop="true"
-        app:lottie_rawRes="@raw/animation_splash" />
+        app:layout_constraintTop_toBottomOf="@+id/cardView3"
+        tools:listitem="@layout/item_appointment"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

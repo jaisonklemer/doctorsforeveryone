@@ -2,24 +2,19 @@ package com.klemer.doctorsforeveryone.view
 
 import android.content.Intent
 import android.net.Uri
-import android.os.Bundle
-import android.view.View
-import android.view.View.INVISIBLE
-import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import android.os.Bundle
+import androidx.fragment.app.Fragment
+import android.view.View
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.klemer.doctorsforeveryone.R
 import com.klemer.doctorsforeveryone.adapter.HealthNewsAdapter
 import com.klemer.doctorsforeveryone.databinding.HealthFragmentBinding
-import com.klemer.doctorsforeveryone.interfaces.NetworkConnectionInterface
 import com.klemer.doctorsforeveryone.model.HealthNewsResponse
-import com.klemer.doctorsforeveryone.utils.checkForInternet
 import com.klemer.doctorsforeveryone.view_model.HealthViewModel
-import dagger.hilt.android.AndroidEntryPoint
 
-@AndroidEntryPoint
-class HealthFragment : Fragment(R.layout.health_fragment), NetworkConnectionInterface {
+class HealthFragment : Fragment(R.layout.health_fragment) {
 
     companion object {
         fun newInstance() = HealthFragment()
@@ -27,13 +22,11 @@ class HealthFragment : Fragment(R.layout.health_fragment), NetworkConnectionInte
 
     private lateinit var viewModel: HealthViewModel
     private lateinit var binding: HealthFragmentBinding
-
     private val adapter = HealthNewsAdapter { newsUrl ->
         startBrowser(newsUrl)
     }
 
     private val newsObserver = Observer<HealthNewsResponse> {
-        binding.lottieAnimationView.visibility = INVISIBLE
         adapter.submitList(it.articles)
     }
 
@@ -43,20 +36,13 @@ class HealthFragment : Fragment(R.layout.health_fragment), NetworkConnectionInte
         binding = HealthFragmentBinding.bind(view)
 
         setupObservers()
+
+        viewModel.getNews()
         setupRecyclerView()
-
     }
-
-    override fun onResume() {
-        super.onResume()
-
-        if (checkForInternet(requireContext()))
-            viewModel.getNews()
-    }
-
 
     private fun setupObservers() {
-        viewModel.newsResponse.observe(viewLifecycleOwner, newsObserver)
+        viewModel.news.observe(viewLifecycleOwner, newsObserver)
     }
 
     private fun setupRecyclerView() {
@@ -67,11 +53,6 @@ class HealthFragment : Fragment(R.layout.health_fragment), NetworkConnectionInte
     private fun startBrowser(url: String) {
         val browser = Intent(Intent.ACTION_VIEW, Uri.parse(url))
         startActivity(browser)
-    }
-
-    override fun isConnected(connected: Boolean) {
-        if (connected)
-            viewModel.getNews()
     }
 
 }

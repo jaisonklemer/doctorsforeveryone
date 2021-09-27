@@ -1,38 +1,22 @@
 package com.klemer.doctorsforeveryone.utils
 
-import android.annotation.SuppressLint
 import android.app.Activity
-import android.app.AlertDialog
 import android.content.Context
-import android.graphics.Color
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Build
 import android.view.View
 import android.view.inputmethod.InputMethodManager
-import androidx.annotation.DrawableRes
 import androidx.annotation.IdRes
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
-import com.google.android.material.snackbar.Snackbar
 import com.klemer.doctorsforeveryone.R
+import androidx.core.content.ContextCompat.getSystemService as getSystemService
 
-fun FragmentActivity.replaceView(
-    fragment: Fragment,
-    @IdRes containerId: Int = R.id.container,
-    addBackStack: Boolean = false
-) {
-    if (addBackStack) {
-        supportFragmentManager.beginTransaction()
-            .replace(containerId, fragment)
-            .addToBackStack(null)
-            .commit()
-    } else {
-        supportFragmentManager.beginTransaction()
-            .replace(containerId, fragment)
-            .commit()
-    }
-
+fun FragmentActivity.replaceView(fragment: Fragment, @IdRes containerId: Int = R.id.container) {
+    supportFragmentManager.beginTransaction()
+        .replace(containerId, fragment)
+        .commitNow()
 }
 
 fun FragmentActivity.hideKeyboard() {
@@ -44,7 +28,7 @@ fun Context.hideKeyboard(view: View) {
     inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
 }
 
-fun checkForInternet(context: Context): Boolean {
+fun FragmentActivity.checkForInternet(context: Context): Boolean {
     val connectivityManager =
         context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
 
@@ -67,63 +51,4 @@ fun checkForInternet(context: Context): Boolean {
         @Suppress("DEPRECATION")
         return networkInfo.isConnected
     }
-}
-
-@SuppressLint("ResourceAsColor")
-fun configSnackbar(
-    view: View,
-    message: String,
-    duration: Int = Snackbar.LENGTH_SHORT,
-    action: String? = "Fechar",
-    actionCallback: ((Boolean) -> Unit)? = null
-) {
-    val snackbar = Snackbar.make(view, message, duration)
-        .setTextColor(Color.WHITE)
-        .setBackgroundTint(view.context.resources.getColor(R.color.greenDark))
-
-    if (action != null && actionCallback != null) {
-        snackbar.setAction(action) { actionCallback(true) }
-    }
-    snackbar.anchorView = view
-    snackbar.show()
-}
-
-fun showAlertDialog(
-    context: Context,
-    title: String,
-    message: String,
-    positiveText: String,
-    negativeText: String?,
-    @DrawableRes icon: Int?,
-    callback: (Boolean, Boolean) -> Unit
-) {
-
-    val dialog = AlertDialog.Builder(context)
-    dialog.setTitle(title)
-    dialog.setMessage(message)
-    dialog.setPositiveButton(positiveText) { _, _ ->
-        callback(true, false)
-    }
-
-    if (negativeText != null) {
-        dialog.setNegativeButton(negativeText) { _, _ ->
-            callback(false, true)
-        }
-    }
-
-    if (icon != null) {
-        dialog.setIcon(icon)
-    }
-
-    dialog.create().show()
-}
-
-fun Context.getFirebaseError(name: String): String {
-    val errorCode = name.replace("-", "_").lowercase()
-    return try {
-        getString(resources.getIdentifier(errorCode, "string", packageName))
-    } catch (e: Exception) {
-        getString(R.string.an_error_has_occurred)
-    }
-
 }

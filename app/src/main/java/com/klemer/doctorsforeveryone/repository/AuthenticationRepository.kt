@@ -9,18 +9,12 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
-import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.klemer.doctorsforeveryone.R
-import com.klemer.doctorsforeveryone.model.User
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.tasks.await
 
 class AuthenticationRepository {
 
@@ -28,14 +22,36 @@ class AuthenticationRepository {
     private val database = Firebase.firestore
     private val userRepository = UserRepository()
 
-    suspend fun signInWithEmailAndPassword(email: String, password: String): AuthResult {
-        return auth.signInWithEmailAndPassword(email, password).await()
+    fun signInWithEmailAndPassword(
+        email: String,
+        password: String,
+        callback: (FirebaseUser?, String?) -> Unit,
+    ) {
+        val task = auth.signInWithEmailAndPassword(email, password)
+
+        task.addOnSuccessListener { authResult ->
+            callback(authResult.user, null)
+        }
+        task.addOnFailureListener {
+            callback(null, it.localizedMessage)
+        }
     }
 
-    suspend fun signUpWithEmailAndPassword(email: String, password: String): AuthResult {
-        val authResult = auth.createUserWithEmailAndPassword(email, password).await()
-        authResult.user?.let { this.createUserAtCollection(it) }
-        return authResult
+    fun signUpWithEmailAndPassword(
+        email: String,
+        password: String,
+        callback: (FirebaseUser?, String?) -> Unit,
+    ) {
+        val task = auth.createUserWithEmailAndPassword(email, password)
+
+        task.addOnSuccessListener { authResult ->
+            authResult.user?.sendEmailVerification()
+            authResult.user?.let { this.createUserAtCollection(it) }
+            callback(authResult.user, null)
+        }
+        task.addOnFailureListener { failureError ->
+            callback(null, failureError.localizedMessage)
+        }
     }
 
     fun signInGoogleOnActivityResult(
@@ -99,19 +115,13 @@ class AuthenticationRepository {
                     println("signInWithCredential:success")
                     val user = auth.currentUser
                     user?.let { firebaseUser ->
-                        CoroutineScope(Dispatchers.Main).launch {
-                            try {
-                                val result = userRepository.getUser(firebaseUser.uid)
-                                if (!result.exists()) {
-                                    createUserAtCollection(firebaseUser)
-                                }
-                                callback(user, null)
-                            } catch (e: Exception) {
-                                e.printStackTrace()
-                                println(e.localizedMessage)
+                        userRepository.getUser(firebaseUser.uid) { user ->
+                            if (user == null) {
+                                this.createUserAtCollection(firebaseUser)
                             }
                         }
                     }
+                    callback(user, null)
                 } else {
                     println("signInWithCredential:failure ${task.exception}")
                     callback(null, task.exception.toString())
@@ -127,8 +137,7 @@ class AuthenticationRepository {
             "age" to "",
             "weight" to "",
             "height" to "",
-            "gender" to "",
-            "profile_completed" to false
+            "gender" to ""
         )
 
         database.collection(collection).document(user.uid).set(data)
