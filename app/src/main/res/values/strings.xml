@@ -68,6 +68,7 @@
     <string name="profile_must_be_completed">Você deve completar o seu cadastro antes de continuar!</string>
     <string name="complete">Completar</string>
     <string name="no_doctor_found">Nenhum especialista encontrado!</string>
+    <string name="an_error_has_occurred">Ocorreu um erro. Tente novamente</string>
     <!--    Firebase Errors-->
 
 

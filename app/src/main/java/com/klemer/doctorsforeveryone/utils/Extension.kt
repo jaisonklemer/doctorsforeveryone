@@ -123,7 +123,7 @@ fun Context.getFirebaseError(name: String): String {
     return try {
         getString(resources.getIdentifier(errorCode, "string", packageName))
     } catch (e: Exception) {
-        "Ocorreu um erro. Tente novamente"
+        getString(R.string.an_error_has_occurred)
     }
 
 }
