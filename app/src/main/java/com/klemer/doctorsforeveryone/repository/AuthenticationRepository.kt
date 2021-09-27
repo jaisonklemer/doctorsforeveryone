@@ -9,10 +9,12 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
+import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
+import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.klemer.doctorsforeveryone.R
@@ -22,14 +24,13 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 
-class AuthenticationRepository {
-
-    private val auth = FirebaseAuth.getInstance()
-    private val database = Firebase.firestore
-    private val userRepository = UserRepository()
-
-    suspend fun signInWithEmailAndPassword(email: String, password: String): AuthResult {
-        return auth.signInWithEmailAndPassword(email, password).await()
+class AuthenticationRepository(
+    private val auth: FirebaseAuth = FirebaseAuth.getInstance(),
+    private val database: FirebaseFirestore = Firebase.firestore,
+    private val userRepository: UserRepository = UserRepository()
+) {
+    fun signInWithEmailAndPassword(email: String, password: String): Task<AuthResult> {
+        return auth.signInWithEmailAndPassword(email, password)
     }
 
     suspend fun signUpWithEmailAndPassword(email: String, password: String): AuthResult {

@@ -16,6 +16,7 @@ import com.klemer.doctorsforeveryone.utils.getFirebaseError
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
 
 @HiltViewModel
@@ -32,7 +33,7 @@ class SignInViewModel @Inject constructor(@ApplicationContext val context: Conte
     fun signInWithEmailAndPassword(email: String, password: String) {
         viewModelScope.launch {
             try {
-                val authResult = repository.signInWithEmailAndPassword(email, password)
+                val authResult = repository.signInWithEmailAndPassword(email, password).await()
                 loginUser.value = authResult.user
 
             } catch (e: FirebaseAuthException) {
