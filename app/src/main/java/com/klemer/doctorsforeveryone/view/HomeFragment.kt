@@ -4,7 +4,8 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
-import android.view.View.INVISIBLE
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -39,22 +40,26 @@ class HomeFragment : Fragment(R.layout.home_fragment) {
     private lateinit var viewModelDoctor: DoctorViewModel
     private lateinit var binding: HomeFragmentBinding
     private lateinit var currentUser: User
+    private lateinit var doctorsList: List<Doctor>
+    private lateinit var filteredDoctors: List<Doctor>
+
     private var searchCategory = String()
 
     private var adapterCategory = CategoryAdapter {
-        searchCategory = it.name
+        binding.headerFragment.includeSearch.searchDoctors.clearFocus()
+        binding.headerFragment.includeSearch.searchDoctors.setText("")
+
+        requireContext().hideKeyboard(requireView())
+
+        binding.lottieAnimationView.visibility = VISIBLE
+
         if (it.order.toInt() != 0) {
-            if (!binding.headerFragment.includeSearch.searchDoctors.text.isNullOrEmpty()) {
-                binding.headerFragment.includeSearch.searchDoctors.clearFocus()
-                binding.headerFragment.includeSearch.searchDoctors.setText("")
-            } else {
-                viewModelDoctor.fetchDoctorByCategory(it.name)
-            }
+            searchCategory = it.name
+            viewModelDoctor.fetchDoctorByCategory(it.name)
         } else {
+            searchCategory = ""
             viewModelDoctor.fetchDoctor()
         }
-
-        requireActivity().hideKeyboard()
     }
 
     private var adapterDoctor = DoctorAdapter {
@@ -70,14 +75,15 @@ class HomeFragment : Fragment(R.layout.home_fragment) {
     }
 
     private val observerDoctorGetALL = Observer<List<Doctor>?> {
-        binding.lottieAnimationView.visibility = INVISIBLE
+        doctorsList = it
+
+        binding.lottieAnimationView.visibility = GONE
         if (!it.isNullOrEmpty()) {
             adapterDoctor.refresh(it)
         } else {
             adapterDoctor.clear()
             val view =
                 (requireActivity() as MainActivity).findViewById<BottomNavigationView>(R.id.bottomNavigation)
-            requireActivity().hideKeyboard()
             configSnackbar(view, getString(R.string.no_doctor_found))
         }
     }
@@ -85,8 +91,7 @@ class HomeFragment : Fragment(R.layout.home_fragment) {
     private val observerError = Observer<String> {
         val view =
             (requireActivity() as MainActivity).findViewById<BottomNavigationView>(R.id.bottomNavigation)
-        requireActivity().hideKeyboard()
-        configSnackbar(view, "Nenhum especialista encontrado!", Snackbar.LENGTH_INDEFINITE)
+        configSnackbar(view, getString(R.string.no_doctor_found), Snackbar.LENGTH_INDEFINITE)
     }
 
     private val currentUserObserver = Observer<User> {
@@ -106,6 +111,7 @@ class HomeFragment : Fragment(R.layout.home_fragment) {
         loadComponents(view)
         setupOservers()
         executeComponents()
+        binding.headerFragment.includeSearch.searchDoctors.clearFocus()
     }
 
     private fun loadComponents(view2: View) {
@@ -142,22 +148,33 @@ class HomeFragment : Fragment(R.layout.home_fragment) {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
             }
 
-            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                p0?.let {
-                    if (it.length > 2) {
-                        if (searchCategory.isNullOrEmpty()) {
-                            viewModelDoctor.fetchDoctorByName(it.toString())
+            override fun onTextChanged(text: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                text?.let {
+                    if (it.length >= 2) {
+                        filteredDoctors = if (searchCategory.isEmpty()) {
+                            doctorsList.filter { doctor ->
+                                doctor.name.startsWith(it.toString(), true)
+                            }
                         } else {
-                            viewModelDoctor.fetchDoctorWithCategory(it.toString(), searchCategory)
+                            doctorsList.filter { doctor ->
+                                doctor.name.startsWith(
+                                    it.toString(),
+                                    true
+                                ) && doctor.category == searchCategory
+                            }
                         }
+
+                        if (filteredDoctors.isEmpty()) {
+                            binding.tvNoDoctorFound.visibility = VISIBLE
+                        } else {
+                            binding.tvNoDoctorFound.visibility = GONE
+                        }
+
+                        adapterDoctor.refresh(filteredDoctors)
+
                     } else if (it.isEmpty()) {
-                        if (!searchCategory.isNullOrEmpty()) {
-                            viewModelDoctor.fetchDoctorByCategory(searchCategory)
-                            requireActivity().hideKeyboard()
-                        } else {
-                            viewModelDoctor.fetchDoctor()
-                            requireActivity().hideKeyboard()
-                        }
+                        binding.tvNoDoctorFound.visibility = GONE
+                        adapterDoctor.refresh(doctorsList)
                     }
                 }
             }
@@ -168,7 +185,6 @@ class HomeFragment : Fragment(R.layout.home_fragment) {
     }
 
     private fun setupRecyclerViewCategory() = with(binding.include.recyclerViewCategory) {
-        //Lista de categorias
         adapter = adapterCategory
         layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)

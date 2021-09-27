@@ -12,6 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/size_5"
+        android:focusedByDefault="false"
         android:hint="@string/placeholder"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -20,21 +21,22 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/searchDoctors"
-            android:inputType="textCapSentences"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:imeOptions="actionSearch"
+            android:inputType="textCapSentences" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
 
-        <ImageView
-            android:id="@+id/idSearch"
-            android:layout_width="@dimen/size_25"
-            android:layout_height="@dimen/size_25"
-            android:layout_marginRight="@dimen/size_15"
-            android:src="@drawable/ic_lupa"
-            app:layout_constraintBottom_toBottomOf="@+id/textInputLayoutSearch"
-            app:layout_constraintEnd_toEndOf="@+id/textInputLayoutSearch"
-            app:layout_constraintTop_toTopOf="@+id/textInputLayoutSearch" />
+    <ImageView
+        android:id="@+id/idSearch"
+        android:layout_width="@dimen/size_25"
+        android:layout_height="@dimen/size_25"
+        android:layout_marginRight="@dimen/size_15"
+        android:src="@drawable/ic_lupa"
+        app:layout_constraintBottom_toBottomOf="@+id/textInputLayoutSearch"
+        app:layout_constraintEnd_toEndOf="@+id/textInputLayoutSearch"
+        app:layout_constraintTop_toTopOf="@+id/textInputLayoutSearch" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
