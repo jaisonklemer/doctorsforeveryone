@@ -7,7 +7,9 @@ import android.content.Context
 import android.graphics.Color
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
+import android.os.Binder
 import android.os.Build
+import android.renderscript.ScriptGroup
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import androidx.annotation.DrawableRes
@@ -16,6 +18,13 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import com.google.android.material.snackbar.Snackbar
 import com.klemer.doctorsforeveryone.R
+import com.klemer.doctorsforeveryone.databinding.ActivityMainBinding
+import com.klemer.doctorsforeveryone.view.HomeFragment
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+
 
 fun FragmentActivity.replaceView(
     fragment: Fragment,
@@ -25,15 +34,15 @@ fun FragmentActivity.replaceView(
     if (addBackStack) {
         supportFragmentManager.beginTransaction()
             .replace(containerId, fragment)
-            .addToBackStack(null)
+            .addToBackStack(fragment.javaClass.name)
             .commit()
     } else {
         supportFragmentManager.beginTransaction()
             .replace(containerId, fragment)
             .commit()
     }
-
 }
+
 
 fun FragmentActivity.hideKeyboard() {
     hideKeyboard(currentFocus ?: View(this))

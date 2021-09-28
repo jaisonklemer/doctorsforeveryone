@@ -55,11 +55,22 @@ class SchedulesFragment : Fragment(R.layout.schedules_fragment) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        changeStateBacnPressed()
+
         loadComponents(view)
         setupObserver()
         setupRecyclerView()
         getStatus()
 
+    }
+
+    private fun changeStateBacnPressed() {
+        (activity as MainActivity)
+            .findViewById<BottomNavigationView>(R.id.bottomNavigation)
+            .menu
+            .getItem(1)
+            .isChecked = true
     }
 
     private fun loadComponents(view: View) {

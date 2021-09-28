@@ -8,6 +8,8 @@ import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.klemer.doctorsforeveryone.MainActivity
 import com.klemer.doctorsforeveryone.R
 import com.klemer.doctorsforeveryone.StartActivity
 import com.klemer.doctorsforeveryone.databinding.ProfileFragmentBinding
@@ -34,15 +36,29 @@ class ProfileFragment : Fragment(R.layout.profile_fragment) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        changeStateBackPressed()
+
         binding = ProfileFragmentBinding.bind(view)
         viewModel = ViewModelProvider(this).get(ProfileViewModel::class.java)
         viewModel.user.observe(viewLifecycleOwner, observerUser)
         viewModel.getCurrentUser()
 
+
+
         setupButtonsClick()
         setupGenderAutoComplete()
 
     }
+
+    private fun changeStateBackPressed() {
+        (activity as MainActivity)
+            .findViewById<BottomNavigationView>(R.id.bottomNavigation)
+            .menu
+            .getItem(3)
+            .isChecked = true
+    }
+
 
     private fun setupButtonsClick() {
         binding.buttonEdit.setOnClickListener {

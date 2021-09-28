@@ -9,6 +9,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.klemer.doctorsforeveryone.MainActivity
 import com.klemer.doctorsforeveryone.R
 import com.klemer.doctorsforeveryone.adapter.HealthNewsAdapter
 import com.klemer.doctorsforeveryone.databinding.HealthFragmentBinding
@@ -42,9 +44,19 @@ class HealthFragment : Fragment(R.layout.health_fragment), NetworkConnectionInte
         viewModel = ViewModelProvider(this)[HealthViewModel::class.java]
         binding = HealthFragmentBinding.bind(view)
 
+        changeStateBacnPressed()
+
         setupObservers()
         setupRecyclerView()
 
+    }
+
+    private fun changeStateBacnPressed() {
+        (activity as MainActivity)
+            .findViewById<BottomNavigationView>(R.id.bottomNavigation)
+            .menu
+            .getItem(2)
+            .isChecked = true
     }
 
     override fun onResume() {

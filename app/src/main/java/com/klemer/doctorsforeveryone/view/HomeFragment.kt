@@ -107,11 +107,19 @@ class HomeFragment : Fragment(R.layout.home_fragment) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        changeStateBacnPressed()
         loadComponents(view)
         setupOservers()
         executeComponents()
         binding.headerFragment.includeSearch.searchDoctors.clearFocus()
+    }
+
+    private fun changeStateBacnPressed() {
+        (activity as MainActivity)
+            .findViewById<BottomNavigationView>(R.id.bottomNavigation)
+            .menu
+            .getItem(0)
+            .isChecked = true
     }
 
     private fun loadComponents(view2: View) {
@@ -225,4 +233,5 @@ class HomeFragment : Fragment(R.layout.home_fragment) {
             )
         }
     }
+
 }

@@ -1,16 +1,20 @@
 package com.klemer.doctorsforeveryone
 
 import android.os.Bundle
+import androidx.annotation.IdRes
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.get
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentManager.POP_BACK_STACK_INCLUSIVE
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.snackbar.Snackbar
 import com.klemer.doctorsforeveryone.databinding.ActivityMainBinding
+import com.klemer.doctorsforeveryone.interfaces.BackStackBottomNavigation
 import com.klemer.doctorsforeveryone.model.User
-import com.klemer.doctorsforeveryone.utils.changeBehaviorForConnection
-import com.klemer.doctorsforeveryone.utils.configSnackbar
-import com.klemer.doctorsforeveryone.utils.replaceView
+import com.klemer.doctorsforeveryone.utils.*
 import com.klemer.doctorsforeveryone.view.*
 import com.klemer.doctorsforeveryone.view_model.ProfileViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -50,28 +54,39 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    private fun bottomNav() {
-
+    fun bottomNav() {
 
         binding.bottomNavigation.setOnItemSelectedListener { item ->
             userViewModel.getCurrentUser()
+//            var fragment: Fragment? = null
             when (item.itemId) {
                 R.id.navHome -> {
-                    replaceView(HomeFragment.newInstance())
+//                    fragment = HomeFragment.newInstance()
+                    replaceView(HomeFragment.newInstance(), addBackStack = true)
                 }
                 R.id.navSchedules -> {
-                    replaceView(SchedulesFragment.newInstance())
+//                    fragment = SchedulesFragment.newInstance()
+                    replaceView(SchedulesFragment.newInstance(), addBackStack = true)
                 }
                 R.id.navHealth -> {
-                    replaceView(HealthFragment.newInstance())
+//                    fragment = HealthFragment.newInstance()
+                    replaceView(HealthFragment.newInstance(), addBackStack = true)
                 }
                 R.id.navProfile -> {
-                    replaceView(ProfileFragment.newInstance())
+//                    fragment = ProfileFragment.newInstance()
+                    replaceView(ProfileFragment.newInstance(), addBackStack = true)
                 }
                 R.id.navAdmin -> {
-                    replaceView(AdminFragment.newInstance())
+//                    fragment = AdminFragment.newInstance()
+                    replaceView(AdminFragment.newInstance(), addBackStack = true)
                 }
             }
+//            supportFragmentManager
+//                .beginTransaction()
+//                .setCustomAnimations(R.anim.abc_fade_in, R.anim.abc_fade_out)
+//                .replace(R.id.container, fragment!!)
+//                .addToBackStack(fragment.tag)
+//                .commit()
             true
         }
     }
@@ -80,14 +95,6 @@ class MainActivity : AppCompatActivity() {
         val userAdmin = intent.getBooleanExtra("admin", false)
         if (userAdmin) {
             binding.bottomNavigation.menu.getItem(4).isVisible = true
-        }
-    }
-
-    fun changeBottomSelectedItem(fragment: Fragment, position: Int) {
-        GlobalScope.launch(Dispatchers.Main) {
-            delay(100)
-            replaceView(fragment)
-            binding.bottomNavigation.menu.getItem(position).isChecked = true
         }
     }
 
@@ -107,6 +114,46 @@ class MainActivity : AppCompatActivity() {
                     this.changeBottomSelectedItem(ProfileFragment.newInstance(), 3)
                 }
             }
+        }
+    }
+
+    //    var count = 0
+//    override fun onBackPressed() {
+//        count += 1
+//        if (count > 3) {
+//            count = 0
+//            replaceView(HomeFragment.newInstance(), addBackStack = true)
+//        } else {
+//            supportFragmentManager.popBackStackImmediate(
+//                HomeFragment.javaClass.name,
+//                POP_BACK_STACK_INCLUSIVE
+//            )
+//        }
+//        if (supportFragmentManager.backStackEntryCount > 0) {
+////            supportFragmentManager.popBackStackImmediate()
+//            supportFragmentManager.popBackStackImmediate(
+//                HomeFragment.javaClass.name,
+//                POP_BACK_STACK_INCLUSIVE
+//            )
+//        }
+
+//        if (supportFragmentManager.backStackEntryCount > 4)
+//            supportFragmentManager.popBackStackImmediate(
+//                HomeFragment.javaClass.name,
+//                POP_BACK_STACK_INCLUSIVE
+//            )
+
+
+//    }
+
+    fun changeBottomSelectedItem(
+        fragment: Fragment,
+        position: Int,
+    ) {
+        GlobalScope.launch(Dispatchers.Main) {
+            delay(100)
+            replaceView(fragment)
+            binding.bottomNavigation.menu.getItem(position).isChecked = true
         }
     }
 }
