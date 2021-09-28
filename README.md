@@ -26,7 +26,10 @@
 Antes de começar, verifique se você atendeu aos seguintes requisitos:
 <!---Estes são apenas requisitos de exemplo. Adicionar, duplicar ou remover conforme necessário--->
 * Baixar Android Studio: [AQUI](https://developer.android.com/studio)
-* Clonar o repositório: ```git clone https://github.com/jaisonklemer/projeto-final-serasa.git```
+* Clonar o repositório: 
+```sh
+git clone https://github.com/jaisonklemer/projeto-final-serasa.git
+```
 * Abrir Android Studio.
 * Abrir o repositório onde está o projeto.
 * Sincronizar o Gradle.
