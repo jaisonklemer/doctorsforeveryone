@@ -5,7 +5,7 @@
 ![GitHub repo size](https://img.shields.io/github/repo-size/jaisonklemer/projeto-final-serasa)
 
 <p>
-  <img src="https://github.com/jaisonklemer/projeto-final-serasa/blob/master/images/Doctors%20for%20Everyone%20png.png" />
+  <img src="https://raw.githubusercontent.com/jaisonklemer/projeto-final-serasa/master/images/Doctors%20for%20Everyone.png" />
 </p>
 
 ## Sumário
